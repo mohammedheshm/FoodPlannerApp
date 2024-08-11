@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/introHead"
+        android:id="@+id/TitleTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/introImage" />
 
     <ImageView
-        android:background="@drawable/food_type_one"
+        android:background="@drawable/food_type_three"
         android:src="@drawable/ic_launcher_foreground"
         android:id="@+id/introImage"
         android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
         />
 
     <TextView
-        android:id="@+id/introDesc"
+        android:id="@+id/descTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -43,5 +43,5 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introHead" />
+        app:layout_constraintTop_toBottomOf="@+id/TitleTextview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

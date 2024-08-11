@@ -48,8 +48,8 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         public SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.introImage);
-            titleTxtView=itemView.findViewById(R.id.introHead);
-            descTxtView=itemView.findViewById(R.id.introDesc);
+            titleTxtView=itemView.findViewById(R.id.TitleTextview);
+            descTxtView=itemView.findViewById(R.id.descTextView);
 
         }
 
