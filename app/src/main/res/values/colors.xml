@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="color_primary">#FF6200EE</color>
+    <color name="color_primary_variant">#FF3700B3</color>
+    <color name="color_secondary">#FF03DAC5</color>
+    <color name="color_secondary_variant">#FF018786</color>
+    <color name="black">#060606</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="light_gray">#EBE5E5</color>
+    <color name="purbleButtonsEnabled">#8A47EB</color>
+    <color name="purbleButtonsDisabled">#CBC3E3 </color>
+
+    <color name="colorPrimary">@android:color/transparent</color>
+
+    <color name="colorPrimaryDark">#000000</color>
+
+    <color name="colorAccent">#008800</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="main_color">#FFFFFF</color>
+    <color name="main_color_2">#000000</color>
+    <color name="transperant">#33000000</color>
+    <color name="transparent_grey">#33000000</color>
+
+</resources>
