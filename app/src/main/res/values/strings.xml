@@ -12,4 +12,20 @@
     <string name="signUp">SignUp</string>
     <string name="createNewAccount">" Create account "</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Fragment Title-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_search">Search</string>
+    <string name="title_details">Details</string>
+    <string name="title_category">Category</string>
+    <string name="title_plane">Plan</string>
+    <string name="title_favorite">Favorites</string>
+    <string name="title_home">Home</string>
+
+    <!-- Menu-->
+    <string name="signout_option">Signout</string>
+
+
+
+
 </resources>
