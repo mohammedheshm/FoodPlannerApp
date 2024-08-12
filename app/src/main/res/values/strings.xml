@@ -2,5 +2,5 @@
     <string name="app_name">FoodPlannerApp</string>
     <string name="guest">guest</string>
     <string name="login">login</string>
-    <string name="signUpWithMail">singupwithmail</string>
+    <string name="signUpWithMail">sing up</string>
 </resources>

@@ -17,6 +17,9 @@ public class SignUpOrLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_or_login);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
     }
 }
