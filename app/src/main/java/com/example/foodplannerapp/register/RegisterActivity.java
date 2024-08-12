@@ -3,20 +3,18 @@ package com.example.foodplannerapp.register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.login.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextView btn_login_tv;
+    TextView loginTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +26,21 @@ public class RegisterActivity extends AppCompatActivity {
         }
         initUi();
         handleButtonEvents();
+    }
 
+    public void initUi(){
+        loginTv = findViewById(R.id.loginTv);
 
     }
 
     public void handleButtonEvents(){
-        btn_login_tv.setOnClickListener(new View.OnClickListener() {
+        loginTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-
             }
         });
+
     }
 
-    public  void initUi(){
-        btn_login_tv = findViewById(R.id.loginTxtView);
-    }
 }
