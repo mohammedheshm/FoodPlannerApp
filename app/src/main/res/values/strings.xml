@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">FoodPlannerApp</string>
     <string name="guest">guest</string>
-    <string name="login">login</string>
+    <string name="login">Login</string>
     <string name="signUpWithMail">sing up</string>
+    <string name="create_account">create Account</string>
+    <string name="Optimize_meals">Optimize your meals</string>
+    <string name="enterYourMail">Please Enter Your Email</string>
+    <string name="enterPassword">Please Enter Your Password</string>
+    <string name="signUp">SignUp</string>
 </resources>

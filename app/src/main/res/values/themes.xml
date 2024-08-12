@@ -2,22 +2,24 @@
 
     <style name="Theme.FoodPlannerApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimary">@color/purple_200</item>
+
         <item name="colorPrimaryVariant">@color/color_primary_variant</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color_secondary</item>
-        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+        <item name="colorSecondaryVariant">@color/color_secondary</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-
-
+        <item name="android:statusBarColor">@color/teal_color_dark</item>
+        <!-- Customize your theme here. -->
     </style>
+
     <style name="Theme.FoodPlannerApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="hi_welcome_b">
         <item name="android:textSize">
             25sp
@@ -26,6 +28,7 @@
             #000000
         </item>
     </style>
+
     <style name="hello_again">
         <item name="android:textSize">
             14sp
@@ -34,12 +37,16 @@
             #999EA1
         </item>
     </style>
+
     <style name="Widget.AppTheme.MaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@drawable/button_state_color</item>
         <item name="android:textColor">@drawable/button_state_color</item>
     </style>
+
     <style name="Theme.FoodPlanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.FoodPlanner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="TextTitle" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/black</item>
     </style>

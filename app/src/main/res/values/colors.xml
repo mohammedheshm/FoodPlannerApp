@@ -19,6 +19,7 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="teal_color">#008080</color>
+    <color name="teal_color_dark">#004c4c</color>
 
     <color name="main_color">#FFFFFF</color>
     <color name="main_color_2">#000000</color>

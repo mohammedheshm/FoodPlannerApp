@@ -47,6 +47,8 @@ dependencies {
     //Lottie Animation
     implementation ("com.airbnb.android:lottie:3.4.0")
 
+    implementation ("com.google.android.material:material:1.9.0") // or the latest version
+
 
 
 
