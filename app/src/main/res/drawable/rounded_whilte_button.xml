@@ -11,5 +11,5 @@
         android:bottom="10dp" />
     <stroke
         android:width="2dp"
-        android:color="@color/color_secondary_variant" />
+        android:color="#004c4c" />
 </shape>
