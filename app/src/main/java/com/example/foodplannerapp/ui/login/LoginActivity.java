@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.login;
+package com.example.foodplannerapp.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.register.RegisterActivity;
+import com.example.foodplannerapp.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

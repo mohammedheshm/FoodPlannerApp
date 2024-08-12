@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.sign_in_with_google;
+package com.example.foodplannerapp.ui.sign_in_with_google;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.login.LoginActivity;
-import com.example.foodplannerapp.register.RegisterActivity;
+import com.example.foodplannerapp.ui.login.LoginActivity;
+import com.example.foodplannerapp.ui.register.RegisterActivity;
 import com.google.android.gms.common.SignInButton;
 
 public class SignUpOrLoginActivity extends AppCompatActivity {

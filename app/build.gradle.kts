@@ -50,7 +50,8 @@ dependencies {
     implementation ("com.google.android.material:material:1.9.0") // or the latest version
 
 
-
+    implementation ("androidx.navigation:navigation-fragment:2.5.3")
+    implementation ("androidx.navigation:navigation-ui:2.5.3")
 
 
 

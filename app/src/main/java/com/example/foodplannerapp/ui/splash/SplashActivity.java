@@ -1,11 +1,11 @@
-package com.example.foodplannerapp.splash;
+package com.example.foodplannerapp.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.foodplannerapp.boarding.BoardingActivity;
+import com.example.foodplannerapp.ui.boarding.BoardingActivity;
 import com.example.foodplannerapp.MainActivity;
 import com.example.foodplannerapp.R;
 

@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.boarding;
+package com.example.foodplannerapp.ui.boarding;
 
 import android.view.LayoutInflater;
 import android.view.View;
