@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.foodplannerapp.R;
+import com.example.foodplannerapp.login.LoginActivity;
 import com.example.foodplannerapp.register.RegisterActivity;
 import com.google.android.gms.common.SignInButton;
 
@@ -19,7 +20,7 @@ public class SignUpOrLoginActivity extends AppCompatActivity {
 
     Button signUpButton;
     SignInButton loginWithGoogleButton;
-    TextView loginTxtViewBtn;
+    TextView btn_login_tv;
     Button guestButton;
 
 
@@ -40,10 +41,13 @@ public class SignUpOrLoginActivity extends AppCompatActivity {
     private void handlebuttonsEvents() {
 
         signUpButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
+        btn_login_tv.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
+
     }
 
     public void initUi(){
         signUpButton=findViewById(R.id.signUpWithMailBtn);
+        btn_login_tv= findViewById(R.id.loginTxtView);
     }
 
 
