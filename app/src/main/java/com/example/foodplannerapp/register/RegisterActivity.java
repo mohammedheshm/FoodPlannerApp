@@ -15,7 +15,7 @@ import com.example.foodplannerapp.login.LoginActivity;
 public class RegisterActivity extends AppCompatActivity {
 
     TextView loginTv;
-
+    Button btn_signUP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void initUi(){
         loginTv = findViewById(R.id.loginTv);
-
+        btn_signUP = findViewById(R.id.signUpBtn);
+        btn_signUP.setEnabled(false);
     }
 
     public void handleButtonEvents(){
@@ -38,6 +39,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+        });
+
+        btn_signUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(RegisterActivity.this, "Clicked!", Toast.LENGTH_SHORT).show();
             }
         });
 
