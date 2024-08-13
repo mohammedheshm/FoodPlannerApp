@@ -25,7 +25,6 @@
             android:layout_weight="1"
             android:textStyle="bold"
             android:text="@string/search_title"
-
             app:layout_constraintBottom_toTopOf="@+id/search_view"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
@@ -38,7 +37,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/search_by_name"
             android:background="@drawable/input_style"
-            android:drawableStart="@drawable/ic_search"
+            android:drawableStart="@drawable/colored_search_24"
             android:padding="7dp"
             app:layout_constraintBottom_toTopOf="@+id/section_title_category_holder"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
@@ -53,7 +52,6 @@
             android:layout_marginTop="8dp"
             android:padding="5dp"
             android:orientation="horizontal"
-
             app:layout_constraintBottom_toTopOf="@+id/rv_category"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
@@ -65,16 +63,16 @@
                 android:layout_gravity="left"
                 style="@style/TextTitle"
                 android:padding="2dp"
+                android:textColor="@color/teal_color_dark"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="@string/search_by_category" />
 
             <TextView
+                android:textColor="@color/teal_color_dark"
                 style="@style/TextTitle"
                 android:id="@+id/seeMoreCategory"
-
                 android:layout_width="wrap_content"
-
                 android:background="@drawable/hover_effect"
                 android:layout_height="match_parent"
                 android:gravity="right"
@@ -120,17 +118,17 @@
                 android:layout_gravity="left"
                 style="@style/TextTitle"
                 android:padding="2dp"
+                android:textColor="@color/teal_color_dark"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="@string/search_by_country" />
 
             <TextView
+                android:textColor="@color/teal_color_dark"
                 style="@style/TextTitle"
                 android:id="@+id/seeMoreArea"
-
                 android:layout_width="wrap_content"
                 android:background="@drawable/hover_effect"
-
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:padding="2dp"
@@ -159,7 +157,6 @@
             android:layout_marginTop="8dp"
             android:padding="5dp"
             android:orientation="horizontal"
-
             app:layout_constraintBottom_toTopOf="@+id/rv_ingredient"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
@@ -171,11 +168,13 @@
                 android:layout_gravity="left"
                 style="@style/TextTitle"
                 android:padding="2dp"
+                android:textColor="@color/teal_color_dark"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="@string/search_by_ingredient" />
 
             <TextView
+                android:textColor="@color/teal_color_dark"
                 android:id="@+id/seeMoreIngredient"
                 style="@style/TextTitle"
                 android:layout_width="wrap_content"
