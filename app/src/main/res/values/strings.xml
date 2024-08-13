@@ -46,6 +46,9 @@
     <string name="logout_title">Logout</string>
     <string name="logout_message_dialog">Do you want to leave app?</string>
     <string name="nothingToShow">Nothing to show</string>
+    <string name="dialog_positive_button">Sure</string>
+    <string name="dialog_negative_button">No</string>
+
 
 
 </resources>

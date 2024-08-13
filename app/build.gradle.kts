@@ -26,9 +26,15 @@ android {
             )
         }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -40,6 +46,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -89,5 +97,8 @@ dependencies {
 
     //Shimmer Effect
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
 }
