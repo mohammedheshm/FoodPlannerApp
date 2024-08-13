@@ -1,16 +1,10 @@
 package com.example.foodplannerapp.data.fireasestore;
 
 
-import android.content.Context;
-import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.foodplannerapp.data.model.User;
 import com.example.foodplannerapp.data.model.meals.MealPlan;
 import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.share.SharedManager;
+import com.example.foodplannerapp.data.sharedpref.SharedManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.data.share;
+package com.example.foodplannerapp.data.sharedpref;
 
 
 import android.content.Context;

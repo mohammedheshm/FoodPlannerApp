@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.fireasestore.BackupManager;
 import com.example.foodplannerapp.data.model.User;
-import com.example.foodplannerapp.data.share.SharedManager;
+import com.example.foodplannerapp.data.sharedpref.SharedManager;
 import com.example.foodplannerapp.ui.sign_in_with_google.SignInWithGoogleInterface;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
