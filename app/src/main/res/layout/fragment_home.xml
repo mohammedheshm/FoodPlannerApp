@@ -6,13 +6,11 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/title_holder"
             android:layout_marginTop="30dp"
@@ -23,54 +21,49 @@
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
             app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
+                android:padding="4dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/foodplannerlogo" />
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/dining"/>
-                <TextView
-                    android:textStyle="bold"
-                    style="@style/TextTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:text="FOOD"
-                    android:textColor="@color/color_secondary_variant"
-                    android:textSize="30sp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TextTitle"
-                    android:textSize="30sp"
-                    android:paddingTop="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/color_secondary_variant"
-                    android:text="PLANNER"/>
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextTitle"
+                        android:textSize="38sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/teal_color_dark"
+                        android:text="FOODPLANNER"/>
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextTitle"
+                        android:textStyle="bold"
+                        android:text="Savor the flavor"/>
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    style="@style/TextTitle"
-                    android:paddingTop="5dp"
-                    android:textStyle="bold"
-                    android:text="Savor the flavor"/>
-            </LinearLayout>
-
 
         </LinearLayout>
+
+
         <TextView
             android:textColor="@color/teal_color_dark"
             android:id="@+id/search_title"

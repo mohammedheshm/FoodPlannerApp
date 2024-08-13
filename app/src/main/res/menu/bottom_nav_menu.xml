@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/navigation_favorite"
-        android:icon="@drawable/ic_favorite"
+        android:icon="@drawable/solid_favorite_24"
         android:title="@string/title_favorite" />
 
     <item
@@ -20,7 +20,7 @@
 
     <item
         android:id="@+id/navigation_category"
-        android:icon="@drawable/ic_category"
+        android:icon="@drawable/baseline_category_24"
         android:title="@string/title_category" />
 
 </menu>
