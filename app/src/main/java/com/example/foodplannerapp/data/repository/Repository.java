@@ -24,6 +24,16 @@ import com.example.foodplannerapp.data.network.ApiCalls;
 import com.example.foodplannerapp.data.network.Network;
 import com.example.foodplannerapp.data.room.RoomDatabase;
 import com.example.foodplannerapp.data.sharedpref.SharedManager;
+import com.example.foodplannerapp.data.model.category.CategoriesList;
+import com.example.foodplannerapp.data.model.category.Category;
+import com.example.foodplannerapp.data.model.countries.Area;
+import com.example.foodplannerapp.data.model.countries.AreasList;
+import com.example.foodplannerapp.data.model.foodcategory.CategoriesFeed;
+import com.example.foodplannerapp.data.model.foodcategory.CategoriesItem;
+import com.example.foodplannerapp.data.model.ingredient.Ingredient;
+import com.example.foodplannerapp.data.model.ingredient.IngredientsList;
+
+
 
 //Handle  Network , RoomDatabase , And SharedPref Manager functions
 public class Repository {
@@ -413,5 +423,229 @@ public class Repository {
                 });
     }
 
+
+
+    //Handle Apis Functionalities with rxjava
+    //Fetch random meals from api
+    public void lookupSingleRandomMeal(DataFetch<List<MealsItem>> dataFetch) {
+        apiCalls.lookupSingleRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<MealsList>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                dataFetch.onDataLoading();
+            }
+
+            @Override
+            public void onSuccess(@NonNull MealsList mealsList) {
+                if (mealsList != null && mealsList.getMeals() != null)
+                    dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                else
+                    dataFetch.onDataSuccessResponse(new ArrayList<>());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                dataFetch.onDataFailedResponse(e.getMessage());
+            }
+        });
+    }
+
+    //Fetch ingredients List from api
+    public void ingredientsList(DataFetch<List<Ingredient>> dataFetch) {
+        apiCalls.ingredientsList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<IngredientsList>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                dataFetch.onDataLoading();
+            }
+
+            @Override
+            public void onSuccess(@NonNull IngredientsList ingredientsList) {
+                if (ingredientsList != null && ingredientsList.getMeals() != null) {
+                    List<String> arrayList = ingredientsList.getMeals().stream().map(category -> category.getStrIngredient()).collect(Collectors.toList());
+                    sharedManager.saveList(SharedManager.INGREDIENTS, arrayList);
+                    dataFetch.onDataSuccessResponse(ingredientsList.getMeals());
+                } else {
+                    dataFetch.onDataSuccessResponse(new ArrayList<>());
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                dataFetch.onDataFailedResponse(e.getMessage());
+            }
+        });
+    }
+
+    //Fetch categories List  from api
+    public void categoriesList(DataFetch<List<Category>> dataFetch) {
+        apiCalls.categoriesList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<CategoriesList>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        dataFetch.onDataLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull CategoriesList categoriesList) {
+                        if (categoriesList != null && categoriesList.getCategory() != null) {
+                            List<String> arrayList = categoriesList.getCategory().stream().map(category -> category.getStrCategory()).collect(Collectors.toList());
+                            sharedManager.saveList(SharedManager.CATEGORIES, arrayList);
+                            dataFetch.onDataSuccessResponse(categoriesList.getCategory());
+                        } else {
+                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dataFetch.onDataFailedResponse(e.getMessage());
+                    }
+                });
+
+    }
+
+    //Fetch Countries List  from api
+    public void areasList(DataFetch<List<Area>> dataFetch) {
+        apiCalls.areasList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<AreasList>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        dataFetch.onDataLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull AreasList areasList) {
+                        if (areasList != null && areasList.getAreas() != null) {
+                            List<String> arrayList = areasList.getAreas().stream().map(category -> category.getStrArea()).collect(Collectors.toList());
+                            sharedManager.saveList(SharedManager.AREAS, arrayList);
+                            dataFetch.onDataSuccessResponse(areasList.getAreas());
+                        } else {
+                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dataFetch.onDataFailedResponse(e.getMessage());
+                    }
+                });
+
+    }
+
+    //Fetch Filtering data according to category , ingredient and country
+    public void retrieveFilterResults(String category, String ingredient, String area, DataFetch<List<MealsItem>> dataFetch) {
+        apiCalls
+                .retrieveFilterResults(category, ingredient, area)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<MealsList>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        dataFetch.onDataLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull MealsList mealsList) {
+
+                        if (mealsList != null && mealsList.getMeals() != null)  // sometime api return null
+                            dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                        else
+                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dataFetch.onDataFailedResponse(e.getMessage());
+                    }
+                });
+        ;
+
+    }
+
+    //Fetch Categories List  from api
+    public void retrieveCategoriesList(DataFetch<List<CategoriesItem>> dataFetch) {
+
+        apiCalls
+                .retrieveCategoriesList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<CategoriesFeed>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        dataFetch.onDataLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull CategoriesFeed categoriesFeed) {
+                        if (categoriesFeed != null && categoriesFeed.getCategories() != null)
+                            dataFetch.onDataSuccessResponse(categoriesFeed.getCategories());
+                        else
+                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dataFetch.onDataFailedResponse(e.getMessage());
+                    }
+                })
+        ;
+    }
+
+    //Fetch search about meals by meals name
+    public void searchMealsByName(String search, DataFetch<List<MealsItem>> dataFetch) {
+        apiCalls
+                .searchMealsByName(search)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<MealsList>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        dataFetch.onDataLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull MealsList mealsList) {
+                        if (mealsList != null && mealsList.getMeals() != null)
+                            dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                        else
+                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dataFetch.onDataFailedResponse(e.getMessage());
+                    }
+                });
+        ;
+    }
+
+    //Fetch meals by meals id
+    public void retrieveMealByID(String id, DataFetch<List<MealsItem>> dataFetch) {
+
+        apiCalls.retrieveMealByID(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<MealsList>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        dataFetch.onDataLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull MealsList mealsList) {
+                        if (mealsList != null && mealsList.getMeals() != null)
+                            dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                        else
+                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dataFetch.onDataFailedResponse(e.getMessage());
+                    }
+                });
+    }
 
 }

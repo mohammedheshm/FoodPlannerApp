@@ -1,8 +1,9 @@
 package com.example.foodplannerapp;
-
+import com.example.foodplannerapp.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         navigationUiSettings();
     }
 
-
-
     private void navigationUiSettings() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         int[] pages = {R.id.navigation_home,R.id.navigation_favorite,R.id.navigation_category, R.id.navigation_plan,R.id.navigation_details,R.id.navigation_search};
@@ -61,16 +60,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.signout_option:
-//                logoutFromApp();
-//                break;
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.signout_option) {
+            logoutFromApp();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
 
     private void logoutFromApp() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
