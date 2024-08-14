@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:id="@+id/title_holder"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             android:layout_gravity="left"
             style="@style/TextTitle"
             android:textSize="30sp"
-            android:paddingTop="10dp"
+            android:paddingTop="16dp"
             android:layout_weight="1"
             android:textStyle="bold"
             android:text="@string/dialy_inspire_title"

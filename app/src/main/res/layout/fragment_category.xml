@@ -11,8 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
         <TextView
             android:textColor="@color/teal_color_dark"
             android:id="@+id/search_title"
@@ -21,7 +20,8 @@
             android:layout_gravity="left"
             style="@style/TextTitle"
             android:textSize="30sp"
-            android:paddingTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:paddingTop="20dp"
             android:layout_weight="1"
             android:textStyle="bold"
             android:text="@string/search_title"

@@ -71,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     private void logoutFromApp() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle(getResources().getString(R.string.logout_title));

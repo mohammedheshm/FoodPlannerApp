@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+    id ("androidx.navigation.safeargs")
 }
 
 android {
@@ -60,6 +61,8 @@ dependencies {
 
     implementation ("androidx.navigation:navigation-fragment:2.5.3")
     implementation ("androidx.navigation:navigation-ui:2.5.3")
+
+
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
