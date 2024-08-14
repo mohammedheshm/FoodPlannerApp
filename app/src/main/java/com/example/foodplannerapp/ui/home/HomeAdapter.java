@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private List<MealsItem> itemsList = new ArrayList<>();
     public MutableLiveData<Boolean> isHaveData = new MutableLiveData<Boolean>(false);
     private HomePresenter presenter;
@@ -28,7 +28,7 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
     private HomeInterface homeInterface;
 
 
-    public HomeFeedAdapter(Context context, HomeInterface homeInterface) {
+    public HomeAdapter(Context context, HomeInterface homeInterface) {
         presenter = new HomePresenter(context,homeInterface);
         this.context = context;
         this.homeInterface = homeInterface;
@@ -36,12 +36,12 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
 
     @NonNull
     @Override
-    public HomeFeedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meals_list,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeFeedAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
         MealsItem item = itemsList.get(position);
         holder.foodNameTv.setText(item.getStrMeal());
 

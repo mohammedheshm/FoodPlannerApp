@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="6dp"
+    android:layout_marginTop="16dp"
     tools:context=".ui.favorite.FavoriteFragment"
     android:orientation="vertical">
 
@@ -15,15 +17,7 @@
         android:orientation="vertical"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_favorit_list" />
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/shimmer_holder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <include layout="@layout/shimmer_favorite_results"/>
-    </LinearLayout>
+
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/no_network_holder"

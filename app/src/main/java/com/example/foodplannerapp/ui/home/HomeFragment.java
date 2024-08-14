@@ -85,12 +85,12 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
     private void recycleriewAreaSettings () {
         RecyclerView rvRandomArea = Utils.recyclerViewHandler(binding.rvRandomArea, getContext());
-        HomeFeedAdapter homeFeedAdapterArea = new HomeFeedAdapter(getContext(), this);
-        rvRandomArea.setAdapter(homeFeedAdapterArea);
+        HomeAdapter homeAdapterArea = new HomeAdapter(getContext(), this);
+        rvRandomArea.setAdapter(homeAdapterArea);
         presenter.getRandomMeals(HomePresenter.AREA, new DataFetch<List<MealsItem>>() {
             @Override
             public void onDataSuccessResponse(List<MealsItem> data) {
-                homeFeedAdapterArea.setItemsList(data);
+                homeAdapterArea.setItemsList(data);
             }
 
             @Override
@@ -108,13 +108,13 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
     private void recycleriewCategorySettings () {
         RecyclerView rvRandomCategory = Utils.recyclerViewHandler(binding.rvRandomCategory, getContext());
-        HomeFeedAdapter homeFeedAdapterCategory = new HomeFeedAdapter(getContext(), this);
-        rvRandomCategory.setAdapter(homeFeedAdapterCategory);
+        HomeAdapter homeAdapterCategory = new HomeAdapter(getContext(), this);
+        rvRandomCategory.setAdapter(homeAdapterCategory);
 
         presenter.getRandomMeals(HomePresenter.CATEGORY, new DataFetch<List<MealsItem>>() {
             @Override
             public void onDataSuccessResponse(List<MealsItem> data) {
-                homeFeedAdapterCategory.setItemsList(data);
+                homeAdapterCategory.setItemsList(data);
             }
 
             @Override
@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
             }
         });
-        homeFeedAdapterCategory.isHaveData.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        homeAdapterCategory.isHaveData.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean haveData) {
                 if (haveData) {
@@ -142,26 +142,23 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
     private void recycleriewIngredientsSettings() {
         RecyclerView rvRandomIngredien = Utils.recyclerViewHandler(binding.rvRandomIngredien, getContext());
-        HomeFeedAdapter homeFeedAdapterIngredien = new HomeFeedAdapter(getContext(), this);
-        rvRandomIngredien.setAdapter(homeFeedAdapterIngredien);
+        HomeAdapter homeAdapterIngredien = new HomeAdapter(getContext(), this);
+        rvRandomIngredien.setAdapter(homeAdapterIngredien);
         presenter.getRandomMeals(HomePresenter.INGREDIENT, new DataFetch<List<MealsItem>>() {
             @Override
             public void onDataSuccessResponse(List<MealsItem> data) {
                 binding.rvRandomIngredien.setVisibility(View.VISIBLE);
-                binding.shimmerHomeIngredient.setVisibility(View.GONE);
-                homeFeedAdapterIngredien.setItemsList(data);
+                homeAdapterIngredien.setItemsList(data);
             }
 
             @Override
             public void onDataFailedResponse(String message) {
                 binding.rvRandomIngredien.setVisibility(View.VISIBLE);
-                binding.shimmerHomeIngredient.setVisibility(View.GONE);
             }
 
             @Override
             public void onDataLoading() {
                 binding.rvRandomIngredien.setVisibility(View.GONE);
-                binding.shimmerHomeIngredient.setVisibility(View.VISIBLE);
             }
         });
 

@@ -249,14 +249,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
             tools:layout_editor_absoluteY="78dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:id="@+id/shimmer_home_ingredient">
-                <include layout="@layout/simmer_home_ingredients"/>
-            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_random_ingredien"
                 android:layout_width="match_parent"
