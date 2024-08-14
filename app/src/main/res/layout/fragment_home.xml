@@ -117,7 +117,7 @@
                 android:textSize="22sp"
                 android:layout_weight="1"
 
-                android:text="You might like this" />
+                android:text="According to country" />
 
             <TextView
                 style="@style/TextTitle"

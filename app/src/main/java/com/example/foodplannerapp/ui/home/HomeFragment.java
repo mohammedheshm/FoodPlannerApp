@@ -2,65 +2,203 @@ package com.example.foodplannerapp.ui.home;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplannerapp.R;
+import com.example.foodplannerapp.data.model.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.databinding.FragmentHomeBinding;
+import com.example.foodplannerapp.ui.common.Utils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment extends Fragment {
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class HomeFragment extends Fragment implements HomeInterface {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+        private FragmentHomeBinding binding;
+        private HomePresenter presenter;
 
-    public HomeFragment() {
-        // Required empty public constructor
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        presenter = new HomePresenter(getContext(), this);
+        recycleriewIngredientsSettings();
+        recycleriewAreaSettings();
+        recycleriewCategorySettings();
+        randomMealCardSettings(view);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void randomMealCardSettings (View view){
+        ImageView imageViewSingleMeal = view.findViewById(R.id.image_thum);
+        TextView foodSingleName = view.findViewById(R.id.food_name);
+        TextView plane_btn = view.findViewById(R.id.plane_btn);
+        ImageButton fav_btn = view.findViewById(R.id.fav_btn);
+        presenter.getRandomMeals(HomePresenter.SINGLE, new DataFetch<List<MealsItem>>() {
+            @Override
+            public void onDataSuccessResponse(List<MealsItem> data) {
+                MealsItem mealsItem = data.get(0);
+                Glide.with(getContext())
+                        .load(mealsItem.getStrMealThumb())
+                        .apply(new RequestOptions()
+                                .override(400, 300)
+                                .placeholder(R.drawable.randomloadingimg)
+                                .error(R.drawable.ic_close_black_24dp))
+                        .into(imageViewSingleMeal);
+
+                foodSingleName.setText(mealsItem.getStrMeal());
+                plane_btn.setOnClickListener(view1 -> {
+                    onSavePlane(mealsItem);
+                });
+
+                fav_btn.setOnClickListener(view12 -> onSaveFavorite(mealsItem));
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
+
+
+    }
+
+
+
+    private void recycleriewAreaSettings () {
+        RecyclerView rvRandomArea = Utils.recyclerViewHandler(binding.rvRandomArea, getContext());
+        HomeFeedAdapter homeFeedAdapterArea = new HomeFeedAdapter(getContext(), this);
+        rvRandomArea.setAdapter(homeFeedAdapterArea);
+        presenter.getRandomMeals(HomePresenter.AREA, new DataFetch<List<MealsItem>>() {
+            @Override
+            public void onDataSuccessResponse(List<MealsItem> data) {
+                homeFeedAdapterArea.setItemsList(data);
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
+
+    }
+
+    private void recycleriewCategorySettings () {
+        RecyclerView rvRandomCategory = Utils.recyclerViewHandler(binding.rvRandomCategory, getContext());
+        HomeFeedAdapter homeFeedAdapterCategory = new HomeFeedAdapter(getContext(), this);
+        rvRandomCategory.setAdapter(homeFeedAdapterCategory);
+
+        presenter.getRandomMeals(HomePresenter.CATEGORY, new DataFetch<List<MealsItem>>() {
+            @Override
+            public void onDataSuccessResponse(List<MealsItem> data) {
+                homeFeedAdapterCategory.setItemsList(data);
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
+        homeFeedAdapterCategory.isHaveData.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean haveData) {
+                if (haveData) {
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+
+    private void recycleriewIngredientsSettings() {
+        RecyclerView rvRandomIngredien = Utils.recyclerViewHandler(binding.rvRandomIngredien, getContext());
+        HomeFeedAdapter homeFeedAdapterIngredien = new HomeFeedAdapter(getContext(), this);
+        rvRandomIngredien.setAdapter(homeFeedAdapterIngredien);
+        presenter.getRandomMeals(HomePresenter.INGREDIENT, new DataFetch<List<MealsItem>>() {
+            @Override
+            public void onDataSuccessResponse(List<MealsItem> data) {
+                binding.rvRandomIngredien.setVisibility(View.VISIBLE);
+                binding.shimmerHomeIngredient.setVisibility(View.GONE);
+                homeFeedAdapterIngredien.setItemsList(data);
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+                binding.rvRandomIngredien.setVisibility(View.VISIBLE);
+                binding.shimmerHomeIngredient.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onDataLoading() {
+                binding.rvRandomIngredien.setVisibility(View.GONE);
+                binding.shimmerHomeIngredient.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onSavePlane (MealsItem item){
+        Toast.makeText(getContext(), item.getStrMeal() + " Will Be Add to plane", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public void onSaveFavorite (MealsItem item){
+        presenter.saveFavorite(item, new DataFetch<Void>() {
+            @Override
+            public void onDataSuccessResponse(Void data) {
+                Toast.makeText(getContext(), item.getStrMeal() + " Added To Favorite", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+                Toast.makeText(getContext(), " Error Happened: " + message, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
     }
+
 }

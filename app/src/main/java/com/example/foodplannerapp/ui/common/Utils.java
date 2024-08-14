@@ -36,7 +36,7 @@ public class Utils {
                 .apply(new RequestOptions()
                         .override(400,300)
                         .placeholder(R.drawable.animated_vecotr)
-                        .error(R.drawable.shippingback))
+                        .error(R.drawable.randomloadingimg))
                 .into(imageView);
     }
 
