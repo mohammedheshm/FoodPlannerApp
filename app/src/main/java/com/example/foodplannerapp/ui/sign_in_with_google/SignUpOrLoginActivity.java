@@ -1,24 +1,30 @@
 package com.example.foodplannerapp.ui.sign_in_with_google;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.foodplannerapp.MainActivity;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.ui.login.LoginActivity;
 import com.example.foodplannerapp.ui.register.RegisterActivity;
 import com.google.android.gms.common.SignInButton;
 
-public class SignUpOrLoginActivity extends AppCompatActivity {
+public class SignUpOrLoginActivity extends AppCompatActivity implements SignInWithGoogleInterface {
 
     Button signUpButton;
     SignInButton loginWithGoogleButton;
     TextView btn_login_tv;
     Button guestButton;
-
+    SignInWithGooglePresenter presenter;  // Presenter object
+    private static final String TAG = "SignUpOrLoginActivity";
+    private static final int RC_SIGN_IN = 9001;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,23 +34,80 @@ public class SignUpOrLoginActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        initUi();
-        handlebuttonsEvents();
 
+        initUi();
+        presenter = new SignInWithGooglePresenter(this, this);  // Initialize presenter with context and interface
+        presenter.googleAuthInitialize(this);  // Initialize Google Auth
+        handlebuttonsEvents();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (presenter.isUser())
+            updateUI();
+    }
 
     private void handlebuttonsEvents() {
-
-        signUpButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
         btn_login_tv.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
-
+        guestButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+        loginWithGoogleButton.setOnClickListener(view -> startActivityForResult(presenter.loginWithGoogle(), RC_SIGN_IN));
+        signUpButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
     }
 
-    public void initUi(){
-        signUpButton=findViewById(R.id.signUpWithMailBtn);
-        btn_login_tv= findViewById(R.id.loginTxtView);
+    public void initUi() {
+        signUpButton = findViewById(R.id.signUpWithMailBtn);
+        loginWithGoogleButton = findViewById(R.id.signInWithGoogle);
+        btn_login_tv = findViewById(R.id.loginTxtView);
+        guestButton = findViewById(R.id.guestButton);
+    }
+
+    @Override
+    public void onSuccessFullFireBaseAuth() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+        updateUI();
     }
 
 
+    @Override
+    public void onFailedFireBaseAuth() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+        Toast.makeText(SignUpOrLoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateUI() {
+        startActivity(new Intent(SignUpOrLoginActivity.this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Show the progress dialog here
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(SignUpOrLoginActivity.this);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setMessage("Please Wait .....");
+            progressDialog.setTitle("Get Ready");
+            progressDialog.show();
+        }
+
+        // Pass the result to the presenter for handling
+        presenter.checkRequestCode(requestCode, data);
+
+        // No need to reinitialize Google Auth here
+    }
 }
