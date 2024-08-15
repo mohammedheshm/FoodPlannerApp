@@ -64,7 +64,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_grade_black_24dp"/>
+                    android:src="@drawable/outline_topic_24"/>
                 <TextView
                     android:id="@+id/categoryTxtView"
                     android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home_black_24dp"/>
+                    android:src="@drawable/baseline_language_24"/>
                 <TextView
                     android:id="@+id/countryTxtView"
                     android:layout_width="match_parent"

@@ -64,7 +64,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_grade_black_24dp"/>
+                    android:src="@drawable/outline_topic_24"/>
                 <TextView
                     android:textColor="@color/teal_color_dark"
                     android:id="@+id/categoryTextView"
@@ -84,7 +84,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_home_black_24dp"/>
+                    android:src="@drawable/baseline_language_24"/>
                 <TextView
                     android:textColor="@color/teal_color_dark"
                     android:id="@+id/countryTextView"

@@ -51,9 +51,6 @@ public class MealPlan {
     @SerializedName("strCategory")
     private String strCategory;
 
-
-    // region Ingredients
-
     @ColumnInfo
     @SerializedName("strIngredient10")
     private String strIngredient10;
@@ -118,8 +115,6 @@ public class MealPlan {
     @ColumnInfo
     @SerializedName("strIngredient8")
     private String strIngredient8;
-    // endregion
-
 
     @Ignore
     private ArrayList<String> ingredients;
