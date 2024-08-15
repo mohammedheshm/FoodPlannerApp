@@ -6,10 +6,9 @@
         android:color="@color/white" />
     <padding
         android:left="10dp"
-        android:top="10dp"
         android:right="10dp"
-        android:bottom="10dp" />
+         />
     <stroke
         android:width="2dp"
-        android:color="#004c4c" />
+        android:color="@color/teal_color" />
 </shape>
