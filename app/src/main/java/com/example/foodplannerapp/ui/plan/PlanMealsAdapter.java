@@ -18,11 +18,11 @@ import com.example.foodplannerapp.data.repository.Repository;
 import java.util.List;
 
 
-public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder>{
+public class PlanMealsAdapter extends RecyclerView.Adapter<PlanMealsAdapter.ViewHolder>{
     private List<MealPlan> values;
     private Context context;
     Repository repository;
-    public MealsAdapter(Context context, List<MealPlan> dataset) {
+    public PlanMealsAdapter(Context context, List<MealPlan> dataset) {
         this.context = context;
         values = dataset;
         repository=Repository.getInstance(context);
@@ -30,16 +30,16 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder>{
     }
     @NonNull
     @Override
-    public MealsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PlanMealsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
         View v =inflater.inflate(R.layout.meals_row,parent,false);
 
 
-        return new MealsAdapter.ViewHolder(v);
+        return new PlanMealsAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MealsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlanMealsAdapter.ViewHolder holder, int position) {
 
         holder.mealName.setText(values.get(position).getStrMeal());
         holder.mealCountry.setText(values.get(position).getStrArea());

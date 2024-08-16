@@ -1,29 +1,59 @@
 package com.example.foodplannerapp.ui.plan;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.foodplannerapp.data.room.Week;
+import com.example.foodplannerapp.databinding.FragmentPlanBinding;
+import java.util.List;
 
-import com.example.foodplannerapp.R;
+public class PlanFragment extends Fragment implements PlanInterface {
 
-public class PlanFragment extends Fragment {
-
-
+    private FragmentPlanBinding binding;
+    private WeekDaysAdapter daysAdapter;
+    private PlanPresenter presenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentPlanBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
+        presenter = new PlanPresenter(getContext(), this);
+
+        setupRecyclerView();
+        presenter.loadWeekDays();
+
+        return view;
+    }
+
+    private void setupRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        binding.daysRecycleView.setLayoutManager(linearLayoutManager);
+        daysAdapter = new WeekDaysAdapter(requireContext(), null);
+        binding.daysRecycleView.setAdapter(daysAdapter);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan, container, false);
+    public void showWeekDays(List<Week> weekDays) {
+        daysAdapter.updateData(weekDays);
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void hideLoading() {
+    }
+
+    @Override
+    public void showError(String message) {
+
     }
 }

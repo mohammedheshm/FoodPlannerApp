@@ -7,6 +7,9 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -23,23 +26,24 @@
             android:textColor="@color/white" />
     </androidx.cardview.widget.CardView>
 
-    <View
-        android:id="@+id/divider"
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:cardCornerRadius="16dp"
+        android:layout_margin="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealsRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:autofillHints="@string/nothingToShow"
-        android:background="@color/teal_color"
-        android:elevation="-20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:padding="8dp" />
 
-
-    </androidx.recyclerview.widget.RecyclerView>
+</androidx.cardview.widget.CardView>
 
 
 

@@ -64,7 +64,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/outline_topic_24"/>
+                    android:src="@drawable/baseline_info_24"/>
                 <TextView
                     android:id="@+id/categoryTxtView"
                     android:layout_width="match_parent"
@@ -104,6 +104,7 @@
 
 
             <ImageView
+                android:layout_marginLeft="150dp"
                 android:id="@+id/removeFromPlanButton"
                 android:padding="5dp"
                 android:layout_width="40dp"

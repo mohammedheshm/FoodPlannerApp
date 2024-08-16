@@ -10,7 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
             android:gravity="center"
             android:textStyle="bold"
@@ -72,7 +71,7 @@
             android:elevation="30dp"
             android:gravity="center"
             android:padding="3dp"
-            android:text="Add To Calender"
+            android:text="Add To Your Plan"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -86,7 +85,7 @@
             android:layout_weight=".25"
             android:elevation="30dp"
             android:padding="5dp"
-            android:src="@drawable/favorite_border_24"
+            android:src="@drawable/solid_favorite_24"
             app:layout_constraintBottom_toBottomOf="@+id/addTOPlanButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addTOPlanButton"
