@@ -37,6 +37,8 @@ public class HomeFragment extends Fragment implements HomeInterface {
     private HomePresenter presenter;
     private FragmentHomeBinding binding;
     private MealPlan mealPlan;
+    public boolean isFavorite = false;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -117,7 +119,14 @@ public class HomeFragment extends Fragment implements HomeInterface {
                 foodSingleName.setText(mealsItem.getStrMeal());
                 plane_btn.setOnClickListener(view1 -> onSavePlane(mealsItem));
 
-                fav_btn.setOnClickListener(view12 -> onSaveFavorite(mealsItem));
+                isFavorite = checkIfFavorite(mealsItem);
+                updateFavoriteButtonIcon(fav_btn);
+                fav_btn.setOnClickListener(view12 -> {
+                    isFavorite = !isFavorite;
+                    updateFavoriteButtonIcon(fav_btn);
+                    onSaveFavorite(mealsItem);
+                });
+
             }
 
             @Override
@@ -127,6 +136,14 @@ public class HomeFragment extends Fragment implements HomeInterface {
             public void onDataLoading() {}
         });
     }
+
+    private void updateFavoriteButtonIcon(ImageButton fav_btn) {
+        fav_btn.setImageResource(isFavorite ? R.drawable.solid_favorite_24 : R.drawable.favorite_border_24);
+    }
+    private boolean checkIfFavorite(MealsItem item) {
+        return false;
+    }
+
 
     public void createDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
@@ -200,6 +217,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
     @Override
     public void onSaveFavorite(MealsItem item) {
         presenter.saveFavorite(item, new DataFetch<Void>() {
+
             @Override
             public void onDataSuccessResponse(Void data) {
                 Toast.makeText(getContext(), item.getStrMeal() + " added to favorite", Toast.LENGTH_SHORT).show();

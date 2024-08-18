@@ -12,7 +12,7 @@ import com.example.foodplannerapp.data.model.meals.MealsItem;
 public abstract class RoomDatabase extends androidx.room.RoomDatabase {
     public static final String DATABASE_FILE_NAME = "foodPlanner.db";
     private  static volatile RoomDatabase instance = null;
-    // Entities
+
     public abstract FavoriteDAO FavoriteDAO();
     public abstract PlaneFoodDAO PlaneFoodDAO();
 

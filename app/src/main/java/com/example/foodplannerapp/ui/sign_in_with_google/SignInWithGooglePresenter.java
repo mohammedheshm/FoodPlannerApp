@@ -20,7 +20,6 @@ public class SignInWithGooglePresenter {
     }
 
     public void googleAuthInitialize(FragmentActivity activity) {
-        // Ensure that SignUpOrLoginActivity extends FragmentActivity or Activity
         google.googleInitializer(activity, activity, signInWithGoogleInterface);
     }
 

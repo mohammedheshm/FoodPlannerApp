@@ -25,7 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
     private static final String TAG = "GoogleAuth";
-    private static final int RC_SIGN_IN = 9001;
+    private static final int RC_SIGN_IN = 1;
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient googleSignInClient;
