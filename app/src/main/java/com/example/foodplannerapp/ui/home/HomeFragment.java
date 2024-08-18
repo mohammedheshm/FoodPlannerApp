@@ -29,16 +29,14 @@ import com.example.foodplannerapp.data.repository.DataFetch;
 import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentHomeBinding;
 import com.example.foodplannerapp.ui.common.Utils;
-import java.util.List;
 
+import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeInterface {
 
     private HomePresenter presenter;
     private FragmentHomeBinding binding;
     private MealPlan mealPlan;
-    private String mealId;
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
         randomMealHandling(view);
     }
 
-    private void recycleriewAreaSettings () {
+    private void recycleriewAreaSettings() {
         RecyclerView rvRandomArea = Utils.recyclerViewHandler(binding.rvRandomArea, getContext());
         HomeAdapter homeFeedAdapterArea = new HomeAdapter(getContext(), this);
         rvRandomArea.setAdapter(homeFeedAdapterArea);
@@ -63,19 +61,14 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataFailedResponse(String message) {
-
-            }
+            public void onDataFailedResponse(String message) {}
 
             @Override
-            public void onDataLoading() {
-
-            }
+            public void onDataLoading() {}
         });
-
     }
 
-    private void recycleriewCategorySettings () {
+    private void recycleriewCategorySettings() {
         RecyclerView rvRandomCategory = Utils.recyclerViewHandler(binding.rvRandomCategory, getContext());
         HomeAdapter homeFeedAdapterCategory = new HomeAdapter(getContext(), this);
         rvRandomCategory.setAdapter(homeFeedAdapterCategory);
@@ -87,28 +80,24 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataFailedResponse(String message) {
-
-            }
+            public void onDataFailedResponse(String message) {}
 
             @Override
-            public void onDataLoading() {
-
-            }
+            public void onDataLoading() {}
         });
         homeFeedAdapterCategory.isHaveData.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean haveData) {
                 if (haveData) {
-
+                    // Handle UI updates
                 } else {
-
+                    // Handle UI updates
                 }
             }
         });
     }
 
-    private void randomMealHandling(View view){
+    private void randomMealHandling(View view) {
         ImageView imageViewSingleMeal = view.findViewById(R.id.image_thum);
         TextView foodSingleName = view.findViewById(R.id.food_name);
         TextView plane_btn = view.findViewById(R.id.plane_btn);
@@ -126,34 +115,25 @@ public class HomeFragment extends Fragment implements HomeInterface {
                         .into(imageViewSingleMeal);
 
                 foodSingleName.setText(mealsItem.getStrMeal());
-                plane_btn.setOnClickListener(view1 -> {
-                    onSavePlane(mealsItem);
-                });
+                plane_btn.setOnClickListener(view1 -> onSavePlane(mealsItem));
 
                 fav_btn.setOnClickListener(view12 -> onSaveFavorite(mealsItem));
             }
 
             @Override
-            public void onDataFailedResponse(String message) {
-
-            }
+            public void onDataFailedResponse(String message) {}
 
             @Override
-            public void onDataLoading() {
-
-            }
+            public void onDataLoading() {}
         });
-
-
     }
 
-    public void createDialog(){
-
+    public void createDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
         dialogBuilder.setIcon(R.drawable.ic_plane);
         dialogBuilder.setTitle("Choose any day you want");
 
-        final ArrayAdapter<String> days = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
+        final ArrayAdapter<String> days = new ArrayAdapter<>(requireContext(), android.R.layout.select_dialog_singlechoice);
         days.add(Week.SATURDAY.toString());
         days.add(Week.SUNDAY.toString());
         days.add(Week.MONDAY.toString());
@@ -162,49 +142,20 @@ public class HomeFragment extends Fragment implements HomeInterface {
         days.add(Week.TUESDAY.toString());
         days.add(Week.FRIDAY.toString());
 
-        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        dialogBuilder.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
 
-        dialogBuilder.setAdapter(days, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Log.i("TAG", "meal plan at dialog: " + mealPlan.getStrCategory());
-                if(which==0)
-                {
-                    mealPlan.setDay(Week.SATURDAY);
-                }
-                if(which==1)
-                {
-                    mealPlan.setDay(Week.SUNDAY);
-                }
-                if(which==2)
-                {
-                    mealPlan.setDay(Week.MONDAY);
-                }
-                if(which==3)
-                {
-                    mealPlan.setDay(Week.THURSDAY);
-                }
-                if(which==4)
-                {
-                    mealPlan.setDay(Week.WEDNESDAY);
-                }
-                if(which==5)
-                {
-                    mealPlan.setDay(Week.TUESDAY);
-                }
-                if(which==6)
-                {
-                    mealPlan.setDay(Week.FRIDAY);
-                }
-                addToPlan(mealPlan);
-                Toast.makeText(requireContext(),"Added to plan successfully",Toast.LENGTH_SHORT).show();
-
+        dialogBuilder.setAdapter(days, (dialog, which) -> {
+            switch (which) {
+                case 0: mealPlan.setDay(Week.SATURDAY); break;
+                case 1: mealPlan.setDay(Week.SUNDAY); break;
+                case 2: mealPlan.setDay(Week.MONDAY); break;
+                case 3: mealPlan.setDay(Week.THURSDAY); break;
+                case 4: mealPlan.setDay(Week.WEDNESDAY); break;
+                case 5: mealPlan.setDay(Week.TUESDAY); break;
+                case 6: mealPlan.setDay(Week.FRIDAY); break;
             }
+            addToPlan(mealPlan);
+            Toast.makeText(requireContext(), "Added to plan successfully", Toast.LENGTH_SHORT).show();
         });
         dialogBuilder.show();
     }
@@ -230,9 +181,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
                 binding.rvRandomIngredien.setVisibility(View.GONE);
             }
         });
-
     }
-
 
     @Nullable
     @Override
@@ -241,32 +190,28 @@ public class HomeFragment extends Fragment implements HomeInterface {
         return binding.getRoot();
     }
 
-
-
     @Override
-    public void onSavePlane (MealsItem item){
-        Toast.makeText(getContext(), item.getStrMeal() + " Will Be Add to plane", Toast.LENGTH_SHORT).show();
-
+    public void onSavePlane(MealsItem item) {
+        Toast.makeText(getContext(), item.getStrMeal() + " will be added to plan", Toast.LENGTH_SHORT).show();
+        mealPlan = new MealPlan(item.getStrMeal(), item.getStrCategory(), item.getStrMealThumb(), item.getIdMeal());
+        createDialog();
     }
 
     @Override
-    public void onSaveFavorite (MealsItem item){
+    public void onSaveFavorite(MealsItem item) {
         presenter.saveFavorite(item, new DataFetch<Void>() {
             @Override
             public void onDataSuccessResponse(Void data) {
-                Toast.makeText(getContext(), item.getStrMeal() + " Added To Favorite", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), item.getStrMeal() + " added to favorite", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDataFailedResponse(String message) {
-                Toast.makeText(getContext(), " Error Happened: " + message, Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onDataLoading() {
-
-            }
+            public void onDataLoading() {}
         });
     }
 
@@ -275,24 +220,24 @@ public class HomeFragment extends Fragment implements HomeInterface {
         presenter.addToPlan(mealPlan, new DataFetch<Void>() {
             @Override
             public void onDataSuccessResponse(Void data) {
-
+                Toast.makeText(getContext(), mealPlan.getStrMeal() + " added to plan", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDataFailedResponse(String message) {
-
+                Toast.makeText(getContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onDataLoading() {
-
-            }
+            public void onDataLoading() {}
         });
     }
 
     @Override
     public void deleteFromPlan(MealPlan mealPlan) {
-
+        presenter.deleteFromPlan(mealPlan);
     }
+
+
 
 }
