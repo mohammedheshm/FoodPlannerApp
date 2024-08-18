@@ -1,5 +1,4 @@
 package com.example.foodplannerapp;
-import com.example.foodplannerapp.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu,menu);
+        getMenuInflater().inflate(R.menu.logout_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 

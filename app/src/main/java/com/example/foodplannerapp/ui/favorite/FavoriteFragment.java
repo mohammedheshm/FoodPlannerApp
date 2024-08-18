@@ -1,3 +1,4 @@
+
 package com.example.foodplannerapp.ui.favorite;
 
 
@@ -56,7 +57,7 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface{
 
                 @Override
                 public void onDataFailedResponse(String message) {
-                    Toast.makeText(getContext(), "Problem happened during delete "+message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error Happened "+message, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -121,3 +122,4 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface{
     }
 
 }
+

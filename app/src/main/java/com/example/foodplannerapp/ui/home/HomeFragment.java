@@ -1,5 +1,7 @@
 package com.example.foodplannerapp.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,9 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,8 +23,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplannerapp.R;
+import com.example.foodplannerapp.data.model.meals.MealPlan;
 import com.example.foodplannerapp.data.model.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentHomeBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 import java.util.List;
@@ -30,6 +36,8 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
     private HomePresenter presenter;
     private FragmentHomeBinding binding;
+    private MealPlan mealPlan;
+    private String mealId;
 
 
     @Override
@@ -37,10 +45,11 @@ public class HomeFragment extends Fragment implements HomeInterface {
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new HomePresenter(getContext(), this);
+
         recycleriewIngredientsSettings();
         recycleriewAreaSettings();
         recycleriewCategorySettings();
-        randomMealCardSettings(view);
+        randomMealHandling(view);
     }
 
     private void recycleriewAreaSettings () {
@@ -99,7 +108,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
         });
     }
 
-    private void randomMealCardSettings (View view){
+    private void randomMealHandling(View view){
         ImageView imageViewSingleMeal = view.findViewById(R.id.image_thum);
         TextView foodSingleName = view.findViewById(R.id.food_name);
         TextView plane_btn = view.findViewById(R.id.plane_btn);
@@ -137,6 +146,69 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
 
     }
+
+    public void createDialog(){
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
+        dialogBuilder.setIcon(R.drawable.ic_plane);
+        dialogBuilder.setTitle("Choose any day you want");
+
+        final ArrayAdapter<String> days = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
+        days.add(Week.SATURDAY.toString());
+        days.add(Week.SUNDAY.toString());
+        days.add(Week.MONDAY.toString());
+        days.add(Week.THURSDAY.toString());
+        days.add(Week.WEDNESDAY.toString());
+        days.add(Week.TUESDAY.toString());
+        days.add(Week.FRIDAY.toString());
+
+        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dialogBuilder.setAdapter(days, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("TAG", "meal plan at dialog: " + mealPlan.getStrCategory());
+                if(which==0)
+                {
+                    mealPlan.setDay(Week.SATURDAY);
+                }
+                if(which==1)
+                {
+                    mealPlan.setDay(Week.SUNDAY);
+                }
+                if(which==2)
+                {
+                    mealPlan.setDay(Week.MONDAY);
+                }
+                if(which==3)
+                {
+                    mealPlan.setDay(Week.THURSDAY);
+                }
+                if(which==4)
+                {
+                    mealPlan.setDay(Week.WEDNESDAY);
+                }
+                if(which==5)
+                {
+                    mealPlan.setDay(Week.TUESDAY);
+                }
+                if(which==6)
+                {
+                    mealPlan.setDay(Week.FRIDAY);
+                }
+                addToPlan(mealPlan);
+                Toast.makeText(requireContext(),"Added to plan successfully",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dialogBuilder.show();
+    }
+
     private void recycleriewIngredientsSettings() {
         RecyclerView rvRandomIngredien = Utils.recyclerViewHandler(binding.rvRandomIngredien, getContext());
         HomeAdapter homeFeedAdapterIngredien = new HomeAdapter(getContext(), this);
@@ -196,6 +268,31 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
             }
         });
+    }
+
+    @Override
+    public void addToPlan(MealPlan mealPlan) {
+        presenter.addToPlan(mealPlan, new DataFetch<Void>() {
+            @Override
+            public void onDataSuccessResponse(Void data) {
+
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
+    }
+
+    @Override
+    public void deleteFromPlan(MealPlan mealPlan) {
+
     }
 
 }

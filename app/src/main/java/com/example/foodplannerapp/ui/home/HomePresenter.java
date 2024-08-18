@@ -2,6 +2,8 @@ package com.example.foodplannerapp.ui.home;
 
 
 import android.content.Context;
+
+import com.example.foodplannerapp.data.model.meals.MealPlan;
 import com.example.foodplannerapp.data.model.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.DataFetch;
 import com.example.foodplannerapp.data.repository.Repository;
@@ -60,4 +62,15 @@ public class HomePresenter {
 
 
 
+    public void addToPlan(MealPlan mealPlan, DataFetch<Void> dataFetch){
+
+        repository.insertPlaneMealDataBase(mealPlan,dataFetch);
+
+    }
+
+    public void deleteFromPlan(MealPlan mealPlan){
+
+        repository.deletePlanMeal(mealPlan,null);
+
+    }
 }

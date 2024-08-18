@@ -122,6 +122,15 @@ public class MealPlan {
     public MealPlan() {
     }
 
+    // New custom constructor
+    public MealPlan(String strMeal, String strCategory, String strMealThumb, String idMeal) {
+        this.strMeal = strMeal;
+        this.strCategory = strCategory;
+        this.strMealThumb = strMealThumb;
+        this.idMeal = idMeal;
+    }
+
+
     protected MealPlan(Parcel in) {
         idMeal = in.readString();
         strArea = in.readString();

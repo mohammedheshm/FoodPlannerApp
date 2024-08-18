@@ -13,8 +13,8 @@ public class FavoritePresenter {
     FavoriteInterface favoriteInterface;
     Repository repository;
     Context context;
+    public boolean isUser = true;
 
-    public boolean isUser = false;
     public FavoritePresenter(Context context, FavoriteInterface favoriteInterface) {
         repository = Repository.getInstance(context);
         isUser = repository.isUser();
@@ -28,3 +28,4 @@ public class FavoritePresenter {
         repository.showFavouriteMealsDataBase(dataFetch);
     }
 }
+
