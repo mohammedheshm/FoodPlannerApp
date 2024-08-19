@@ -61,7 +61,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addTOPlanButton"
             android:gravity="center"
-            android:background="@drawable/button_calender_effect"
+            android:background="@drawable/button_addtoplan_effect"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:text="@string/add_to_plan"

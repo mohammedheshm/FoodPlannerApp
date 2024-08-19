@@ -36,13 +36,81 @@ public class CategoryFragment extends Fragment implements CategoryInterface {
         super.onViewCreated(view, savedInstanceState);
         categoryPresenter = new CategoryPresenter(getContext());
 
+        setUpRecyclerCategory();
+        setUpRecyclerArea();
+        setUpRecyclerIngredients();
+        navigateToShowAll();
+
+
+    }
+    private void setUpRecyclerArea() {
+        RecyclerView recyclerViewArea = Utils.recyclerViewHandler(binding.rvAreas, getContext());
+        FilterAreaAdapter filterAreaAdapter = new FilterAreaAdapter(getContext(), this);
+        recyclerViewArea.setAdapter(filterAreaAdapter);
+        categoryPresenter.getFilterAreaResults(new RepoInterface<List<Area>>() {
+            @Override
+            public void onDataSuccessResponse(List<Area> data) {
+                filterAreaAdapter.setItemsList(data);
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
 
 
     }
 
+    private void setUpRecyclerIngredients() {
+        RecyclerView recyclerViewIngredient = Utils.recyclerViewHandler(binding.rvIngredient, getContext());
+        FilterIngredientAdapter filterIngredientAdapter = new FilterIngredientAdapter(getContext(), this);
+        recyclerViewIngredient.setAdapter(filterIngredientAdapter);
+        categoryPresenter.getFilterIngredientResults(new RepoInterface<List<Ingredient>>() {
+            @Override
+            public void onDataSuccessResponse(List<Ingredient> data) {
+                filterIngredientAdapter.setItemsList(data);
+            }
 
+            @Override
+            public void onDataFailedResponse(String message) {
 
+            }
 
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
+    }
+
+    private void setUpRecyclerCategory() {
+        RecyclerView recyclerViewCategory = Utils.recyclerViewHandler(binding.rvCategory, getContext());
+        FilterCategoryAdapter filterCategoryAdapter = new FilterCategoryAdapter(getContext(), this);
+        recyclerViewCategory.setAdapter(filterCategoryAdapter);
+
+        categoryPresenter.getFilterCategoryResults(new RepoInterface<List<Category>>() {
+            @Override
+            public void onDataSuccessResponse(List<Category> data) {
+                filterCategoryAdapter.setItemsList(data);
+            }
+
+            @Override
+            public void onDataFailedResponse(String message) {
+
+            }
+
+            @Override
+            public void onDataLoading() {
+
+            }
+        });
+    }
 
     @Override
     public void onItemClicked() {
@@ -53,5 +121,22 @@ public class CategoryFragment extends Fragment implements CategoryInterface {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCategoryBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+
+    private void navigateToShowAll() {
+        binding.seeMoreArea.setOnClickListener(view -> {
+            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.AREA, "");
+        });
+        binding.seeMoreCategory.setOnClickListener(view -> {
+            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.CATEGORY, "");
+        });
+        binding.seeMoreIngredient.setOnClickListener(view -> {
+            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.INGREDIENT, "");
+        });
+        binding.searchView.setOnClickListener(view -> {
+            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.SEARCH, "");
+        });
+
     }
 }

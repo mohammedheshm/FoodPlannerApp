@@ -3,6 +3,7 @@ package com.example.foodplannerapp.ui.favorite;
 
 import android.content.Context;
 
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
@@ -26,6 +27,19 @@ public class FavoritePresenter {
     }
     public void getFavorites(RepoInterface<List<MealsItem>> repoInterface) {
         repository.showFavouriteMealsDataBase(repoInterface);
+    }
+
+
+    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
+
+        repository.insertPlaneMealDataBase(mealPlan, repoInterface);
+
+    }
+
+    public void deleteFromPlan(MealPlan mealPlan){
+
+        repository.deletePlanMeal(mealPlan,null);
+
     }
 }
 

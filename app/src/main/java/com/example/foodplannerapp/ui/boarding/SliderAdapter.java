@@ -27,7 +27,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     @Override
     public SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new SliderViewHolder(LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.slide_item_container,parent, false));
+                inflate(R.layout.slider_item,parent, false));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
         public SliderViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.introImage);
+            imageView=itemView.findViewById(R.id.introImage2);
             titleTxtView=itemView.findViewById(R.id.TitleTextview);
             descTxtView=itemView.findViewById(R.id.descTextView);
 

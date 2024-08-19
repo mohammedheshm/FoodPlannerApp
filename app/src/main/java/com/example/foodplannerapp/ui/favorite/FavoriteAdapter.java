@@ -88,4 +88,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public interface FavoriteAdapterActions{
         public void onCardClicked(MealsItem item,int position);
     }
+
+
 }
