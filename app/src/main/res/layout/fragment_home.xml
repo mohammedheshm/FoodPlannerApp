@@ -120,17 +120,7 @@
 
                 android:text="According to country" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:id="@+id/seeMoreArea"
-                android:layout_width="wrap_content"
-                android:textColor="@color/teal_color_dark"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:padding="2dp"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="@string/see_more" />
+
 
 
         </LinearLayout>
@@ -176,17 +166,7 @@
 
                 android:text="More about food category" />
 
-            <TextView
-                android:id="@+id/seeMoreCategory"
-                style="@style/TextTitle"
-                android:layout_width="wrap_content"
-                android:textColor="@color/teal_color_dark"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:padding="2dp"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="@string/see_more" />
+
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_random_category"
@@ -228,17 +208,7 @@
                 android:textSize="20sp"
                 android:text="You might like this ingredients"/>
 
-            <TextView
-                android:id="@+id/seeMoreIngredients"
-                style="@style/TextTitle"
-                android:layout_width="wrap_content"
-                android:textColor="@color/teal_color_dark"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:padding="2dp"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="@string/see_more" />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"

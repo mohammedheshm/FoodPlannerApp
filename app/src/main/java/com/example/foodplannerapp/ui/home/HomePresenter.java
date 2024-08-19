@@ -3,11 +3,11 @@ package com.example.foodplannerapp.ui.home;
 
 import android.content.Context;
 
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
-import com.example.foodplannerapp.data.sharedpref.SharedManager;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
 import java.util.List;
 import java.util.Random;
 
@@ -29,42 +29,42 @@ public class HomePresenter {
 
 
 
-    public void getRandomMeals(String type, DataFetch<List<MealsItem>> dataFetch){
+    public void getRandomMeals(String type, RepoInterface<List<MealsItem>> repoInterface){
         int random = 0;
         String[] cashList;
         switch (type){
             case AREA:
-                cashList = repository.getList(SharedManager.AREAS);
+                cashList = repository.getList(SharedPrefrencesFactory.AREAS);
                 random = new Random().nextInt(cashList.length);
-                repository.retrieveFilterResults(null, null, cashList[random], dataFetch);
+                repository.retrieveFilterResults(null, null, cashList[random], repoInterface);
                 break;
             case CATEGORY:
-                cashList = repository.getList(SharedManager.CATEGORIES);
+                cashList = repository.getList(SharedPrefrencesFactory.CATEGORIES);
                 random = new Random().nextInt(cashList.length);
-                repository.retrieveFilterResults(cashList[random], null, null,dataFetch);
+                repository.retrieveFilterResults(cashList[random], null, null, repoInterface);
                 break;
             case INGREDIENT:
-                cashList = repository.getList(SharedManager.INGREDIENTS);
+                cashList = repository.getList(SharedPrefrencesFactory.INGREDIENTS);
                 random = new Random().nextInt(cashList.length);
-                repository.retrieveFilterResults(null, cashList[random], null,dataFetch);
+                repository.retrieveFilterResults(null, cashList[random], null, repoInterface);
                 break;
             case SINGLE:
-                repository.lookupSingleRandomMeal(dataFetch);
+                repository.lookupSingleRandomMeal(repoInterface);
                 break;
 
 
         }
     }
 
-    public void saveFavorite(MealsItem item,DataFetch<Void> dataFetch){
-        repository.insertFavoriteMealDataBase(item,dataFetch);
+    public void saveFavorite(MealsItem item, RepoInterface<Void> repoInterface){
+        repository.insertFavoriteMealDataBase(item, repoInterface);
     }
 
 
 
-    public void addToPlan(MealPlan mealPlan, DataFetch<Void> dataFetch){
+    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
 
-        repository.insertPlaneMealDataBase(mealPlan,dataFetch);
+        repository.insertPlaneMealDataBase(mealPlan, repoInterface);
 
     }
 

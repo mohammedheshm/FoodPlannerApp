@@ -13,8 +13,8 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.foodplannerapp.data.auth.AuthenticationFactory;
-import com.example.foodplannerapp.data.sharedpref.SharedManager;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
 import com.example.foodplannerapp.databinding.ActivityMainBinding;
 import com.example.foodplannerapp.ui.sign_in_with_google.SignUpOrLoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         {
 
 
-            int autProvider = SharedManager.getInstance(this).getUser().getAuthProvider();
+            int autProvider = SharedPrefrencesFactory.getInstance(this).getUser().getAuthProvider();
             AuthenticationFactory.authenticationManager(autProvider)
                     .logout(this);
             startActivity(new Intent(this, SignUpOrLoginActivity.class));

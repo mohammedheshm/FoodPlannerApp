@@ -15,7 +15,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
     private List<MealsItem> itemsList;
     FavoriteAdapter.FavoriteAdapterActions favoriteAdapterActions;
-    public MutableLiveData<Boolean> isHaveData = new MutableLiveData<Boolean>(false);
+    public MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<Boolean>(false);
     private Context context;
 
 

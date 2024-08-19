@@ -17,12 +17,14 @@
         android:orientation="vertical">
 
         <AutoCompleteTextView
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="25dp"
             android:id="@+id/search_view"
-            android:layout_margin="10dp"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_by_name"
+            android:hint="@string/search_about_meal"
             android:background="@drawable/input_style"
             android:drawableStart="@drawable/ic_search"
             android:completionThreshold="1"
@@ -36,25 +38,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1">
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/shimmer_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
 
-            <include layout="@layout/shimmer_search_results"/>
-        </LinearLayout>
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/no_network_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <include layout="@layout/offline_network_view"/>
-        </LinearLayout>
         <LinearLayout
             android:visibility="gone"
             android:id="@+id/no_data_holder"

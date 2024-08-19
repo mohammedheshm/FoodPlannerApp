@@ -1,14 +1,12 @@
 package com.example.foodplannerapp.ui.category;
 
 import android.content.Context;
-
-import com.example.foodplannerapp.data.model.category.Category;
-import com.example.foodplannerapp.data.model.countries.Area;
-import com.example.foodplannerapp.data.model.ingredient.Ingredient;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.category.Category;
+import com.example.foodplannerapp.data.pojo.countries.Area;
+import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
-
 import java.util.List;
 
 public class CategoryPresenter {
@@ -18,20 +16,22 @@ public class CategoryPresenter {
         repository = Repository.getInstance(context);
     }
 
-    public void getCategories(DataFetch<List<MealsItem>> dataFetch) {
-        repository.retrieveFilterResults(null, null, "American", dataFetch);
+    public void getCategories(RepoInterface<List<MealsItem>> repoInterface){
+        repository.retrieveFilterResults(null,null,"American", repoInterface);
     }
 
-    public void getFilterAreaResults(DataFetch<List<Area>> dataFetch) {
-        repository.areasList(dataFetch);
+    public void getFilterAreaResults(RepoInterface<List<Area>> repoInterface){
+        repository.areasList(repoInterface);
     }
 
-    public void getFilterCategoryResults(DataFetch<List<Category>> dataFetch) {
-        repository.categoriesList(dataFetch);
+    public void getFilterCategoryResults(RepoInterface<List<Category>> repoInterface){
+        repository.categoriesList(repoInterface);
     }
 
-    public void getFilterIngredientResults(DataFetch<List<Ingredient>> dataFetch) {
-        repository.ingredientsList(dataFetch);
+    public void getFilterIngredientResults(RepoInterface<List<Ingredient>> repoInterface){
+        repository.ingredientsList(repoInterface);
     }
+
+
 
 }

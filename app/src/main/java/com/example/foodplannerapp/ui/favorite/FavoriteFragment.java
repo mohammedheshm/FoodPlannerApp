@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.databinding.FragmentFavoriteBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 
@@ -44,7 +44,7 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface{
     private void recyclerViewSetUp() {
         recyclerView = Utils.recyclerViewHandler(binding.rvListFavorite,getContext());
         favoriteAdapter = new FavoriteAdapter(getContext(), mealsItemList, (item, position) -> {
-            presenter.removeFavorite(item, new DataFetch<Void>() {
+            presenter.removeFavorite(item, new RepoInterface<Void>() {
                 @Override
                 public void onDataSuccessResponse(Void data) {
                     mealsItemList.remove(item);
@@ -85,20 +85,17 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface{
     private void showNoData() {
         binding.rvListFavorite.setVisibility(View.GONE);
         binding.noDataHolder.setVisibility(View.VISIBLE);
-        binding.noNetworkHolder.setVisibility(View.GONE);
 
     }
 
     private void showData() {
         binding.rvListFavorite.setVisibility(View.VISIBLE);
         binding.noDataHolder.setVisibility(View.GONE);
-        binding.noNetworkHolder.setVisibility(View.GONE);
     }
 
     private void showError() {
         binding.rvListFavorite.setVisibility(View.GONE);
         binding.noDataHolder.setVisibility(View.GONE);
-        binding.noNetworkHolder.setVisibility(View.VISIBLE);
     }
 
 

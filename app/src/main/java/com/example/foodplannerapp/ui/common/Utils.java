@@ -48,7 +48,7 @@ public class Utils {
         Navigation.findNavController(view).navigate(action);
     }
 
-    public static void setAutoCompleteCash(Context context,String[] data, AutoCompleteTextView search) {
+    public static void setAutoCompleteTv(Context context, String[] data, AutoCompleteTextView search) {
         // Auto Complete
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, data);
         search.setAdapter(adapter);

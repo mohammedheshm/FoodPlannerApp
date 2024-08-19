@@ -20,9 +20,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentDetailsBinding;
 import java.util.List;
@@ -64,7 +64,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
 
 
         mealId=DetailsFragmentArgs.fromBundle(getArguments()).getMealId();
-        presenter.getMeal(mealId, new DataFetch<List<MealsItem>>() {
+        presenter.getMeal(mealId, new RepoInterface<List<MealsItem>>() {
 
 
             @Override
@@ -144,7 +144,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
 
     @Override
     public void addToPlan(MealPlan mealPlan) {
-        presenter.addToPlan(mealPlan, new DataFetch<Void>() {
+        presenter.addToPlan(mealPlan, new RepoInterface<Void>() {
             @Override
             public void onDataSuccessResponse(Void data) {
 
@@ -164,7 +164,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
 
     @Override
     public void addToFav(MealsItem mealsItem) {
-        presenter.addToFav(mealsItem, new DataFetch<Void>() {
+        presenter.addToFav(mealsItem, new RepoInterface<Void>() {
             @Override
             public void onDataSuccessResponse(Void data) {
 

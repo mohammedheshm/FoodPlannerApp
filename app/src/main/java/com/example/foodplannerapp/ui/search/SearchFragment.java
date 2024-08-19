@@ -16,8 +16,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Toast;
 
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.databinding.FragmentSearchBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 
@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment implements SearchInterface{
 
         type = SearchFragmentArgs.fromBundle(getArguments()).getType();
         query = SearchFragmentArgs.fromBundle(getArguments()).getSearch();
-        Utils.setAutoCompleteCash(getContext(), presenter.getCashList(type), binding.searchView);
+        Utils.setAutoCompleteTv(getContext(), presenter.getCashList(type), binding.searchView);
 
 
         checkQueryType();
@@ -118,11 +118,9 @@ public class SearchFragment extends Fragment implements SearchInterface{
     public void onDataSuccessResponse(List<MealsItem> data) {
         if (data.size()==0){
             binding.rvSearch.setVisibility(View.GONE);
-            binding.noNetworkHolder.setVisibility(View.GONE);
             binding.noDataHolder.setVisibility(View.VISIBLE);
         }else{
             binding.rvSearch.setVisibility(View.VISIBLE);
-            binding.noNetworkHolder.setVisibility(View.GONE);
             binding.noDataHolder.setVisibility(View.GONE);
             searchAdapter.setItemsList(data);
         }
@@ -132,14 +130,12 @@ public class SearchFragment extends Fragment implements SearchInterface{
     @Override
     public void onDataFailedResponse(String message) {
         binding.rvSearch.setVisibility(View.GONE);
-        binding.noNetworkHolder.setVisibility(View.VISIBLE);
         binding.noDataHolder.setVisibility(View.GONE);
     }
 
     @Override
     public void onDataLoading() {
         binding.rvSearch.setVisibility(View.GONE);
-        binding.noNetworkHolder.setVisibility(View.GONE);
         binding.noDataHolder.setVisibility(View.GONE);
     }
 
@@ -150,7 +146,7 @@ public class SearchFragment extends Fragment implements SearchInterface{
 
     @Override
     public void onSaveFavorite(MealsItem item) {
-        presenter.saveFavorite(item, new DataFetch<Void>() {
+        presenter.saveFavorite(item, new RepoInterface<Void>() {
             @Override
             public void onDataSuccessResponse(Void data) {
                 Toast.makeText(getContext(), item.getStrMeal() + " Added To Favorite", Toast.LENGTH_SHORT).show();

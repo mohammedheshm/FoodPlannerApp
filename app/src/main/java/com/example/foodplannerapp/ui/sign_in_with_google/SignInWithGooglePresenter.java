@@ -3,8 +3,8 @@ package com.example.foodplannerapp.ui.sign_in_with_google;
 import android.content.Context;
 import android.content.Intent;
 import androidx.fragment.app.FragmentActivity;
-import com.example.foodplannerapp.data.auth.AuthenticationFactory;
-import com.example.foodplannerapp.data.auth.GoogleAuth;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
+import com.example.foodplannerapp.data.firbaseauth.GoogleAuth;
 import com.example.foodplannerapp.data.repository.Repository;
 
 public class SignInWithGooglePresenter {

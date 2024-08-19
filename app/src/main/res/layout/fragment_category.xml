@@ -9,40 +9,25 @@
     android:layout_height="match_parent"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <TextView
-            android:textColor="@color/teal_color_dark"
-            android:id="@+id/search_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            style="@style/TextTitle"
-            android:textSize="30sp"
-            android:layout_marginLeft="15dp"
-            android:paddingTop="20dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="@string/search_title"
-            app:layout_constraintBottom_toTopOf="@+id/search_view"
-            app:layout_constraintEnd_toEndOf="@+id/guideEnd"
-            app:layout_constraintStart_toStartOf="@+id/guideStart"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlHardcoded" />
-        <TextView
+            android:layout_marginTop="30dp"
             android:id="@+id/search_view"
-            android:layout_margin="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/search_by_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/input_style"
             android:drawableStart="@drawable/colored_search_24"
+            android:hint="@string/search_about_meal"
             android:padding="7dp"
             app:layout_constraintBottom_toTopOf="@+id/section_title_category_holder"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
-            app:layout_constraintTop_toBottomOf="@+id/search_title">
+            app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
         <LinearLayout
@@ -96,7 +81,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
             tools:layout_editor_absoluteY="78dp"
-            tools:listitem="@layout/item_filter_category_list" />
+            tools:listitem="@layout/item_filter_category" />
 
 
         <LinearLayout
@@ -148,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
-            tools:listitem="@layout/item_filter_category_list" />
+            tools:listitem="@layout/item_filter_category" />
 
         <LinearLayout
             android:id="@+id/section_title_ingredient_holder"
@@ -198,9 +183,9 @@
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
-            app:spanCount="3"
+            app:spanCount="1"
             tools:layout_editor_absoluteY="78dp"
-            tools:listitem="@layout/item_filter_ingredient_list" />
+            tools:listitem="@layout/item_filter_ingredient" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideStart"

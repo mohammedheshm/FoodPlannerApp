@@ -1,7 +1,7 @@
 package com.example.foodplannerapp.ui.details;
 
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 
 public interface DetailsInterface {
 

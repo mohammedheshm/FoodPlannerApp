@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 import com.example.foodplannerapp.data.room.Week;
 
@@ -52,7 +52,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
         switch (dayWeek.get(position))
         {
             case SATURDAY:
-                repository.showPlanMealsByDay(Week.SATURDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.SATURDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -76,7 +76,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case SUNDAY:
-                repository.showPlanMealsByDay(Week.SUNDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.SUNDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -100,7 +100,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case MONDAY:
-                repository.showPlanMealsByDay(Week.MONDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.MONDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(!data.isEmpty())
@@ -126,7 +126,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case TUESDAY:
-                repository.showPlanMealsByDay(Week.TUESDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.TUESDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -150,7 +150,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case WEDNESDAY:
-                repository.showPlanMealsByDay(Week.WEDNESDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.WEDNESDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -174,7 +174,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case THURSDAY:
-                repository.showPlanMealsByDay(Week.THURSDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.THURSDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -199,7 +199,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 break;
 
             case FRIDAY:
-                repository.showPlanMealsByDay(Week.FRIDAY, new DataFetch<List<MealPlan>>() {
+                repository.showPlanMealsByDay(Week.FRIDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())

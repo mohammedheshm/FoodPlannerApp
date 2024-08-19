@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 import java.util.List;
 
@@ -52,10 +52,10 @@ public class PlanMealsAdapter extends RecyclerView.Adapter<PlanMealsAdapter.View
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                repository.deletePlanMeal(values.get(position), new DataFetch<Void>() {
+                repository.deletePlanMeal(values.get(position), new RepoInterface<Void>() {
                     @Override
                     public void onDataSuccessResponse(Void data) {
-                        repository.showPlanMealsByDay(values.get(position).getDay(), new DataFetch<List<MealPlan>>() {
+                        repository.showPlanMealsByDay(values.get(position).getDay(), new RepoInterface<List<MealPlan>>() {
                             @Override
                             public void onDataSuccessResponse(List<MealPlan> data) {
                                 values=data;

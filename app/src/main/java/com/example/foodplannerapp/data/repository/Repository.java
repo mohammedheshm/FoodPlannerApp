@@ -14,38 +14,38 @@ import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.model.meals.MealsList;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.pojo.meals.MealsList;
 import com.example.foodplannerapp.data.room.Week;
-import com.example.foodplannerapp.data.fireasestore.BackupManager;
-import com.example.foodplannerapp.data.model.User;
+import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
+import com.example.foodplannerapp.data.pojo.user.User;
 import com.example.foodplannerapp.data.network.ApiCalls;
 import com.example.foodplannerapp.data.network.Network;
 import com.example.foodplannerapp.data.room.RoomDatabase;
-import com.example.foodplannerapp.data.sharedpref.SharedManager;
-import com.example.foodplannerapp.data.model.category.CategoriesList;
-import com.example.foodplannerapp.data.model.category.Category;
-import com.example.foodplannerapp.data.model.countries.Area;
-import com.example.foodplannerapp.data.model.countries.AreasList;
-import com.example.foodplannerapp.data.model.foodcategory.CategoriesFeed;
-import com.example.foodplannerapp.data.model.foodcategory.CategoriesItem;
-import com.example.foodplannerapp.data.model.ingredient.Ingredient;
-import com.example.foodplannerapp.data.model.ingredient.IngredientsList;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
+import com.example.foodplannerapp.data.pojo.category.CategoriesList;
+import com.example.foodplannerapp.data.pojo.category.Category;
+import com.example.foodplannerapp.data.pojo.countries.Area;
+import com.example.foodplannerapp.data.pojo.countries.AreasList;
+import com.example.foodplannerapp.data.pojo.foodcategory.CategoriesFood;
+import com.example.foodplannerapp.data.pojo.foodcategory.CategoriesItem;
+import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
+import com.example.foodplannerapp.data.pojo.ingredient.IngredientsList;
 
 
 
 //Handle  Network , RoomDatabase , And SharedPref Manager functions
 public class Repository {
-    private static final String TAG = "Repository";
 
+    private static final String TAG = "Repository";
     public static final int DELETE_FAV = 1;
     public static final int DELETE_PLAN = 2;
     public static final int DELETE_PLAN_AND_FAV = 3;
     private final ApiCalls apiCalls;
     private final RoomDatabase roomDatabase;
-    private final BackupManager backupManager;
-    private final SharedManager sharedManager;
+    private final FirebaseStoreBackup firebaseStoreBackup;
+    private final SharedPrefrencesFactory sharedPrefrencesFactory;
     public static Repository repository = null;
 
     public static Repository getInstance(Context context) {
@@ -57,22 +57,24 @@ public class Repository {
     private Repository(Context context) {
         apiCalls = Network.apiCalls;
         roomDatabase = RoomDatabase.getInstance(context);
-        sharedManager = SharedManager.getInstance(context);
-        backupManager = BackupManager.getInstance(sharedManager);
+        sharedPrefrencesFactory = SharedPrefrencesFactory.getInstance(context);
+        firebaseStoreBackup = FirebaseStoreBackup.getInstance(sharedPrefrencesFactory);
     }
 
     //SharedPreference
-    public boolean isUser() {return sharedManager.isUser();}
-    public void saveUser(User user) {sharedManager.saveUser(user);}
-    public User getUser() {return sharedManager.getUser();}
-    public String[] getList(String type) {return sharedManager.getList(type);}
-    public boolean isFirstEntrance() {return sharedManager.isFirstEntrance();}
-    public void saveEntrance() {sharedManager.saveEntrance();}
+    public boolean isUser() {return sharedPrefrencesFactory.isUser();}
+    public void saveUser(User user) {sharedPrefrencesFactory.saveUser(user);}
+    public User getUser() {return sharedPrefrencesFactory.getUser();}
+    public String[] getList(String type) {return sharedPrefrencesFactory.getList(type);}
+    public boolean isFirstEntrance() {return sharedPrefrencesFactory.isFirstEntrance();}
+    public void saveEntrance() {sharedPrefrencesFactory.saveEntrance();}
 
 
+
+    //LocalDataSource
     //restore all user data ,favorites and MealsPlane ,using rxjava
     public void restoreAllData() {
-        backupManager.restoreDataPlane(new OnSuccessListener<QuerySnapshot>() {
+        firebaseStoreBackup.restoreDataPlane(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 // Gather all items from firebase
@@ -81,7 +83,7 @@ public class Repository {
                     MealPlan mealPlan = ds.toObject(MealPlan.class);
                     mealPlans.add(mealPlan);
                 }
-                Log.d(TAG, "restoreAllData: Gather all items from firebase");
+                Log.d(TAG, "restore All Data from firebase");
 
                 // remove all data from room for sure there is no items to prevent duplication
                 roomDatabase.PlaneFoodDAO().removeAllTable()
@@ -111,7 +113,7 @@ public class Repository {
                         });
             }
         });
-        backupManager.restoreDataFavorite(new OnSuccessListener<QuerySnapshot>() {
+        firebaseStoreBackup.restoreDataFavorite(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 // Gather all items from firebase
@@ -155,7 +157,6 @@ public class Repository {
         });
     }
 
-
     //delete all room database according type using rxjava
     public void deleteAllTable(int type) {
         CompletableObserver completableObserver = new CompletableObserver() {
@@ -171,7 +172,7 @@ public class Repository {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.d(TAG, "onComplete: TABLE HASE BEEN FAILED TO DELETE " + e.getMessage());
+                Log.d(TAG, "onError: TABLE HASE BEEN FAILED TO DELETE " + e.getMessage());
             }
         };
         switch (type) {
@@ -204,7 +205,7 @@ public class Repository {
     }
 
     //Insert Fav Meal Into Room Database
-    private void insertFavoriteToRoom(MealsItem mealsItem, DataFetch<Void> dataFetch) {
+    private void insertFavoriteToRoom(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
         roomDatabase
                 .FavoriteDAO()
                 .insertFavoriteMeal(mealsItem)
@@ -213,24 +214,24 @@ public class Repository {
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onComplete() {
-                        backupManager.saveFavorite(mealsItem);
-                        dataFetch.onDataSuccessResponse(null);
+                        firebaseStoreBackup.saveFavorite(mealsItem);
+                        repoInterface.onDataSuccessResponse(null);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
-    //Insert Fav Meal with api
-    public void insertFavoriteMealDataBase(MealsItem mealsItem, DataFetch<Void> dataFetch) {
+    //retrieveMea lBy ID Meal from api calls
+    public void insertFavoriteMealDataBase(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
         apiCalls.retrieveMealByID(mealsItem.getIdMeal())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -242,7 +243,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull MealsList mealsList) {
-                        insertFavoriteToRoom(mealsList.getMeals().get(0), dataFetch);
+                        insertFavoriteToRoom(mealsList.getMeals().get(0), repoInterface);
                     }
 
                     @Override
@@ -253,8 +254,8 @@ public class Repository {
 
     }
 
-    //show Fav Meals in favorite fragment
-    public void showFavouriteMealsDataBase(DataFetch<List<MealsItem>> dataFetch) {
+    //show Favourite Meals in favorite fragment
+    public void showFavouriteMealsDataBase(RepoInterface<List<MealsItem>> repoInterface) {
         roomDatabase
                 .FavoriteDAO()
                 .showFavouriteMeals()
@@ -263,23 +264,23 @@ public class Repository {
                 .subscribe(new SingleObserver<List<MealsItem>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull List<MealsItem> mealsItems) {
-                        dataFetch.onDataSuccessResponse(mealsItems);
+                        repoInterface.onDataSuccessResponse(mealsItems);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
     //delete fav item from database
-    public void deleteFavorite(MealsItem mealsItem, DataFetch<Void> dataFetch) {
+    public void deleteFavorite(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
         roomDatabase.FavoriteDAO()
                 .deleteFavouriteMeal(mealsItem)
                 .subscribeOn(Schedulers.io())
@@ -287,24 +288,24 @@ public class Repository {
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onComplete() {
-                        backupManager.deleteFavorite(mealsItem);
-                        dataFetch.onDataSuccessResponse(null);
+                        firebaseStoreBackup.deleteFavorite(mealsItem);
+                        repoInterface.onDataSuccessResponse(null);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
-    //insert  meal to week plan with api calls
-    public void insertPlaneMealDataBase(MealPlan mealPlan, DataFetch<Void> dataFetch) {
+    //retrieve Meal By ID to week plan from  api calls
+    public void insertPlaneMealDataBase(MealPlan mealPlan, RepoInterface<Void> repoInterface) {
         apiCalls.retrieveMealByID(mealPlan.getIdMeal())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -316,7 +317,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull MealsList mealsList) {
-                        insertPlanMealRoom(mealPlan.migrateMealsToPlaneModel(mealsList.getMeals().get(0)), dataFetch);
+                        insertPlanMealRoom(mealPlan.migrateMealsToPlaneModel(mealsList.getMeals().get(0)), repoInterface);
                     }
 
                     @Override
@@ -328,30 +329,30 @@ public class Repository {
     }
 
     //insert  meal to week plan with RoomDatabase
-    private void insertPlanMealRoom(MealPlan mealPlan, DataFetch<Void> dataFetch) {
+    private void insertPlanMealRoom(MealPlan mealPlan, RepoInterface<Void> repoInterface) {
         roomDatabase.PlaneFoodDAO().insertPlanMeal(mealPlan)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onComplete() {
-                        dataFetch.onDataSuccessResponse(null);
+                        repoInterface.onDataSuccessResponse(null);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
     //show  plan Meals in plan fragment with rx-room
-    public void showMealPlan(DataFetch<List<MealPlan>> dataFetch) {
+    public void showMealPlan(RepoInterface<List<MealPlan>> repoInterface) {
         roomDatabase
                 .PlaneFoodDAO()
                 .showPlanMeals()
@@ -360,46 +361,46 @@ public class Repository {
                 .subscribe(new SingleObserver<List<MealPlan>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull List<MealPlan> mealPlans) {
-                        dataFetch.onDataSuccessResponse(mealPlans);
+                        repoInterface.onDataSuccessResponse(mealPlans);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
     //week plan meals with rx-room
-    public void showPlanMealsByDay(Week dayName, DataFetch<List<MealPlan>> dataFetch) {
+    public void showPlanMealsByDay(Week dayName, RepoInterface<List<MealPlan>> repoInterface) {
         roomDatabase.PlaneFoodDAO().showPlanMealsByDay(dayName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<MealPlan>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull List<MealPlan> mealPlans) {
-                        dataFetch.onDataSuccessResponse(mealPlans);
+                        repoInterface.onDataSuccessResponse(mealPlans);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
     //delete week plan meal from room database with rx-room
-    public void deletePlanMeal(MealPlan mealPlan, DataFetch<Void> dataFetch) {
+    public void deletePlanMeal(MealPlan mealPlan, RepoInterface<Void> repoInterface) {
         roomDatabase.PlaneFoodDAO()
                 .deletePlanMeal(mealPlan)
                 .subscribeOn(Schedulers.io())
@@ -407,135 +408,135 @@ public class Repository {
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onComplete() {
-                        backupManager.deletePlane(mealPlan);
-                        dataFetch.onDataSuccessResponse(null);
+                        firebaseStoreBackup.deletePlane(mealPlan);
+                        repoInterface.onDataSuccessResponse(null);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }
 
 
-
+    //RemoteDataSource
     //Handle Apis Functionalities with rxjava
     //Fetch random meals from api
-    public void lookupSingleRandomMeal(DataFetch<List<MealsItem>> dataFetch) {
+    public void lookupSingleRandomMeal(RepoInterface<List<MealsItem>> repoInterface) {
         apiCalls.lookupSingleRandomMeal().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<MealsList>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                dataFetch.onDataLoading();
+                repoInterface.onDataLoading();
             }
 
             @Override
             public void onSuccess(@NonNull MealsList mealsList) {
                 if (mealsList != null && mealsList.getMeals() != null)
-                    dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                    repoInterface.onDataSuccessResponse(mealsList.getMeals());
                 else
-                    dataFetch.onDataSuccessResponse(new ArrayList<>());
+                    repoInterface.onDataSuccessResponse(new ArrayList<>());
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                dataFetch.onDataFailedResponse(e.getMessage());
+                repoInterface.onDataFailedResponse(e.getMessage());
             }
         });
     }
 
     //Fetch ingredients List from api
-    public void ingredientsList(DataFetch<List<Ingredient>> dataFetch) {
+    public void ingredientsList(RepoInterface<List<Ingredient>> repoInterface) {
         apiCalls.ingredientsList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<IngredientsList>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-                dataFetch.onDataLoading();
+                repoInterface.onDataLoading();
             }
 
             @Override
             public void onSuccess(@NonNull IngredientsList ingredientsList) {
                 if (ingredientsList != null && ingredientsList.getMeals() != null) {
                     List<String> arrayList = ingredientsList.getMeals().stream().map(category -> category.getStrIngredient()).collect(Collectors.toList());
-                    sharedManager.saveList(SharedManager.INGREDIENTS, arrayList);
-                    dataFetch.onDataSuccessResponse(ingredientsList.getMeals());
+                    sharedPrefrencesFactory.saveList(SharedPrefrencesFactory.INGREDIENTS, arrayList);
+                    repoInterface.onDataSuccessResponse(ingredientsList.getMeals());
                 } else {
-                    dataFetch.onDataSuccessResponse(new ArrayList<>());
+                    repoInterface.onDataSuccessResponse(new ArrayList<>());
                 }
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                dataFetch.onDataFailedResponse(e.getMessage());
+                repoInterface.onDataFailedResponse(e.getMessage());
             }
         });
     }
 
     //Fetch categories List  from api
-    public void categoriesList(DataFetch<List<Category>> dataFetch) {
+    public void categoriesList(RepoInterface<List<Category>> repoInterface) {
         apiCalls.categoriesList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CategoriesList>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull CategoriesList categoriesList) {
                         if (categoriesList != null && categoriesList.getCategory() != null) {
                             List<String> arrayList = categoriesList.getCategory().stream().map(category -> category.getStrCategory()).collect(Collectors.toList());
-                            sharedManager.saveList(SharedManager.CATEGORIES, arrayList);
-                            dataFetch.onDataSuccessResponse(categoriesList.getCategory());
+                            sharedPrefrencesFactory.saveList(SharedPrefrencesFactory.CATEGORIES, arrayList);
+                            repoInterface.onDataSuccessResponse(categoriesList.getCategory());
                         } else {
-                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                            repoInterface.onDataSuccessResponse(new ArrayList<>());
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
 
     }
 
     //Fetch Countries List  from api
-    public void areasList(DataFetch<List<Area>> dataFetch) {
+    public void areasList(RepoInterface<List<Area>> repoInterface) {
         apiCalls.areasList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<AreasList>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull AreasList areasList) {
                         if (areasList != null && areasList.getAreas() != null) {
                             List<String> arrayList = areasList.getAreas().stream().map(category -> category.getStrArea()).collect(Collectors.toList());
-                            sharedManager.saveList(SharedManager.AREAS, arrayList);
-                            dataFetch.onDataSuccessResponse(areasList.getAreas());
+                            sharedPrefrencesFactory.saveList(SharedPrefrencesFactory.AREAS, arrayList);
+                            repoInterface.onDataSuccessResponse(areasList.getAreas());
                         } else {
-                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                            repoInterface.onDataSuccessResponse(new ArrayList<>());
                         }
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
 
     }
 
     //Fetch Filtering data according to category , ingredient and country
-    public void retrieveFilterResults(String category, String ingredient, String area, DataFetch<List<MealsItem>> dataFetch) {
+    public void retrieveFilterResults(String category, String ingredient, String area, RepoInterface<List<MealsItem>> repoInterface) {
         apiCalls
                 .retrieveFilterResults(category, ingredient, area)
                 .subscribeOn(Schedulers.io())
@@ -543,21 +544,21 @@ public class Repository {
                 .subscribe(new SingleObserver<MealsList>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull MealsList mealsList) {
 
                         if (mealsList != null && mealsList.getMeals() != null)  // sometime api return null
-                            dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                            repoInterface.onDataSuccessResponse(mealsList.getMeals());
                         else
-                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                            repoInterface.onDataSuccessResponse(new ArrayList<>());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
         ;
@@ -565,36 +566,36 @@ public class Repository {
     }
 
     //Fetch Categories List  from api
-    public void retrieveCategoriesList(DataFetch<List<CategoriesItem>> dataFetch) {
+    public void retrieveCategoriesList(RepoInterface<List<CategoriesItem>> repoInterface) {
 
         apiCalls
                 .retrieveCategoriesList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<CategoriesFeed>() {
+                .subscribe(new SingleObserver<CategoriesFood>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
-                    public void onSuccess(@NonNull CategoriesFeed categoriesFeed) {
-                        if (categoriesFeed != null && categoriesFeed.getCategories() != null)
-                            dataFetch.onDataSuccessResponse(categoriesFeed.getCategories());
+                    public void onSuccess(@NonNull CategoriesFood categoriesFood) {
+                        if (categoriesFood != null && categoriesFood.getCategories() != null)
+                            repoInterface.onDataSuccessResponse(categoriesFood.getCategories());
                         else
-                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                            repoInterface.onDataSuccessResponse(new ArrayList<>());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 })
         ;
     }
 
     //Fetch search about meals by meals name
-    public void searchMealsByName(String search, DataFetch<List<MealsItem>> dataFetch) {
+    public void searchMealsByName(String search, RepoInterface<List<MealsItem>> repoInterface) {
         apiCalls
                 .searchMealsByName(search)
                 .subscribeOn(Schedulers.io())
@@ -602,27 +603,27 @@ public class Repository {
                 .subscribe(new SingleObserver<MealsList>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull MealsList mealsList) {
                         if (mealsList != null && mealsList.getMeals() != null)
-                            dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                            repoInterface.onDataSuccessResponse(mealsList.getMeals());
                         else
-                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                            repoInterface.onDataSuccessResponse(new ArrayList<>());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
         ;
     }
 
     //Fetch meals by meals id
-    public void retrieveMealByID(String id, DataFetch<List<MealsItem>> dataFetch) {
+    public void retrieveMealByID(String id, RepoInterface<List<MealsItem>> repoInterface) {
 
         apiCalls.retrieveMealByID(id)
                 .subscribeOn(Schedulers.io())
@@ -630,20 +631,20 @@ public class Repository {
                 .subscribe(new SingleObserver<MealsList>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        dataFetch.onDataLoading();
+                        repoInterface.onDataLoading();
                     }
 
                     @Override
                     public void onSuccess(@NonNull MealsList mealsList) {
                         if (mealsList != null && mealsList.getMeals() != null)
-                            dataFetch.onDataSuccessResponse(mealsList.getMeals());
+                            repoInterface.onDataSuccessResponse(mealsList.getMeals());
                         else
-                            dataFetch.onDataSuccessResponse(new ArrayList<>());
+                            repoInterface.onDataSuccessResponse(new ArrayList<>());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        dataFetch.onDataFailedResponse(e.getMessage());
+                        repoInterface.onDataFailedResponse(e.getMessage());
                     }
                 });
     }

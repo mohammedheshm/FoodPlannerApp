@@ -1,11 +1,11 @@
 package com.example.foodplannerapp.data.network;
 
 
-import com.example.foodplannerapp.data.model.category.CategoriesList;
-import com.example.foodplannerapp.data.model.countries.AreasList;
-import com.example.foodplannerapp.data.model.foodcategory.CategoriesFeed;
-import com.example.foodplannerapp.data.model.ingredient.IngredientsList;
-import com.example.foodplannerapp.data.model.meals.MealsList;
+import com.example.foodplannerapp.data.pojo.category.CategoriesList;
+import com.example.foodplannerapp.data.pojo.countries.AreasList;
+import com.example.foodplannerapp.data.pojo.foodcategory.CategoriesFood;
+import com.example.foodplannerapp.data.pojo.ingredient.IngredientsList;
+import com.example.foodplannerapp.data.pojo.meals.MealsList;
 
 import io.reactivex.rxjava3.core.Single;
 
@@ -36,7 +36,7 @@ public interface ApiCalls {
     );
 
     @GET("categories.php")
-    public Single<CategoriesFeed> retrieveCategoriesList();
+    public Single<CategoriesFood> retrieveCategoriesList();
 
 
     @GET("search.php")

@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodplannerapp.MainActivity;
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.data.auth.Authentication;
-import com.example.foodplannerapp.data.auth.AuthenticationFactory;
+import com.example.foodplannerapp.data.firbaseauth.Authentication;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
 import com.example.foodplannerapp.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

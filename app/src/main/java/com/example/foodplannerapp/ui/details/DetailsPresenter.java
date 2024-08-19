@@ -3,9 +3,9 @@ package com.example.foodplannerapp.ui.details;
 
 import android.content.Context;
 
-import com.example.foodplannerapp.data.model.meals.MealPlan;
-import com.example.foodplannerapp.data.model.meals.MealsItem;
-import com.example.foodplannerapp.data.repository.DataFetch;
+import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 
 import java.util.List;
@@ -31,18 +31,18 @@ public class DetailsPresenter {
         repository.deleteFavorite(mealsItem,null);
     }
 
-    public void addToPlan(MealPlan mealPlan, DataFetch<Void> dataFetch){
+    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
 
-        repository.insertPlaneMealDataBase(mealPlan,dataFetch);
+        repository.insertPlaneMealDataBase(mealPlan, repoInterface);
 
     }
 
-    public void addToFav(MealsItem mealsItem, DataFetch<Void> dataFetch){
-        repository.insertFavoriteMealDataBase(mealsItem,dataFetch);
+    public void addToFav(MealsItem mealsItem, RepoInterface<Void> repoInterface){
+        repository.insertFavoriteMealDataBase(mealsItem, repoInterface);
     }
-    public void getMeal(String mealId,DataFetch<List<MealsItem>> dataFetch )
+    public void getMeal(String mealId, RepoInterface<List<MealsItem>> repoInterface)
     {
-        repository.retrieveMealByID(mealId,dataFetch);
+        repository.retrieveMealByID(mealId, repoInterface);
     }
 
 }
