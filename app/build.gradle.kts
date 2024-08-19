@@ -55,14 +55,12 @@ dependencies {
 
     //Lottie Animation
     implementation ("com.airbnb.android:lottie:3.4.0")
+    implementation ("com.google.android.material:material:1.9.0")
 
-    implementation ("com.google.android.material:material:1.9.0") // or the latest version
 
-
+    //Navigation Component
     implementation ("androidx.navigation:navigation-fragment:2.5.3")
     implementation ("androidx.navigation:navigation-ui:2.5.3")
-
-
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -97,11 +95,10 @@ dependencies {
 
     // RoundedImageView
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-
-    //Shimmer Effect
-    implementation ("com.facebook.shimmer:shimmer:0.5.0")
-
-
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
+
+    // Youtube Player
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
+
 
 }

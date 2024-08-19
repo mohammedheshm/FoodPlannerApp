@@ -25,12 +25,17 @@ import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentDetailsBinding;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
 import java.util.List;
 
 
 
 public class DetailsFragment extends Fragment implements DetailsInterface{
 
+    private boolean isFavorite = false;
     private TextView detailsName;
     private TextView categoryName;
     private TextView areaName;
@@ -46,14 +51,9 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
     private List<String> ingridients;
     private MealPlan mealPlan;
     private ImageView imageView;
+    private YouTubePlayerView youTubePlayerView;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        DetailsFragment.this.requireActivity().getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -91,6 +91,26 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
 
                                 placeholder(drawable.randomloadingimg).error(drawable.randomloadingimg)).
                         into(imageView);
+
+                youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                    @Override
+                    public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                        String[] videoIdParts = mealsItem.getStrYoutube().split("=");
+                        String videoId = videoIdParts.length > 1 ? videoIdParts[1] : null;
+
+                        if (videoId != null && !videoId.isEmpty()) {
+                            try {
+                                youTubePlayer.loadVideo(videoId, 0);
+                            } catch (ArrayIndexOutOfBoundsException exception) {
+                                exception.printStackTrace();
+                                showVideoLoadErrorDialog("Video playback error. Please try again later.");
+                            }
+                        } else {
+                            showVideoLoadErrorDialog("Invalid video ID. Unable to load the video.");
+                        }
+                    }
+                });
+
             }
 
             @Override
@@ -114,13 +134,32 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
         addTofavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToFav(mealsItem);
-                Toast.makeText(requireContext(), "Meal added to your favorite successfully", Toast.LENGTH_SHORT).show();
+
+                if (!isFavorite) {
+
+                    addTofavBtn.setImageResource(drawable.solid_favorite_24); // Replace with your solid icon
+                    addToFav(mealsItem);
+                    Toast.makeText(requireContext(), "Meal added to your favorites successfully", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    addTofavBtn.setImageResource(drawable.ic_favorite_border_black_menu_24dp); //
+                }
+                isFavorite = !isFavorite;
+
 
             }
         });
         return root;
     }
+
+    private void showVideoLoadErrorDialog(String message) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Playback Error")
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
 
     public void initUi(){
         root = binding.getRoot();
@@ -132,12 +171,24 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
         imageView=root.findViewById(id.mealImageView);
         ingridientsTv=root.findViewById(id.ingredientsTextView);
         instructionsTv=root.findViewById(id.instructionsTextView);
+        youTubePlayerView = root.findViewById(id.youtube_player_view);
+        getLifecycle().addObserver(youTubePlayerView);
+
 
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        DetailsFragment.this.requireActivity().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        youTubePlayerView.release();
         binding = null;
     }
 

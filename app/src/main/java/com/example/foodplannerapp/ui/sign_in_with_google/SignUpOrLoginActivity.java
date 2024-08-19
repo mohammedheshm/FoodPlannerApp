@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.foodplannerapp.MainActivity;
+import com.example.foodplannerapp.ui.main.MainActivity;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.ui.login.LoginActivity;
 import com.example.foodplannerapp.ui.register.RegisterActivity;

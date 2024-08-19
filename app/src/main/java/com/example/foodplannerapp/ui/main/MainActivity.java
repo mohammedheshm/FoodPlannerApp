@@ -1,4 +1,4 @@
-package com.example.foodplannerapp;
+package com.example.foodplannerapp.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +13,8 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
 import com.example.foodplannerapp.databinding.ActivityMainBinding;

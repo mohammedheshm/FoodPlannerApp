@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodplannerapp.ui.boarding.BoardingActivity;
-import com.example.foodplannerapp.MainActivity;
+import com.example.foodplannerapp.ui.main.MainActivity;
 import com.example.foodplannerapp.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(4000);
                 startActivity(new Intent(getApplicationContext(), BoardingActivity.class));
                 finish();
             } catch (InterruptedException e) {
