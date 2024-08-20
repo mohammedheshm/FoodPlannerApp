@@ -34,8 +34,6 @@ import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
 import com.example.foodplannerapp.data.pojo.ingredient.IngredientsList;
 
 
-
-//Handle  Network , RoomDatabase , And SharedPref Manager functions
 public class Repository {
 
     private static final String TAG = "Repository";
@@ -562,35 +560,6 @@ public class Repository {
                 });
         ;
 
-    }
-
-    //Fetch Categories List  from api
-    public void retrieveCategoriesList(RepoInterface<List<CategoriesItem>> repoInterface) {
-
-        apiCalls
-                .retrieveCategoriesList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<CategoriesFood>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        repoInterface.onDataLoading();
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull CategoriesFood categoriesFood) {
-                        if (categoriesFood != null && categoriesFood.getCategories() != null)
-                            repoInterface.onDataSuccessResponse(categoriesFood.getCategories());
-                        else
-                            repoInterface.onDataSuccessResponse(new ArrayList<>());
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        repoInterface.onDataFailedResponse(e.getMessage());
-                    }
-                })
-        ;
     }
 
     //Fetch search about meals by meals name
