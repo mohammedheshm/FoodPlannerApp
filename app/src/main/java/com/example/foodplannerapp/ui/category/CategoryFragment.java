@@ -39,7 +39,7 @@ public class CategoryFragment extends Fragment implements CategoryInterface {
         setUpRecyclerCategory();
         setUpRecyclerArea();
         setUpRecyclerIngredients();
-        navigateToShowAll();
+        navigateToSearchFragment();
 
 
     }
@@ -114,7 +114,7 @@ public class CategoryFragment extends Fragment implements CategoryInterface {
 
     @Override
     public void onItemClicked() {
-        Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -124,16 +124,7 @@ public class CategoryFragment extends Fragment implements CategoryInterface {
     }
 
 
-    private void navigateToShowAll() {
-        binding.seeMoreArea.setOnClickListener(view -> {
-            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.AREA, "");
-        });
-        binding.seeMoreCategory.setOnClickListener(view -> {
-            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.CATEGORY, "");
-        });
-        binding.seeMoreIngredient.setOnClickListener(view -> {
-            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.INGREDIENT, "");
-        });
+    private void navigateToSearchFragment() {
         binding.searchView.setOnClickListener(view -> {
             Utils.navigatorCategoryToSearchFragment(view, SearchInterface.SEARCH, "");
         });

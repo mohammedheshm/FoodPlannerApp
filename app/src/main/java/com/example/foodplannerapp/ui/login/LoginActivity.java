@@ -67,13 +67,13 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
 
         passwordTV.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                statesFlagPassword = isValidPassword(charSequence);
+            public void onTextChanged(CharSequence s, int start, int count, int after) {
+                statesFlagPassword = isValidPassword(s);
                 buttonStates();
             }
 
@@ -85,13 +85,13 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
 
         emailTV.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                statesFlagEmail = isValidEmail(charSequence);
+            public void onTextChanged(CharSequence s, int start, int count, int after) {
+                statesFlagEmail = isValidEmail(s);
                 buttonStates();
             }
 
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
     public void updateUI(FirebaseUser user) {
         if (user != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();  // Optional: Close the LoginActivity after a successful login
+            finish();
         }
     }
 

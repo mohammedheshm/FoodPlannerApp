@@ -53,18 +53,18 @@
                 android:textStyle="bold"
                 android:text="@string/search_by_category" />
 
-            <TextView
-                android:textColor="@color/teal_color_dark"
-                style="@style/TextTitle"
-                android:id="@+id/seeMoreCategory"
-                android:layout_width="wrap_content"
-                android:background="@drawable/hover_effect"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:padding="2dp"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="@string/see_more" />
+<!--            <TextView-->
+<!--                android:textColor="@color/teal_color_dark"-->
+<!--                style="@style/TextTitle"-->
+<!--                android:id="@+id/seeMoreCategory"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:background="@drawable/hover_effect"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="right"-->
+<!--                android:padding="2dp"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textStyle="italic"-->
+<!--                android:text="@string/see_more" />-->
 
 
         </LinearLayout>
@@ -108,18 +108,18 @@
                 android:textStyle="bold"
                 android:text="@string/search_by_country" />
 
-            <TextView
-                android:textColor="@color/teal_color_dark"
-                style="@style/TextTitle"
-                android:id="@+id/seeMoreArea"
-                android:layout_width="wrap_content"
-                android:background="@drawable/hover_effect"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:padding="2dp"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="@string/see_more" />
+<!--            <TextView-->
+<!--                android:textColor="@color/teal_color_dark"-->
+<!--                style="@style/TextTitle"-->
+<!--                android:id="@+id/seeMoreArea"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:background="@drawable/hover_effect"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="right"-->
+<!--                android:padding="2dp"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textStyle="italic"-->
+<!--                android:text="@string/see_more" />-->
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_areas"
@@ -158,18 +158,18 @@
                 android:textStyle="bold"
                 android:text="@string/search_by_ingredient" />
 
-            <TextView
-                android:textColor="@color/teal_color_dark"
-                android:id="@+id/seeMoreIngredient"
-                style="@style/TextTitle"
-                android:layout_width="wrap_content"
-                android:background="@drawable/hover_effect"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:padding="2dp"
-                android:textAllCaps="true"
-                android:textStyle="italic"
-                android:text="@string/see_more" />
+<!--            <TextView-->
+<!--                android:textColor="@color/teal_color_dark"-->
+<!--                android:id="@+id/seeMoreIngredient"-->
+<!--                style="@style/TextTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:background="@drawable/hover_effect"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="right"-->
+<!--                android:padding="2dp"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textStyle="italic"-->
+<!--                android:text="@string/see_more" />-->
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_ingredient"

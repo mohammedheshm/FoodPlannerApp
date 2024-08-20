@@ -73,16 +73,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
         signUpEmailTv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (isValidEmail(charSequence))
+            public void onTextChanged(CharSequence s, int start, int count, int after) {
+                if (isValidEmail(s))
                 {   statesFlagEmail=true;
                     buttonStates();}
-                if(isValidEmail(charSequence)==false) {
+                if(isValidEmail(s)==false) {
                     statesFlagEmail=false;
                     buttonStates();
                 }
@@ -100,16 +100,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
         signUpPasswordTv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (isValidPassword(charSequence))
+            public void onTextChanged(CharSequence s, int start, int count, int after) {
+                if (isValidPassword(s))
                 {  statesFlagPassword=true;
                     buttonStates();}
-                if(isValidPassword(charSequence)==false)
+                if(isValidPassword(s)==false)
                 {
                     statesFlagPassword=false;
                     buttonStates();
