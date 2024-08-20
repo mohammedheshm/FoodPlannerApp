@@ -1,5 +1,7 @@
 package com.example.foodplannerapp.ui.home;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,15 +36,20 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeInterface {
 
-    private HomePresenter presenter;
     private FragmentHomeBinding binding;
+    private HomePresenter presenter;
     private MealPlan mealPlan;
     public boolean isFavorite = false;
+    ImageView logoImage;
+    TextView titleText;
+    TextView subtitleText;
+    private boolean isAnimationExecuted = false;
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         presenter = new HomePresenter(getContext(), this);
 
@@ -61,10 +70,12 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataFailedResponse(String message) {}
+            public void onDataFailedResponse(String message) {
+            }
 
             @Override
-            public void onDataLoading() {}
+            public void onDataLoading() {
+            }
         });
     }
 
@@ -80,10 +91,12 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataFailedResponse(String message) {}
+            public void onDataFailedResponse(String message) {
+            }
 
             @Override
-            public void onDataLoading() {}
+            public void onDataLoading() {
+            }
         });
         homeFeedAdapterCategory.isHaveData.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
@@ -128,16 +141,19 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataFailedResponse(String message) {}
+            public void onDataFailedResponse(String message) {
+            }
 
             @Override
-            public void onDataLoading() {}
+            public void onDataLoading() {
+            }
         });
     }
 
     private void updateFavoriteButtonIcon(ImageButton fav_btn) {
         fav_btn.setImageResource(isFavorite ? R.drawable.solid_favorite_24 : R.drawable.favorite_border_24);
     }
+
     private boolean checkIfFavorite(MealsItem item) {
         return false;
     }
@@ -146,7 +162,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
     public void createDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
         dialogBuilder.setIcon(R.drawable.ic_plane);
-        dialogBuilder.setTitle("Choose any day you want");
+        dialogBuilder.setTitle("Pick a day that suits you");
 
         final ArrayAdapter<String> days = new ArrayAdapter<>(requireContext(), android.R.layout.select_dialog_singlechoice);
         days.add(Week.SATURDAY.toString());
@@ -161,13 +177,27 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
         dialogBuilder.setAdapter(days, (dialog, which) -> {
             switch (which) {
-                case 0: mealPlan.setDay(Week.SATURDAY); break;
-                case 1: mealPlan.setDay(Week.SUNDAY); break;
-                case 2: mealPlan.setDay(Week.MONDAY); break;
-                case 3: mealPlan.setDay(Week.THURSDAY); break;
-                case 4: mealPlan.setDay(Week.WEDNESDAY); break;
-                case 5: mealPlan.setDay(Week.TUESDAY); break;
-                case 6: mealPlan.setDay(Week.FRIDAY); break;
+                case 0:
+                    mealPlan.setDay(Week.SATURDAY);
+                    break;
+                case 1:
+                    mealPlan.setDay(Week.SUNDAY);
+                    break;
+                case 2:
+                    mealPlan.setDay(Week.MONDAY);
+                    break;
+                case 3:
+                    mealPlan.setDay(Week.THURSDAY);
+                    break;
+                case 4:
+                    mealPlan.setDay(Week.WEDNESDAY);
+                    break;
+                case 5:
+                    mealPlan.setDay(Week.TUESDAY);
+                    break;
+                case 6:
+                    mealPlan.setDay(Week.FRIDAY);
+                    break;
             }
             addToPlan(mealPlan);
             Toast.makeText(requireContext(), "Added to plan successfully", Toast.LENGTH_SHORT).show();
@@ -202,8 +232,58 @@ public class HomeFragment extends Fragment implements HomeInterface {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+
+        View view = binding.getRoot();
+        logoImage = binding.foodplannerlogo;
+        titleText = binding.foodplannerTitle;
+        subtitleText = binding.foodplannerSubtitle;
+
+
+        if (!isAnimationExecuted) {
+            executeAnimations(logoImage, titleText, subtitleText);
+            isAnimationExecuted = true; // Mark animation as executed
+        }
+
+
+//        ObjectAnimator slideInImage = ObjectAnimator.ofFloat(logoImage, "translationX", -500f, 0f);
+//        slideInImage.setDuration(2000);
+//
+//        ObjectAnimator translateTitle = ObjectAnimator.ofFloat(titleText, "translationY", -200f, 0f);
+//        ObjectAnimator translateSubtitle = ObjectAnimator.ofFloat(subtitleText, "translationY", -200f, 0f);
+//        translateTitle.setDuration(2000);
+//        translateSubtitle.setDuration(2000);
+//
+//        AnimatorSet animatorSet = new AnimatorSet();
+//        animatorSet.playTogether(slideInImage, translateTitle, translateSubtitle);
+//        animatorSet.start();
+
+
+//        Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+//        Animation translateUpAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.translate_up);
+//
+//        logoImage.startAnimation(fadeInAnimation);
+//
+//        titleText.startAnimation(translateUpAnimation);
+//        subtitleText.startAnimation(translateUpAnimation);
+
+
+        return view;
     }
+
+    private void executeAnimations(ImageView logoImage, TextView titleText, TextView subtitleText) {
+        ObjectAnimator slideInImage = ObjectAnimator.ofFloat(logoImage, "translationX", -500f, 0f);
+        slideInImage.setDuration(2000);
+
+        ObjectAnimator translateTitle = ObjectAnimator.ofFloat(titleText, "translationY", -200f, 0f);
+        ObjectAnimator translateSubtitle = ObjectAnimator.ofFloat(subtitleText, "translationY", -200f, 0f);
+        translateTitle.setDuration(2000);
+        translateSubtitle.setDuration(2000);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(slideInImage, translateTitle, translateSubtitle);
+        animatorSet.start();
+    }
+
 
     @Override
     public void onSavePlane(MealsItem item) {
@@ -227,7 +307,8 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataLoading() {}
+            public void onDataLoading() {
+            }
         });
     }
 
@@ -245,7 +326,8 @@ public class HomeFragment extends Fragment implements HomeInterface {
             }
 
             @Override
-            public void onDataLoading() {}
+            public void onDataLoading() {
+            }
         });
     }
 
@@ -255,5 +337,9 @@ public class HomeFragment extends Fragment implements HomeInterface {
     }
 
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }

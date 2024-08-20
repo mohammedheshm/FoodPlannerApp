@@ -30,6 +30,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/foodplannerlogo"
                     android:layout_width="80dp"
                     android:layout_height="70dp"
                     android:src="@drawable/foodplannerlogo" />
@@ -41,6 +42,7 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:id="@+id/foodplanner_title"
                         android:layout_marginTop="14dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -52,11 +54,12 @@
                         android:text="FOODPLANNER"/>
 
                     <TextView
+                        android:layout_marginRight="12dp"
+                        android:id="@+id/foodplannerSubtitle"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/TextTitle"
                         android:textStyle="bold"
                         android:text="Savor the flavor"/>
                 </LinearLayout>
@@ -206,7 +209,7 @@
                 android:textColor="@color/teal_color_dark"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:text="You might like this ingredients"/>
+                android:text="Some ingredients you like"/>
 
 
         </LinearLayout>

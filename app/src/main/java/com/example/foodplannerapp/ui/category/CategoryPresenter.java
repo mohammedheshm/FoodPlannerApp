@@ -17,7 +17,7 @@ public class CategoryPresenter {
     }
 
     public void getCategories(RepoInterface<List<MealsItem>> repoInterface){
-        repository.retrieveFilterResults(null,null,"American", repoInterface);
+        repository.retrieveFilterResults(null,null,"Egyptian", repoInterface);
     }
 
     public void getFilterAreaResults(RepoInterface<List<Area>> repoInterface){

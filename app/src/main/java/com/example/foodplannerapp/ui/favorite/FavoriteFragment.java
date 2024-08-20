@@ -108,7 +108,7 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface{
     public void createDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
         dialogBuilder.setIcon(R.drawable.ic_plane);
-        dialogBuilder.setTitle("Choose any day you want");
+        dialogBuilder.setTitle("Pick a day that suits you");
 
         final ArrayAdapter<String> days = new ArrayAdapter<>(requireContext(), android.R.layout.select_dialog_singlechoice);
         days.add(Week.SATURDAY.toString());
@@ -146,7 +146,7 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface{
 
     @Override
     public void onDataLoading() {
-        Toast.makeText(getContext(), "Waitting data is loading...", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), "Waitting data is loading...", Toast.LENGTH_SHORT).show();
     }
 
 

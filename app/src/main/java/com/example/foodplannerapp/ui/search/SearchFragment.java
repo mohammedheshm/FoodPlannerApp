@@ -46,11 +46,11 @@ public class SearchFragment extends Fragment implements SearchInterface{
         Utils.setAutoCompleteTv(getContext(), presenter.getCashList(type), binding.searchView);
 
 
-        checkQueryType();
+        HandleSearchQueryResult();
         return binding.getRoot();
     }
 
-    private void checkQueryType() {
+    private void HandleSearchQueryResult() {
         if (!query.isEmpty()){
             binding.searchView.setText(query);
             presenter.getSearchResultMeals(type,query);
@@ -62,13 +62,13 @@ public class SearchFragment extends Fragment implements SearchInterface{
             binding.searchView.requestFocus();
             binding.searchView.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
                 }
 
                 @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    presenter.getSearchResultMeals(type,charSequence.toString());
+                public void onTextChanged(CharSequence s, int start, int count, int after) {
+                    presenter.getSearchResultMeals(type,s.toString());
                 }
 
                 @Override
@@ -86,13 +86,13 @@ public class SearchFragment extends Fragment implements SearchInterface{
 
             binding.searchView.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
                 }
 
                 @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (charSequence.toString().trim().isEmpty())
+                public void onTextChanged(CharSequence s, int start, int count, int after) {
+                    if (s.toString().trim().isEmpty())
                         binding.searchView.showDropDown();
                 }
 

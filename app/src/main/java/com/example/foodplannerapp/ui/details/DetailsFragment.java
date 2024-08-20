@@ -249,7 +249,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
         dialogBuilder.setIcon(R.drawable.ic_plane);
-        dialogBuilder.setTitle("Choose any day you want");
+        dialogBuilder.setTitle("Pick a day that suits you");
 
         final ArrayAdapter<String> days = new ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_singlechoice);
         days.add(Week.SATURDAY.toString());

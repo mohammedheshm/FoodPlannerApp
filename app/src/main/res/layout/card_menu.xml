@@ -90,7 +90,7 @@
         android:text="Add To Your Plan"
         style="@style/TextTitle"
         android:textStyle="bold"
-        android:drawableStart="@drawable/baseline_playlist_add_circle_24"
+        android:drawableStart="@drawable/baseline_calendar_month_24"
         android:layout_alignTop="@+id/fav_btn"
         android:layout_alignParentStart="true" />
 

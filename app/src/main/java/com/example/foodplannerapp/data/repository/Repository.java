@@ -83,16 +83,15 @@ public class Repository {
                     MealPlan mealPlan = ds.toObject(MealPlan.class);
                     mealPlans.add(mealPlan);
                 }
-                Log.d(TAG, "restore All Data from firebase");
+                Log.d(TAG, "restore All Data from firebaseStore");
 
-                // remove all data from room for sure there is no items to prevent duplication
                 roomDatabase.PlaneFoodDAO().removeAllTable()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new CompletableObserver() {
                             @Override
                             public void onSubscribe(@NonNull Disposable d) {
-                                Log.d(TAG, "onSubscribe: Remove all db");
+                                Log.d(TAG, "onSubscribe: Remove all Table from room database");
                             }
 
                             @Override
@@ -167,12 +166,12 @@ public class Repository {
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete: TABLE HASE BEEN DELETED");
+                Log.d(TAG, "onComplete: Table Deleted!");
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.d(TAG, "onError: TABLE HASE BEEN FAILED TO DELETE " + e.getMessage());
+                Log.d(TAG, "onError: Table failed to deleted! " + e.getMessage());
             }
         };
         switch (type) {
