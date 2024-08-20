@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.ui.sign_in_with_google;
+package com.example.foodplannerapp.ui.signup_or_login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -29,7 +29,7 @@ public class SignUpOrLoginActivity extends AppCompatActivity implements SignInWi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_or_login);
+        setContentView(R.layout.activity_signup_or_login);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();

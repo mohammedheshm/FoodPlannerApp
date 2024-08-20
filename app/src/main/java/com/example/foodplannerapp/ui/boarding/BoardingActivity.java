@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.ui.sign_in_with_google.SignUpOrLoginActivity;
+import com.example.foodplannerapp.ui.signup_or_login.SignUpOrLoginActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

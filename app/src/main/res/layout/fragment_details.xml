@@ -84,6 +84,7 @@
             android:background="@drawable/button_addtoplan_effect"
             android:elevation="30dp"
             android:gravity="center"
+            android:drawableLeft="@drawable/baseline_calendar_month_24"
             android:padding="3dp"
             android:text="Add To Your Plan"
             app:layout_constraintStart_toStartOf="parent"

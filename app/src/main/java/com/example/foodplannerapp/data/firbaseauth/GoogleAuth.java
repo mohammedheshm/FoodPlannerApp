@@ -11,7 +11,7 @@ import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.pojo.user.User;
 import com.example.foodplannerapp.data.repository.Repository;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
-import com.example.foodplannerapp.ui.sign_in_with_google.SignInWithGoogleInterface;
+import com.example.foodplannerapp.ui.signup_or_login.SignInWithGoogleInterface;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

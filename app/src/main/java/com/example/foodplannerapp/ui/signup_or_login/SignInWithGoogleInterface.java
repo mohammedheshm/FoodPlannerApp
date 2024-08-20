@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.ui.sign_in_with_google;
+package com.example.foodplannerapp.ui.signup_or_login;
 
 
 public interface SignInWithGoogleInterface {

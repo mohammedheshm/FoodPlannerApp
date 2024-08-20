@@ -18,7 +18,7 @@ import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
 import com.example.foodplannerapp.databinding.ActivityMainBinding;
-import com.example.foodplannerapp.ui.sign_in_with_google.SignUpOrLoginActivity;
+import com.example.foodplannerapp.ui.signup_or_login.SignUpOrLoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

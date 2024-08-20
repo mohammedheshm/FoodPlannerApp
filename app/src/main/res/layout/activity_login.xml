@@ -45,6 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/create_an_a" />
 
     <EditText
+        android:textSize="14sp"
         android:id="@+id/emailTxtView"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:textSize="14sp"
         android:id="@+id/passwordTxtView"
         android:layout_width="250dp"
         android:layout_height="wrap_content"

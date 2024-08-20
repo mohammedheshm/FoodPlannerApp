@@ -72,9 +72,9 @@
         tools:layout="@layout/activity_register" />
     <activity
         android:id="@+id/signUpOrLoginActivity"
-        android:name="com.example.foodplannerapp.ui.sign_in_with_google.SignUpOrLoginActivity"
+        android:name="com.example.foodplannerapp.ui.signup_or_login.SignUpOrLoginActivity"
         android:label="activity_sign_up_or_login"
-        tools:layout="@layout/activity_sign_up_or_login" />
+        tools:layout="@layout/activity_signup_or_login" />
 <!--    <dialog-->
 <!--        android:id="@+id/addToPlaneDialog"-->
 <!--        android:name="iti.android.foodplanner.ui.features.details.AddToPlaneDialog"-->
