@@ -10,7 +10,7 @@ import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.pojo.user.User;
 import com.example.foodplannerapp.data.repository.Repository;
-import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.ui.signup_or_login.SignInWithGoogleInterface;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -43,7 +43,7 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
     @Override
     public void logout(Context context) {
         Repository.getInstance(context).deleteAllTable(Repository.DELETE_PLAN_AND_FAV);
-        SharedPrefrencesFactory.getInstance(context).clearAllData();
+        SharedPrefrencesManger.getInstance(context).clearAllData();
         mAuth.signOut();
     }
 
@@ -102,10 +102,10 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
             mAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
                         User user = getUserData();
-                        SharedPrefrencesFactory sharedPrefrencesFactory = SharedPrefrencesFactory.getInstance(context);
-                        FirebaseStoreBackup.getInstance(sharedPrefrencesFactory).saveUser(user, task -> {
+                        SharedPrefrencesManger sharedPrefrencesManger = SharedPrefrencesManger.getInstance(context);
+                        FirebaseStoreBackup.getInstance(sharedPrefrencesManger).saveUser(user, task -> {
                             if (task.isSuccessful()) {
-                                sharedPrefrencesFactory.saveUser(user);
+                                sharedPrefrencesManger.saveUser(user);
                                 Repository.getInstance(context).restoreAllData();
                                 signInWithGoogleInterface.onSuccessFullFireBaseAuth();
                             } else {
@@ -123,9 +123,9 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
         private User getUserData() {
             FirebaseUser user = mAuth.getCurrentUser();
             if (user != null) {
-                return new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null, user.getEmail(), AuthenticationFactory.GOOGLE);
+                return new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null, user.getEmail(), AuthenticationManger.GOOGLE);
             } else {
-                return new User("", "", "", "", AuthenticationFactory.GOOGLE);
+                return new User("", "", "", "", AuthenticationManger.GOOGLE);
             }
         }
     }

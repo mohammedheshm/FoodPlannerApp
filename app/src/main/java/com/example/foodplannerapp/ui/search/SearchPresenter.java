@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
-import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 
 import java.util.Random;
 
@@ -31,13 +31,13 @@ public class SearchPresenter {
             case SearchInterface.SEARCH:
                 break;
             case SearchInterface.AREA:
-                result = repository.getList(SharedPrefrencesFactory.AREAS);
+                result = repository.getList(SharedPrefrencesManger.AREAS);
                 break;
             case SearchInterface.INGREDIENT:
-                result = repository.getList(SharedPrefrencesFactory.INGREDIENTS);
+                result = repository.getList(SharedPrefrencesManger.INGREDIENTS);
                 break;
             case SearchInterface.CATEGORY:
-                result = repository.getList(SharedPrefrencesFactory.CATEGORIES);
+                result = repository.getList(SharedPrefrencesManger.CATEGORIES);
                 break;
         }
         return result;
@@ -53,19 +53,19 @@ public class SearchPresenter {
         String reVal = "";
         switch (type){
             case SearchInterface.AREA:
-                cashList = repository.getList(SharedPrefrencesFactory.AREAS);
+                cashList = repository.getList(SharedPrefrencesManger.AREAS);
                 random = new Random().nextInt(cashList.length);
                 reVal = cashList[random];
                 break;
 
             case SearchInterface.CATEGORY:
-                cashList = repository.getList(SharedPrefrencesFactory.CATEGORIES);
+                cashList = repository.getList(SharedPrefrencesManger.CATEGORIES);
                 random = new Random().nextInt(cashList.length);
                 reVal = cashList[random];
                 break;
 
             case SearchInterface.INGREDIENT:
-                cashList = repository.getList(SharedPrefrencesFactory.INGREDIENTS);
+                cashList = repository.getList(SharedPrefrencesManger.INGREDIENTS);
                 random = new Random().nextInt(cashList.length);
                 reVal = cashList[random];
                 break;

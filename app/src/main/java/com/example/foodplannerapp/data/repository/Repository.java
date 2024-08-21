@@ -2,18 +2,22 @@ package com.example.foodplannerapp.data.repository;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.pojo.meals.MealsList;
@@ -23,13 +27,11 @@ import com.example.foodplannerapp.data.pojo.user.User;
 import com.example.foodplannerapp.data.network.ApiCalls;
 import com.example.foodplannerapp.data.network.Network;
 import com.example.foodplannerapp.data.room.RoomDatabase;
-import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.data.pojo.category.CategoriesList;
 import com.example.foodplannerapp.data.pojo.category.Category;
 import com.example.foodplannerapp.data.pojo.countries.Area;
 import com.example.foodplannerapp.data.pojo.countries.AreasList;
-import com.example.foodplannerapp.data.pojo.foodcategory.CategoriesFood;
-import com.example.foodplannerapp.data.pojo.foodcategory.CategoriesItem;
 import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
 import com.example.foodplannerapp.data.pojo.ingredient.IngredientsList;
 
@@ -43,7 +45,7 @@ public class Repository {
     private final ApiCalls apiCalls;
     private final RoomDatabase roomDatabase;
     private final FirebaseStoreBackup firebaseStoreBackup;
-    private final SharedPrefrencesFactory sharedPrefrencesFactory;
+    private final SharedPrefrencesManger sharedPrefrencesManger;
     public static Repository repository = null;
 
     public static Repository getInstance(Context context) {
@@ -55,18 +57,34 @@ public class Repository {
     private Repository(Context context) {
         apiCalls = Network.apiCalls;
         roomDatabase = RoomDatabase.getInstance(context);
-        sharedPrefrencesFactory = SharedPrefrencesFactory.getInstance(context);
-        firebaseStoreBackup = FirebaseStoreBackup.getInstance(sharedPrefrencesFactory);
+        sharedPrefrencesManger = SharedPrefrencesManger.getInstance(context);
+        firebaseStoreBackup = FirebaseStoreBackup.getInstance(sharedPrefrencesManger);
     }
 
     //SharedPreference
-    public boolean isUser() {return sharedPrefrencesFactory.isUser();}
-    public void saveUser(User user) {sharedPrefrencesFactory.saveUser(user);}
-    public User getUser() {return sharedPrefrencesFactory.getUser();}
-    public String[] getList(String type) {return sharedPrefrencesFactory.getList(type);}
-    public boolean isFirstEntrance() {return sharedPrefrencesFactory.isFirstEntrance();}
-    public void saveEntrance() {sharedPrefrencesFactory.saveEntrance();}
+    public boolean isUser() {
+        return sharedPrefrencesManger.isUser();
+    }
 
+    public void saveUser(User user) {
+        sharedPrefrencesManger.saveUser(user);
+    }
+
+    public User getUser() {
+        return sharedPrefrencesManger.getUser();
+    }
+
+    public String[] getList(String type) {
+        return sharedPrefrencesManger.getList(type);
+    }
+
+    public boolean isFirstEntrance() {
+        return sharedPrefrencesManger.isFirstEntrance();
+    }
+
+    public void saveEntrance() {
+        sharedPrefrencesManger.saveEntrance();
+    }
 
 
     //LocalDataSource
@@ -121,13 +139,13 @@ public class Repository {
                 }
 
 
-                // remove all data from room [for sure] there is no items to prevent duplication
+                // remove all data from room to prevent duplication items
                 roomDatabase.FavoriteDAO().removeAllTable()
                         .subscribeOn(Schedulers.io())
                         .subscribe(new CompletableObserver() {
                             @Override
                             public void onSubscribe(@NonNull Disposable d) {
-                                Log.d(TAG, "onSubscribe:  Remove all db");
+                                Log.d(TAG, "onSubscribe:  Remove all Table from room database");
 
                             }
 
@@ -459,7 +477,7 @@ public class Repository {
             public void onSuccess(@NonNull IngredientsList ingredientsList) {
                 if (ingredientsList != null && ingredientsList.getMeals() != null) {
                     List<String> arrayList = ingredientsList.getMeals().stream().map(category -> category.getStrIngredient()).collect(Collectors.toList());
-                    sharedPrefrencesFactory.saveList(SharedPrefrencesFactory.INGREDIENTS, arrayList);
+                    sharedPrefrencesManger.saveList(SharedPrefrencesManger.INGREDIENTS, arrayList);
                     repoInterface.onDataSuccessResponse(ingredientsList.getMeals());
                 } else {
                     repoInterface.onDataSuccessResponse(new ArrayList<>());
@@ -486,7 +504,7 @@ public class Repository {
                     public void onSuccess(@NonNull CategoriesList categoriesList) {
                         if (categoriesList != null && categoriesList.getCategory() != null) {
                             List<String> arrayList = categoriesList.getCategory().stream().map(category -> category.getStrCategory()).collect(Collectors.toList());
-                            sharedPrefrencesFactory.saveList(SharedPrefrencesFactory.CATEGORIES, arrayList);
+                            sharedPrefrencesManger.saveList(SharedPrefrencesManger.CATEGORIES, arrayList);
                             repoInterface.onDataSuccessResponse(categoriesList.getCategory());
                         } else {
                             repoInterface.onDataSuccessResponse(new ArrayList<>());
@@ -516,7 +534,7 @@ public class Repository {
                     public void onSuccess(@NonNull AreasList areasList) {
                         if (areasList != null && areasList.getAreas() != null) {
                             List<String> arrayList = areasList.getAreas().stream().map(category -> category.getStrArea()).collect(Collectors.toList());
-                            sharedPrefrencesFactory.saveList(SharedPrefrencesFactory.AREAS, arrayList);
+                            sharedPrefrencesManger.saveList(SharedPrefrencesManger.AREAS, arrayList);
                             repoInterface.onDataSuccessResponse(areasList.getAreas());
                         } else {
                             repoInterface.onDataSuccessResponse(new ArrayList<>());

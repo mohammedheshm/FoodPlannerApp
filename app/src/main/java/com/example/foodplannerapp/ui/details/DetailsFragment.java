@@ -25,6 +25,7 @@ import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentDetailsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -127,28 +128,34 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
         addToPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createDialog();
+                if (isUserAuthenticated()) {
+                    createDialog();
+                } else {
+                    Toast.makeText(requireContext(), "You are in Guest Mode !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         addTofavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (!isFavorite) {
-
-                    addTofavBtn.setImageResource(drawable.solid_favorite_24); // Replace with your solid icon
-                    addToFav(mealsItem);
-                    Toast.makeText(requireContext(), "Meal added to your favorites successfully", Toast.LENGTH_SHORT).show();
+                if (isUserAuthenticated()) {
+                    if (!isFavorite) {
+                        addTofavBtn.setImageResource(drawable.solid_favorite_24); // Replace with your solid icon
+                        addToFav(mealsItem);
+                        Toast.makeText(requireContext(), "Meal added to your favorites successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        addTofavBtn.setImageResource(drawable.ic_favorite_border_black_menu_24dp); //
+                    }
+                    isFavorite = !isFavorite;
+                } else {
+                    Toast.makeText(requireContext(), "You are in Guest Mode !", Toast.LENGTH_SHORT).show();
+                    // Optionally, redirect to login activity
+                    // startActivity(new Intent(requireContext(), LoginActivity.class));
                 }
-                else {
-                    addTofavBtn.setImageResource(drawable.ic_favorite_border_black_menu_24dp); //
-                }
-                isFavorite = !isFavorite;
-
-
             }
         });
+
         return root;
     }
 
@@ -192,6 +199,10 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
         binding = null;
     }
 
+
+    private boolean isUserAuthenticated() {
+        return FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
 
     @Override
     public void addToPlan(MealPlan mealPlan) {

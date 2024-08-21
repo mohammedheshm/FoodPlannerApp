@@ -3,7 +3,7 @@ package com.example.foodplannerapp.ui.signup_or_login;
 import android.content.Context;
 import android.content.Intent;
 import androidx.fragment.app.FragmentActivity;
-import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationManger;
 import com.example.foodplannerapp.data.firbaseauth.GoogleAuth;
 import com.example.foodplannerapp.data.repository.Repository;
 
@@ -15,7 +15,7 @@ public class SignInWithGooglePresenter {
     public SignInWithGooglePresenter(Context context, SignInWithGoogleInterface signInWithGoogleInterface) {
         repository = Repository.getInstance(context);
         this.signInWithGoogleInterface = signInWithGoogleInterface;
-        GoogleAuth authentication = (GoogleAuth) AuthenticationFactory.authenticationManager(AuthenticationFactory.GOOGLE);
+        GoogleAuth authentication = (GoogleAuth) AuthenticationManger.authenticationManager(AuthenticationManger.GOOGLE);
         google = authentication.instance();
     }
 

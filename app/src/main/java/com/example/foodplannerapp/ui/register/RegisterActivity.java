@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.foodplannerapp.ui.main.MainActivity;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.firbaseauth.Authentication;
-import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationManger;
 import com.example.foodplannerapp.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     private static final String TAG="RegisterActivity";
 
     private Authentication authentication;
-    private AuthenticationFactory authenticationFactory;
+    private AuthenticationManger authenticationManger;
 
 
     @Override
@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
             getSupportActionBar().hide();
         }
 
-        authentication= AuthenticationFactory.authenticationManager(AuthenticationFactory.EMAIL);
+        authentication= AuthenticationManger.authenticationManager(AuthenticationManger.EMAIL);
         initUi();
         handleButtonEvents();
     }

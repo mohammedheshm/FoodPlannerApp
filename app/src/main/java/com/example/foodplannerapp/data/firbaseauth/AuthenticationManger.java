@@ -1,11 +1,11 @@
 package com.example.foodplannerapp.data.firbaseauth;
 
 
-public class AuthenticationFactory {
-    public final static int EMAIL = 2;
-    public final static int GOOGLE = 4;
+public class AuthenticationManger {
+    public final static int EMAIL = 1;
+    public final static int GOOGLE = 2;
 
-    private AuthenticationFactory() {
+    private AuthenticationManger() {
     }
 
     public static Authentication authenticationManager(int authType){

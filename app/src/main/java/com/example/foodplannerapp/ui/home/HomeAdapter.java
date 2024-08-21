@@ -1,4 +1,5 @@
 package com.example.foodplannerapp.ui.home;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +9,17 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.ui.common.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +33,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
 
     public HomeAdapter(Context context, HomeInterface homeInterface) {
-        presenter = new HomePresenter(context,homeInterface);
+        presenter = new HomePresenter(context, homeInterface);
         this.context = context;
         this.homeInterface = homeInterface;
     }
@@ -37,7 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @NonNull
     @Override
     public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meals_list,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meals_list, parent, false));
     }
 
     @Override
@@ -47,13 +51,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
 
         //Glide
-        Utils.loadImage(context,item.getStrMealThumb(),holder.thumnailView);
+        Utils.loadImage(context, item.getStrMealThumb(), holder.thumnailView);
 
-        //when user register as a guest
-        if (!presenter.isUser){
-            holder.addToPlaneBtn.setVisibility(View.GONE);
-            holder.addToFavBtn.setVisibility(View.GONE);
-        }
+
+        holder.addToPlaneBtn.setVisibility(View.GONE);
+        holder.addToFavBtn.setVisibility(View.GONE);
 
 
         holder.addToPlaneBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,17 +77,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
 
-                HomeFragmentDirections.ActionNavigationHomeToNavigationDetails action=HomeFragmentDirections.actionNavigationHomeToNavigationDetails();
+                HomeFragmentDirections.ActionNavigationHomeToNavigationDetails action = HomeFragmentDirections.actionNavigationHomeToNavigationDetails();
                 action.setMealId(item.getIdMeal());
                 Navigation.findNavController(v).navigate(action);
             }
         });
     }
 
-    public void setItemsList(List<MealsItem> itemsList){
+    public void setItemsList(List<MealsItem> itemsList) {
         this.itemsList = itemsList;
         notifyDataSetChanged();
-        isHaveData.postValue(itemsList.size()>0);
+        isHaveData.postValue(itemsList.size() > 0);
     }
 
     @Override
@@ -93,7 +95,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         return itemsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         AppCompatButton addToPlaneBtn;
         CheckBox addToFavBtn;
         TextView foodNameTv;
@@ -107,7 +109,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             foodNameTv = itemView.findViewById(R.id.tv_title);
             addToFavBtn = itemView.findViewById(R.id.fav_ceheck);
             thumnailView = itemView.findViewById(R.id.thumnail_image);
-            itemHome=itemView.findViewById(R.id.itemHome);
+            itemHome = itemView.findViewById(R.id.itemHome);
         }
     }
 

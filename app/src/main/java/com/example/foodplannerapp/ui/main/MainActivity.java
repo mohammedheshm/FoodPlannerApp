@@ -15,8 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.foodplannerapp.R;
-import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
-import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesFactory;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationManger;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.databinding.ActivityMainBinding;
 import com.example.foodplannerapp.ui.signup_or_login.SignUpOrLoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -75,14 +75,14 @@ public class MainActivity extends AppCompatActivity {
     private void logoutFromApp() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle(getResources().getString(R.string.logout_title));
-        alertDialog.setMessage(getResources().getString(R.string.logout_message_dialog));
+        alertDialog.setMessage(getResources().getString(R.string.logout_exitapp_dialog));
         alertDialog.setCancelable(false);
         alertDialog.setPositiveButton(getResources().getString(R.string.dialog_positive_button), (dialog, which) ->
         {
 
 
-            int autProvider = SharedPrefrencesFactory.getInstance(this).getUser().getAuthProvider();
-            AuthenticationFactory.authenticationManager(autProvider)
+            int autProvider = SharedPrefrencesManger.getInstance(this).getUser().getAuthProvider();
+            AuthenticationManger.authenticationManager(autProvider)
                     .logout(this);
             startActivity(new Intent(this, SignUpOrLoginActivity.class));
             finish();

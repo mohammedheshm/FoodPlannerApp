@@ -10,25 +10,38 @@ import com.google.gson.Gson;
 import java.util.List;
 
 
-public class SharedPrefrencesFactory {
+public class SharedPrefrencesManger {
+
+    public static final String IS_GUEST = "IS_GUEST";
     public static final String DELEMETER = ",";
     public static final String AREAS = "AREAS";
     public static final String INGREDIENTS = "INGREDIENTS";
     public static final String CATEGORIES = "CATEGORIES";
     public static final String IS_FIRST = "IS_FIRST";
     public static final String USER_INFO = "USER_INFO";
-    private volatile static SharedPrefrencesFactory instance = null;
+    private volatile static SharedPrefrencesManger instance = null;
     private  SharedPreferences sharedPreferences = null;
-    private SharedPrefrencesFactory(Context context){
+    private SharedPrefrencesManger(Context context){
         final String SHARE_KEY = "shareRoom";
         sharedPreferences = context.getSharedPreferences(SHARE_KEY,Context.MODE_PRIVATE);
     }
-    public static SharedPrefrencesFactory getInstance(Context context) {
+    public static SharedPrefrencesManger getInstance(Context context) {
         if (instance == null)
-            instance = new SharedPrefrencesFactory(context);
+            instance = new SharedPrefrencesManger(context);
         return instance;
     }
 
+
+
+    public void setGuestUser(boolean isGuest) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(IS_GUEST, isGuest);
+        editor.apply();
+    }
+
+    public boolean isGuestUser() {
+        return sharedPreferences.getBoolean(IS_GUEST, false);
+    }
 
 
     public void clearAllData(){

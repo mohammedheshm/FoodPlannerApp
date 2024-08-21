@@ -31,6 +31,7 @@ import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentHomeBinding;
 import com.example.foodplannerapp.ui.common.Utils;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -45,11 +46,15 @@ public class HomeFragment extends Fragment implements HomeInterface {
     TextView subtitleText;
     private boolean isAnimationExecuted = false;
 
+    // Assume this method checks if a user is logged in
+    private boolean isUserLoggedIn() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        return auth.getCurrentUser() != null;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         presenter = new HomePresenter(getContext(), this);
 
@@ -112,7 +117,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
     private void randomMealHandling(View view) {
         ImageView imageViewSingleMeal = view.findViewById(R.id.image_thum);
-        TextView foodSingleName = view.findViewById(R.id.food_name);
+        TextView TitleNameFood = view.findViewById(R.id.food_name);
         TextView plane_btn = view.findViewById(R.id.plane_btn);
         ImageButton fav_btn = view.findViewById(R.id.fav_btn);
         presenter.getRandomMeals(HomePresenter.SINGLE, new RepoInterface<List<MealsItem>>() {
@@ -127,17 +132,21 @@ public class HomeFragment extends Fragment implements HomeInterface {
                                 .error(R.drawable.ic_close_black_24dp))
                         .into(imageViewSingleMeal);
 
-                foodSingleName.setText(mealsItem.getStrMeal());
+                TitleNameFood.setText(mealsItem.getStrMeal());
                 plane_btn.setOnClickListener(view1 -> onSavePlane(mealsItem));
 
                 isFavorite = checkIfFavorite(mealsItem);
                 updateFavoriteButtonIcon(fav_btn);
-                fav_btn.setOnClickListener(view12 -> {
-                    isFavorite = !isFavorite;
-                    updateFavoriteButtonIcon(fav_btn);
-                    onSaveFavorite(mealsItem);
-                });
 
+                fav_btn.setOnClickListener(view12 -> {
+                    if (isUserLoggedIn()) {
+                        isFavorite = !isFavorite;
+                        updateFavoriteButtonIcon(fav_btn);
+                        onSaveFavorite(mealsItem);
+                    } else {
+                        Toast.makeText(getContext(), "You are in Guest Mode !", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -155,13 +164,13 @@ public class HomeFragment extends Fragment implements HomeInterface {
     }
 
     private boolean checkIfFavorite(MealsItem item) {
+        // Implement your logic to check if the item is a favorite
         return false;
     }
 
-
     public void createDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
-        dialogBuilder.setIcon(R.drawable.ic_plane);
+        dialogBuilder.setIcon(R.drawable.baseline_calendar_month_24);
         dialogBuilder.setTitle("Pick a day that suits you");
 
         final ArrayAdapter<String> days = new ArrayAdapter<>(requireContext(), android.R.layout.select_dialog_singlechoice);
@@ -238,34 +247,10 @@ public class HomeFragment extends Fragment implements HomeInterface {
         titleText = binding.foodplannerTitle;
         subtitleText = binding.foodplannerSubtitle;
 
-
         if (!isAnimationExecuted) {
             executeAnimations(logoImage, titleText, subtitleText);
             isAnimationExecuted = true; // Mark animation as executed
         }
-
-
-//        ObjectAnimator slideInImage = ObjectAnimator.ofFloat(logoImage, "translationX", -500f, 0f);
-//        slideInImage.setDuration(2000);
-//
-//        ObjectAnimator translateTitle = ObjectAnimator.ofFloat(titleText, "translationY", -200f, 0f);
-//        ObjectAnimator translateSubtitle = ObjectAnimator.ofFloat(subtitleText, "translationY", -200f, 0f);
-//        translateTitle.setDuration(2000);
-//        translateSubtitle.setDuration(2000);
-//
-//        AnimatorSet animatorSet = new AnimatorSet();
-//        animatorSet.playTogether(slideInImage, translateTitle, translateSubtitle);
-//        animatorSet.start();
-
-
-//        Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-//        Animation translateUpAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.translate_up);
-//
-//        logoImage.startAnimation(fadeInAnimation);
-//
-//        titleText.startAnimation(translateUpAnimation);
-//        subtitleText.startAnimation(translateUpAnimation);
-
 
         return view;
     }
@@ -284,32 +269,43 @@ public class HomeFragment extends Fragment implements HomeInterface {
         animatorSet.start();
     }
 
-
     @Override
     public void onSavePlane(MealsItem item) {
+        if (!isUserLoggedIn()) {
+            // Show a toast message if the user is not logged in
+            Toast.makeText(getContext(), "You are in Guest Mode !", Toast.LENGTH_SHORT).show();
+            return; // Exit the method without adding to the plan
+        }
+
+        // Proceed if the user is logged in
         Toast.makeText(getContext(), item.getStrMeal() + " will be added to plan", Toast.LENGTH_SHORT).show();
         mealPlan = new MealPlan(item.getStrMeal(), item.getStrCategory(), item.getStrMealThumb(), item.getIdMeal());
         createDialog();
     }
 
+
     @Override
     public void onSaveFavorite(MealsItem item) {
-        presenter.saveFavorite(item, new RepoInterface<Void>() {
+        if (isUserLoggedIn()) {
+            presenter.saveFavorite(item, new RepoInterface<Void>() {
 
-            @Override
-            public void onDataSuccessResponse(Void data) {
-                Toast.makeText(getContext(), item.getStrMeal() + " added to favorite", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onDataSuccessResponse(Void data) {
+                    Toast.makeText(getContext(), item.getStrMeal() + " added to favorite", Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void onDataFailedResponse(String message) {
-                Toast.makeText(getContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onDataFailedResponse(String message) {
+                    Toast.makeText(getContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void onDataLoading() {
-            }
-        });
+                @Override
+                public void onDataLoading() {
+                }
+            });
+        } else {
+            Toast.makeText(getContext(), "You must be logged in to add favorites", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -335,7 +331,6 @@ public class HomeFragment extends Fragment implements HomeInterface {
     public void deleteFromPlan(MealPlan mealPlan) {
         presenter.deleteFromPlan(mealPlan);
     }
-
 
     @Override
     public void onDestroy() {

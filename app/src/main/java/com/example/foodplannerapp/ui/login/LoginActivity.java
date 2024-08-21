@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.foodplannerapp.ui.main.MainActivity;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.firbaseauth.Authentication;
-import com.example.foodplannerapp.data.firbaseauth.AuthenticationFactory;
+import com.example.foodplannerapp.data.firbaseauth.AuthenticationManger;
 import com.example.foodplannerapp.ui.register.RegisterActivity;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
             getSupportActionBar().hide();
         }
 
-        authentication = AuthenticationFactory.authenticationManager(AuthenticationFactory.EMAIL);
+        authentication = AuthenticationManger.authenticationManager(AuthenticationManger.EMAIL);
         initUi();
         handleButtonEvens();
     }
