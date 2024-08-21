@@ -34,7 +34,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:paddingTop="4dp"
             android:layout_weight="1"
             android:orientation="horizontal">
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 style="@style/TextTitle"
-                android:textSize="20sp"
+                android:textSize="16dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 tools:text="@tools:sample/cities"/>
@@ -52,7 +52,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="2dp"
             android:gravity="center"
             android:orientation="horizontal">
             <LinearLayout
@@ -66,6 +65,8 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/baseline_info_24"/>
                 <TextView
+                    android:layout_marginTop="2dp"
+                    android:textSize="12dp"
                     android:id="@+id/categoryTxtView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,6 +86,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_language_24"/>
                 <TextView
+                    android:layout_marginTop="2dp"
+                    android:textSize="12dp"
                     android:id="@+id/countryTxtView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,6 +108,7 @@
 
             <ImageView
                 android:layout_marginLeft="150dp"
+                android:layout_marginTop="4dp"
                 android:id="@+id/removeFromPlanButton"
                 android:padding="5dp"
                 android:layout_width="40dp"

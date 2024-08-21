@@ -73,19 +73,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:paddingLeft="10dp"
             android:id="@+id/addTOPlanButton"
             android:layout_width="270dp"
             android:textStyle="bold"
-            android:textColor="@color/teal_color_dark"
+            android:textColor="@color/white"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:background="@drawable/button_addtoplan_effect"
+            android:background="@drawable/add_plan_solid_bg"
             android:elevation="30dp"
             android:gravity="center"
-            android:drawableLeft="@drawable/baseline_calendar_month_24"
-            android:padding="3dp"
+            android:drawableLeft="@drawable/baseline_calendar_month_white"
             android:text="Add To Your Plan"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -164,7 +164,6 @@
 
                         <TextView
                             android:id="@+id/countryTextView"
-                            style="@style/TextTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -180,7 +179,6 @@
 
                         <TextView
                             android:id="@+id/categoryTextView"
-                            style="@style/TextTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

@@ -46,9 +46,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.tvCategory.setText(item.getStrCategory());
         holder.tvArea.setText(item.getStrArea());
         Glide.with(context).load(item.getStrMealThumb()).into(holder.imagefav);
-        holder.addToPlaneBtn.setOnClickListener(view -> {
-            Toast.makeText(context, "Successfully Added This meal to Plan", Toast.LENGTH_SHORT).show();
-        });
         holder.removeBtn.setOnClickListener(view -> {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
             alertDialog.setTitle(context.getResources().getString(R.string.delete_favorite));
@@ -70,7 +67,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvName, tvCategory,tvArea;
-        AppCompatButton addToPlaneBtn;
         ImageView removeBtn;
         ImageView imagefav;
         public ViewHolder(@NonNull View itemView) {
@@ -79,7 +75,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             tvArea = itemView.findViewById(R.id.countryTextView);
             imagefav = itemView.findViewById(R.id.mealImageView);
             tvCategory = itemView.findViewById(R.id.categoryTextView);
-            addToPlaneBtn = itemView.findViewById(R.id.addTOPlanButton);
             removeBtn = itemView.findViewById(R.id.addToFavoriteButton);
 
         }

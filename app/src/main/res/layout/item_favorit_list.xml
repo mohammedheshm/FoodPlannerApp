@@ -103,24 +103,9 @@
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
             android:orientation="horizontal">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addTOPlanButton"
-                android:gravity="center"
-                android:background="@drawable/button_addtoplan_effect"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Add to plan"
-                android:drawableStart="@drawable/baseline_calendar_month_24"
-                android:padding="3dp"
-                android:textColor="@color/teal_color_dark"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                >
-
-            </androidx.appcompat.widget.AppCompatButton>
-
             <ImageView
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="150dp"
                 android:id="@+id/addToFavoriteButton"
                 android:padding="5dp"
                 android:layout_width="40dp"

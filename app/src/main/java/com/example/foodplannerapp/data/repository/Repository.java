@@ -2,22 +2,18 @@ package com.example.foodplannerapp.data.repository;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.pojo.meals.MealsList;
@@ -62,29 +58,15 @@ public class Repository {
     }
 
     //SharedPreference
-    public boolean isUser() {
-        return sharedPrefrencesManger.isUser();
-    }
-
+    public boolean isUser() {return sharedPrefrencesManger.isUser();}
     public void saveUser(User user) {
-        sharedPrefrencesManger.saveUser(user);
-    }
-
-    public User getUser() {
-        return sharedPrefrencesManger.getUser();
-    }
-
-    public String[] getList(String type) {
-        return sharedPrefrencesManger.getList(type);
-    }
-
-    public boolean isFirstEntrance() {
-        return sharedPrefrencesManger.isFirstEntrance();
-    }
-
+        sharedPrefrencesManger.saveUser(user);}
+    public User getUser() {return sharedPrefrencesManger.getUser();}
+    public String[] getList(String type) {return sharedPrefrencesManger.getList(type);}
+    public boolean isFirstEntrance() {return sharedPrefrencesManger.isFirstEntrance();}
     public void saveEntrance() {
-        sharedPrefrencesManger.saveEntrance();
-    }
+        sharedPrefrencesManger.saveEntrance();}
+
 
 
     //LocalDataSource

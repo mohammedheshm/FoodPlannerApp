@@ -53,17 +53,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         //Glide
         Utils.loadImage(context, item.getStrMealThumb(), holder.thumnailView);
 
-
-        holder.addToPlaneBtn.setVisibility(View.GONE);
         holder.addToFavBtn.setVisibility(View.GONE);
-
-
-        holder.addToPlaneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                homeInterface.onSavePlane(item);
-            }
-        });
 
         holder.addToFavBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -96,7 +86,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        AppCompatButton addToPlaneBtn;
         CheckBox addToFavBtn;
         TextView foodNameTv;
         ImageView thumnailView;
@@ -105,7 +94,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            addToPlaneBtn = itemView.findViewById(R.id.addTOPlanButton);
             foodNameTv = itemView.findViewById(R.id.tv_title);
             addToFavBtn = itemView.findViewById(R.id.fav_ceheck);
             thumnailView = itemView.findViewById(R.id.thumnail_image);

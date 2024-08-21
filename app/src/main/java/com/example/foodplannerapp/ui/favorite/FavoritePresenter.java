@@ -23,10 +23,21 @@ public class FavoritePresenter {
     public void removeFavorite(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
         repository.deleteFavorite(mealsItem, repoInterface);
     }
-
     public void getFavorites(RepoInterface<List<MealsItem>> repoInterface) {
         repository.showFavouriteMealsDataBase(repoInterface);
     }
 
+
+    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
+
+        repository.insertPlaneMealDataBase(mealPlan, repoInterface);
+
+    }
+
+    public void deleteFromPlan(MealPlan mealPlan){
+
+        repository.deletePlanMeal(mealPlan,null);
+
+    }
 }
 

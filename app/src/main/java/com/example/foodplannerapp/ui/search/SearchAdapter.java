@@ -81,7 +81,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            btn_AddToPlane = itemView.findViewById(R.id.addTOPlanButton);
+           // btn_AddToPlane = itemView.findViewById(R.id.addTOPlanButton);
             foodNameTv = itemView.findViewById(R.id.tv_title);
             btn_addToFav = itemView.findViewById(R.id.fav_ceheck);
             thumnailView = itemView.findViewById(R.id.thumnail_image);
