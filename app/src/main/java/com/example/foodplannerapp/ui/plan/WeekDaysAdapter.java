@@ -15,7 +15,6 @@ import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
-import com.example.foodplannerapp.data.room.Week;
 
 import java.util.List;
 

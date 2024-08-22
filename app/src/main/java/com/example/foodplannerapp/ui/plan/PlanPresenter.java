@@ -3,7 +3,6 @@ package com.example.foodplannerapp.ui.plan;
 import android.content.Context;
 
 import com.example.foodplannerapp.data.repository.Repository;
-import com.example.foodplannerapp.data.room.Week;
 
 import java.util.ArrayList;
 import java.util.List;

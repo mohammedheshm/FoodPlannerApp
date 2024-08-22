@@ -10,11 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
-import com.example.foodplannerapp.data.room.Week;
 import com.example.foodplannerapp.databinding.FragmentFavoriteBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 import com.google.firebase.auth.FirebaseAuth;

@@ -36,7 +36,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @NonNull
     @Override
     public SearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_row,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_row, parent, false));
     }
 
     @Override
@@ -44,13 +44,21 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         MealsItem item = itemsList.get(position);
         holder.foodNameTv.setText(item.getStrMeal());
 
-        Utils.loadImage(context,item.getStrMealThumb(),holder.thumnailView);
+        Utils.loadImage(context, item.getStrMealThumb(), holder.thumnailView);
 
-        holder.btn_AddToPlane.setOnClickListener(view -> searchInterface.onSavePlane(item));
+        //holder.btn_AddToPlane.setOnClickListener(view -> searchInterface.onSavePlane(item));
 
-        holder.btn_addToFav.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b)
+        holder.btn_addToFav.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked)
+            {
+                holder.btn_addToFav.setButtonDrawable(R.drawable.solid_favorite_24);
                 searchInterface.onSaveFavorite(item);
+            }
+            else {
+                holder.btn_addToFav.setButtonDrawable(R.drawable.ic_favorite_border_black_menu_24dp);
+
+            }
+
         });
 
         holder.itemHome.setOnClickListener(v -> {
@@ -60,7 +68,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         });
     }
 
-    public void setItemsList(List<MealsItem> itemsList){
+    public void setItemsList(List<MealsItem> itemsList) {
         this.itemsList.clear();
         this.itemsList.addAll(itemsList);
         notifyDataSetChanged();
@@ -71,8 +79,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return itemsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        AppCompatButton btn_AddToPlane;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        // AppCompatButton btn_AddToPlane;
         CheckBox btn_addToFav;
         TextView foodNameTv;
         ImageView thumnailView;
@@ -81,11 +89,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-           // btn_AddToPlane = itemView.findViewById(R.id.addTOPlanButton);
+            // btn_AddToPlane = itemView.findViewById(R.id.addTOPlanButton);
             foodNameTv = itemView.findViewById(R.id.tv_title);
             btn_addToFav = itemView.findViewById(R.id.fav_ceheck);
             thumnailView = itemView.findViewById(R.id.thumnail_image);
-            itemHome=itemView.findViewById(R.id.itemHome);
+            itemHome = itemView.findViewById(R.id.itemHome);
         }
     }
 

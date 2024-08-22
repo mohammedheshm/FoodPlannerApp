@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.foodplannerapp.data.room.Week;
+
 import com.example.foodplannerapp.databinding.FragmentPlanBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;

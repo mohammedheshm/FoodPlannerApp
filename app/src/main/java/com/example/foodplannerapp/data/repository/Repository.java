@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.pojo.meals.MealsList;
-import com.example.foodplannerapp.data.room.Week;
+import com.example.foodplannerapp.ui.plan.Week;
 import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.pojo.user.User;
 import com.example.foodplannerapp.data.network.ApiCalls;

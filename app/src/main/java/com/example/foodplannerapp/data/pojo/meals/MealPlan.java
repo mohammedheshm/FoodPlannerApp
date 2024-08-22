@@ -9,7 +9,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
-import com.example.foodplannerapp.data.room.Week;
+import com.example.foodplannerapp.ui.plan.Week;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

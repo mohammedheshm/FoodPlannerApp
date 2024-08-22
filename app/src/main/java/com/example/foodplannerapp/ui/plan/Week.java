@@ -1,4 +1,4 @@
-package com.example.foodplannerapp.data.room;
+package com.example.foodplannerapp.ui.plan;
 
 
 public enum Week {

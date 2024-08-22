@@ -53,13 +53,20 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         //Glide
         Utils.loadImage(context, item.getStrMealThumb(), holder.thumnailView);
 
-        holder.addToFavBtn.setVisibility(View.GONE);
+        //holder.addToFavBtn.setVisibility(View.GONE);
 
         holder.addToFavBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b)
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked)
+                {
+                    holder.addToFavBtn.setButtonDrawable(R.drawable.solid_favorite_24);
                     homeInterface.onSaveFavorite(item);
+                }
+                else {
+                    holder.addToFavBtn.setButtonDrawable(R.drawable.ic_favorite_border_black_menu_24dp);
+                }
+
             }
         });
 

@@ -23,7 +23,7 @@ import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
-import com.example.foodplannerapp.data.room.Week;
+import com.example.foodplannerapp.ui.plan.Week;
 import com.example.foodplannerapp.databinding.FragmentDetailsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
