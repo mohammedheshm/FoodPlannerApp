@@ -58,19 +58,5 @@
             android:text="@string/search_title"
 />
 
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/addTOPlanButton"-->
-<!--            android:gravity="center"-->
-<!--            android:background="@drawable/button_addtoplan_effect"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:text="@string/add_to_plan"-->
-<!--            android:drawableStart="@drawable/baseline_calendar_month_24"-->
-<!--            android:padding="3dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            />-->
     </LinearLayout>
 </androidx.cardview.widget.CardView>

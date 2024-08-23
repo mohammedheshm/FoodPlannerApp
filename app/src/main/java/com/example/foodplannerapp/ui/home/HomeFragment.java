@@ -170,7 +170,6 @@ public class HomeFragment extends Fragment implements HomeInterface {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
         dialogBuilder.setIcon(R.drawable.baseline_calendar_month_24);
         dialogBuilder.setTitle("Pick a day that suits you");
-
         final ArrayAdapter<String> days = new ArrayAdapter<>(requireContext(), android.R.layout.select_dialog_singlechoice);
         days.add(Week.SATURDAY.toString());
         days.add(Week.SUNDAY.toString());
