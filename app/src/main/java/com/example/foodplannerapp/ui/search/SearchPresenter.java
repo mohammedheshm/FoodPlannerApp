@@ -4,6 +4,8 @@ package com.example.foodplannerapp.ui.search;
 import android.content.Context;
 
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
+import com.example.foodplannerapp.data.repository.RemoteDataSource;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
@@ -31,13 +33,13 @@ public class SearchPresenter {
             case SearchInterface.SEARCH:
                 break;
             case SearchInterface.AREA:
-                result = repository.getList(SharedPrefrencesManger.AREAS);
+                result = LocalDataSource.getList(SharedPrefrencesManger.AREAS);
                 break;
             case SearchInterface.INGREDIENT:
-                result = repository.getList(SharedPrefrencesManger.INGREDIENTS);
+                result = LocalDataSource.getList(SharedPrefrencesManger.INGREDIENTS);
                 break;
             case SearchInterface.CATEGORY:
-                result = repository.getList(SharedPrefrencesManger.CATEGORIES);
+                result = LocalDataSource.getList(SharedPrefrencesManger.CATEGORIES);
                 break;
         }
         return result;
@@ -53,19 +55,19 @@ public class SearchPresenter {
         String reVal = "";
         switch (type){
             case SearchInterface.AREA:
-                cashList = repository.getList(SharedPrefrencesManger.AREAS);
+                cashList = LocalDataSource.getList(SharedPrefrencesManger.AREAS);
                 random = new Random().nextInt(cashList.length);
                 reVal = cashList[random];
                 break;
 
             case SearchInterface.CATEGORY:
-                cashList = repository.getList(SharedPrefrencesManger.CATEGORIES);
+                cashList = LocalDataSource.getList(SharedPrefrencesManger.CATEGORIES);
                 random = new Random().nextInt(cashList.length);
                 reVal = cashList[random];
                 break;
 
             case SearchInterface.INGREDIENT:
-                cashList = repository.getList(SharedPrefrencesManger.INGREDIENTS);
+                cashList = LocalDataSource.getList(SharedPrefrencesManger.INGREDIENTS);
                 random = new Random().nextInt(cashList.length);
                 reVal = cashList[random];
                 break;
@@ -78,16 +80,16 @@ public class SearchPresenter {
     public void getSearchResultMeals(int type,String query){
         switch (type){
             case SearchInterface.AREA:
-                repository.retrieveFilterResults(null, null, query,searchInterface);
+                RemoteDataSource.retrieveFilterResults(null, null, query,searchInterface);
                 break;
             case SearchInterface.CATEGORY:
-                repository.retrieveFilterResults(query, null, null,searchInterface);
+                RemoteDataSource.retrieveFilterResults(query, null, null,searchInterface);
                 break;
             case SearchInterface.INGREDIENT:
-                repository.retrieveFilterResults(null, query, null,searchInterface);
+                RemoteDataSource.retrieveFilterResults(null, query, null,searchInterface);
                 break;
             case SearchInterface.SEARCH:
-                repository.searchMealsByName(query,searchInterface);
+                RemoteDataSource.searchMealsByName(query,searchInterface);
                 break;
 
 

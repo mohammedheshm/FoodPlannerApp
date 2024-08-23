@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 
@@ -51,7 +52,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
         switch (dayWeek.get(position))
         {
             case SATURDAY:
-                repository.showPlanMealsByDay(Week.SATURDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.SATURDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -75,7 +76,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case SUNDAY:
-                repository.showPlanMealsByDay(Week.SUNDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.SUNDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -99,7 +100,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case MONDAY:
-                repository.showPlanMealsByDay(Week.MONDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.MONDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(!data.isEmpty())
@@ -125,7 +126,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case TUESDAY:
-                repository.showPlanMealsByDay(Week.TUESDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.TUESDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -149,7 +150,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case WEDNESDAY:
-                repository.showPlanMealsByDay(Week.WEDNESDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.WEDNESDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -173,7 +174,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 });
                 break;
             case THURSDAY:
-                repository.showPlanMealsByDay(Week.THURSDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.THURSDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())
@@ -198,7 +199,7 @@ public class WeekDaysAdapter extends RecyclerView.Adapter<WeekDaysAdapter.ViewHo
                 break;
 
             case FRIDAY:
-                repository.showPlanMealsByDay(Week.FRIDAY, new RepoInterface<List<MealPlan>>() {
+                LocalDataSource.showPlanMealsByDay(Week.FRIDAY, new RepoInterface<List<MealPlan>>() {
                     @Override
                     public void onDataSuccessResponse(List<MealPlan> data) {
                         if(data.isEmpty())

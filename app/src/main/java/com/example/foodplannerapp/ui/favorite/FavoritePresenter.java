@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 
@@ -21,10 +22,10 @@ public class FavoritePresenter {
     }
 
     public void removeFavorite(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
-        repository.deleteFavorite(mealsItem, repoInterface);
+        LocalDataSource.deleteFavorite(mealsItem, repoInterface);
     }
     public void getFavorites(RepoInterface<List<MealsItem>> repoInterface) {
-        repository.showFavouriteMealsDataBase(repoInterface);
+        LocalDataSource.showFavouriteMealsDataBase(repoInterface);
     }
 
 
@@ -36,7 +37,7 @@ public class FavoritePresenter {
 
     public void deleteFromPlan(MealPlan mealPlan){
 
-        repository.deletePlanMeal(mealPlan,null);
+        LocalDataSource.deletePlanMeal(mealPlan,null);
 
     }
 }

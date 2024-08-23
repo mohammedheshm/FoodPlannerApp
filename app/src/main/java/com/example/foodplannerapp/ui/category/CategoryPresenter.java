@@ -5,6 +5,7 @@ import com.example.foodplannerapp.data.pojo.category.Category;
 import com.example.foodplannerapp.data.pojo.countries.Area;
 import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.RemoteDataSource;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 import java.util.List;
@@ -17,19 +18,19 @@ public class CategoryPresenter {
     }
 
     public void getCategories(RepoInterface<List<MealsItem>> repoInterface){
-        repository.retrieveFilterResults(null,null,"Egyptian", repoInterface);
+        RemoteDataSource.retrieveFilterResults(null,null,"Egyptian", repoInterface);
     }
 
     public void getFilterAreaResults(RepoInterface<List<Area>> repoInterface){
-        repository.areasList(repoInterface);
+        RemoteDataSource.areasList(repoInterface);
     }
 
     public void getFilterCategoryResults(RepoInterface<List<Category>> repoInterface){
-        repository.categoriesList(repoInterface);
+        RemoteDataSource.categoriesList(repoInterface);
     }
 
     public void getFilterIngredientResults(RepoInterface<List<Ingredient>> repoInterface){
-        repository.ingredientsList(repoInterface);
+        RemoteDataSource.ingredientsList(repoInterface);
     }
 
 

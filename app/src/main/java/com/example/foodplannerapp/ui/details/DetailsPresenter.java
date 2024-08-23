@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
+import com.example.foodplannerapp.data.repository.RemoteDataSource;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 
@@ -23,12 +25,12 @@ public class DetailsPresenter {
 
     public void deleteFromPlan(MealPlan mealPlan){
 
-        repository.deletePlanMeal(mealPlan,null);
+        LocalDataSource.deletePlanMeal(mealPlan,null);
 
     }
 
     public void deleteFromFav(MealsItem mealsItem){
-        repository.deleteFavorite(mealsItem,null);
+        LocalDataSource.deleteFavorite(mealsItem,null);
     }
 
     public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
@@ -42,7 +44,7 @@ public class DetailsPresenter {
     }
     public void getMeal(String mealId, RepoInterface<List<MealsItem>> repoInterface)
     {
-        repository.retrieveMealByID(mealId, repoInterface);
+        RemoteDataSource.retrieveMealByID(mealId, repoInterface);
     }
 
 }

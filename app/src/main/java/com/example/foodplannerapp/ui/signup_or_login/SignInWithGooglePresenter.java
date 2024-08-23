@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.fragment.app.FragmentActivity;
 import com.example.foodplannerapp.data.firbaseauth.AuthenticationManger;
 import com.example.foodplannerapp.data.firbaseauth.GoogleAuth;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
 import com.example.foodplannerapp.data.repository.Repository;
 
 public class SignInWithGooglePresenter {
@@ -36,7 +37,7 @@ public class SignInWithGooglePresenter {
     }
 
     public boolean isUser() {
-        return repository.isUser();
+        return LocalDataSource.isUser();
     }
 
     public void checkRequestCode(int requestCode, Intent data) {

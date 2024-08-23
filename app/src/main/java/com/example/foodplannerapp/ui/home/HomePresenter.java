@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
+import com.example.foodplannerapp.data.repository.RemoteDataSource;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.data.repository.Repository;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
@@ -31,22 +33,22 @@ public class HomePresenter {
         String[] cashList;
         switch (type) {
             case AREA:
-                cashList = repository.getList(SharedPrefrencesManger.AREAS);
+                cashList = LocalDataSource.getList(SharedPrefrencesManger.AREAS);
                 random = new Random().nextInt(cashList.length);
-                repository.retrieveFilterResults(null, null, cashList[random], repoInterface);
+                RemoteDataSource.retrieveFilterResults(null, null, cashList[random], repoInterface);
                 break;
             case CATEGORY:
-                cashList = repository.getList(SharedPrefrencesManger.CATEGORIES);
+                cashList = LocalDataSource.getList(SharedPrefrencesManger.CATEGORIES);
                 random = new Random().nextInt(cashList.length);
-                repository.retrieveFilterResults(cashList[random], null, null, repoInterface);
+                RemoteDataSource.retrieveFilterResults(cashList[random], null, null, repoInterface);
                 break;
             case INGREDIENT:
-                cashList = repository.getList(SharedPrefrencesManger.INGREDIENTS);
+                cashList = LocalDataSource.getList(SharedPrefrencesManger.INGREDIENTS);
                 random = new Random().nextInt(cashList.length);
-                repository.retrieveFilterResults(null, cashList[random], null, repoInterface);
+                RemoteDataSource.retrieveFilterResults(null, cashList[random], null, repoInterface);
                 break;
             case SINGLE:
-                repository.lookupSingleRandomMeal(repoInterface);
+                RemoteDataSource.lookupSingleRandomMeal(repoInterface);
                 break;
 
 
@@ -66,7 +68,7 @@ public class HomePresenter {
 
     public void deleteFromPlan(MealPlan mealPlan) {
 
-        repository.deletePlanMeal(mealPlan, null);
+        LocalDataSource.deletePlanMeal(mealPlan, null);
 
     }
 }

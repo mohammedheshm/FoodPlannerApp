@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.pojo.user.User;
+import com.example.foodplannerapp.data.repository.LocalDataSource;
 import com.example.foodplannerapp.data.repository.Repository;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.ui.signup_or_login.SignInWithGoogleInterface;
@@ -42,7 +43,7 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
 
     @Override
     public void logout(Context context) {
-        Repository.getInstance(context).deleteAllTable(Repository.DELETE_PLAN_AND_FAV);
+        LocalDataSource.getInstance(context).deleteAllTable(LocalDataSource.DELETE_PLAN_AND_FAV);
         SharedPrefrencesManger.getInstance(context).clearAllData();
         mAuth.signOut();
     }
@@ -106,7 +107,7 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
                         FirebaseStoreBackup.getInstance(sharedPrefrencesManger).saveUser(user, task -> {
                             if (task.isSuccessful()) {
                                 sharedPrefrencesManger.saveUser(user);
-                                Repository.getInstance(context).restoreAllData();
+                                LocalDataSource.getInstance(context).restoreAllData();
                                 signInWithGoogleInterface.onSuccessFullFireBaseAuth();
                             } else {
                                 Log.e(TAG, "Failed to save user data");
