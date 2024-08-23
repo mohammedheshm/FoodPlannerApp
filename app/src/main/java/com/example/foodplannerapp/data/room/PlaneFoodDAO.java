@@ -30,6 +30,7 @@ public interface PlaneFoodDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertAllTable(List<MealPlan> mealPlanList);
 
-    @Query("SELECT * FROM MealPlan where day=:dayName" )
+    @Query("SELECT * FROM MealPlan WHERE day = :dayName")
     public Single<List<MealPlan>> showPlanMealsByDay(Week dayName);
+
 }

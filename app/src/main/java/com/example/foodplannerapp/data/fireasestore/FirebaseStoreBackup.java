@@ -96,7 +96,7 @@ public class FirebaseStoreBackup {
             firebaseFirestore
                     .collection(ROOT_KEY)
                     .document(sharedPrefrencesManger.getUser().getUID())
-                    .collection(FAV_KEY)
+                    .collection(PLANE_KEY)
                     .document(mealPlan.getIdMeal())
                     .set(mealPlan);
     }

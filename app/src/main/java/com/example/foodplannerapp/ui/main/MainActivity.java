@@ -20,6 +20,7 @@ import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.databinding.ActivityMainBinding;
 import com.example.foodplannerapp.ui.signup_or_login.SignUpOrLoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             int autProvider = SharedPrefrencesManger.getInstance(this).getUser().getAuthProvider();
             AuthenticationManger.authenticationManager(autProvider)
                     .logout(this);
+
             startActivity(new Intent(this, SignUpOrLoginActivity.class));
             finish();
         });

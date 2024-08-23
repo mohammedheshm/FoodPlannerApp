@@ -98,16 +98,56 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
             return mAuth.getCurrentUser();
         }
 
+//        private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+//            AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+//            mAuth.signInWithCredential(credential)
+//                    .addOnSuccessListener(authResult -> {
+//                        User user = getUserData();
+//                        SharedPrefrencesManger sharedPrefrencesManger = SharedPrefrencesManger.getInstance(context);
+//                        FirebaseStoreBackup.getInstance(sharedPrefrencesManger).saveUser(user, task -> {
+//                            if (task.isSuccessful()) {
+//                                sharedPrefrencesManger.saveUser(user);
+//                                LocalDataSource.getInstance(context).restoreAllData();
+//                                signInWithGoogleInterface.onSuccessFullFireBaseAuth();
+//                            } else {
+//                                Log.e(TAG, "Failed to save user data");
+//                                signInWithGoogleInterface.onFailedFireBaseAuth();
+//                            }
+//                        });
+//                    })
+//                    .addOnFailureListener(e -> {
+//                        Log.w(TAG, "FirebaseAuthWithGoogle: Failed", e);
+//                        signInWithGoogleInterface.onFailedFireBaseAuth();
+//                    });
+//        }
+
+
         private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
             AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
             mAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
                         User user = getUserData();
                         SharedPrefrencesManger sharedPrefrencesManger = SharedPrefrencesManger.getInstance(context);
-                        FirebaseStoreBackup.getInstance(sharedPrefrencesManger).saveUser(user, task -> {
+                        FirebaseStoreBackup firebaseStoreBackup = FirebaseStoreBackup.getInstance(sharedPrefrencesManger);
+
+                        // Save user data to Firestore
+                        firebaseStoreBackup.saveUser(user, task -> {
                             if (task.isSuccessful()) {
                                 sharedPrefrencesManger.saveUser(user);
-                                LocalDataSource.getInstance(context).restoreAllData();
+
+                                // Restore favorite data
+                                firebaseStoreBackup.restoreDataFavorite(querySnapshot -> {
+                                    // Handle restored favorite data
+                                    LocalDataSource.getInstance(context).restoreAllData();
+                                });
+
+                                // Restore plan data
+                                firebaseStoreBackup.restoreDataPlane(querySnapshot -> {
+                                    // Handle restored plan data
+                                    LocalDataSource.getInstance(context).restoreAllData();
+                                });
+
+                                // Notify success
                                 signInWithGoogleInterface.onSuccessFullFireBaseAuth();
                             } else {
                                 Log.e(TAG, "Failed to save user data");
@@ -120,6 +160,7 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
                         signInWithGoogleInterface.onFailedFireBaseAuth();
                     });
         }
+
 
         private User getUserData() {
             FirebaseUser user = mAuth.getCurrentUser();

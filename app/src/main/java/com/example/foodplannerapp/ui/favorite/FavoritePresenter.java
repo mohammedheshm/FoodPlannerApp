@@ -28,17 +28,5 @@ public class FavoritePresenter {
         LocalDataSource.showFavouriteMealsDataBase(repoInterface);
     }
 
-
-    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
-
-        repository.insertPlaneMealDataBase(mealPlan, repoInterface);
-
-    }
-
-    public void deleteFromPlan(MealPlan mealPlan){
-
-        LocalDataSource.deletePlanMeal(mealPlan,null);
-
-    }
 }
 

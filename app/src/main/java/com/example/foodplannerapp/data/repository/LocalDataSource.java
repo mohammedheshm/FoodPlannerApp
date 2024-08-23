@@ -283,32 +283,8 @@ public class LocalDataSource {
 
                     @Override
                     public void onComplete() {
+                        firebaseStoreBackup.savePlane(mealPlan);
                         repoInterface.onDataSuccessResponse(null);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        repoInterface.onDataFailedResponse(e.getMessage());
-                    }
-                });
-    }
-
-    //show  plan Meals in plan fragment with rx-room
-    public void showMealPlan(RepoInterface<List<MealPlan>> repoInterface) {
-        roomDatabase
-                .PlaneFoodDAO()
-                .showPlanMeals()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<MealPlan>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        repoInterface.onDataLoading();
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull List<MealPlan> mealPlans) {
-                        repoInterface.onDataSuccessResponse(mealPlans);
                     }
 
                     @Override
@@ -331,6 +307,10 @@ public class LocalDataSource {
 
                     @Override
                     public void onSuccess(@NonNull List<MealPlan> mealPlans) {
+
+                        for (MealPlan mealPlan : mealPlans) {
+                            firebaseStoreBackup.savePlane(mealPlan);
+                        }
                         repoInterface.onDataSuccessResponse(mealPlans);
                     }
 
@@ -365,5 +345,7 @@ public class LocalDataSource {
                     }
                 });
     }
+
+
 
 }

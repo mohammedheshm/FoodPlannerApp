@@ -28,4 +28,7 @@ public interface FavoriteDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertAllTable(List<MealsItem> mealPlanList);
+
+
+
 }

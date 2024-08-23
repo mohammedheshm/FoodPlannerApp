@@ -1,11 +1,15 @@
 package com.example.foodplannerapp.data.repository;
 
 import android.content.Context;
+
+import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.network.ApiCalls;
 import com.example.foodplannerapp.data.network.Network;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.pojo.meals.MealsList;
+import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
+
 import java.util.List;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -18,7 +22,7 @@ public class Repository {
     private final LocalDataSource localDataSource;
     private final RemoteDataSource remoteDataSource;
     public static Repository repository = null;
-
+    private Context context;
     public static Repository getInstance(Context context) {
         if (repository == null)
             repository = new Repository(context);
@@ -84,4 +88,9 @@ public class Repository {
             }
         });
     }
+
+
+
+
+
 }
