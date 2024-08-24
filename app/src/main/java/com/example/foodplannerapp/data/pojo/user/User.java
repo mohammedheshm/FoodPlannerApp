@@ -9,7 +9,6 @@ public class User implements Serializable {
     private String name;
     private String imageUrl;
     private String email;
-
     private int authProvider;
 
     public User() {

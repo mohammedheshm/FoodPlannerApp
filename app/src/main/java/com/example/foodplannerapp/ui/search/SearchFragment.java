@@ -7,13 +7,16 @@ import android.view.ViewGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.databinding.FragmentSearchBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
 public class SearchFragment extends Fragment implements SearchInterface {

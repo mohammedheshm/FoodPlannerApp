@@ -56,13 +56,13 @@ public class HomeFragment extends Fragment implements HomeInterface {
 
         presenter = new HomePresenter(getContext(), this);
 
-        recycleriewIngredientsSettings();
-        recycleriewAreaSettings();
-        recycleriewCategorySettings();
+        recyclerViewIngredientsSetup();
+        recyclerViewAreaSetup();
+        recyclerViewCategorySetup();
         randomMealHandling(view);
     }
 
-    private void recycleriewAreaSettings() {
+    private void recyclerViewAreaSetup() {
         RecyclerView rvRandomArea = Utils.recyclerViewHandler(binding.rvRandomArea, getContext());
         HomeAdapter homeFeedAdapterArea = new HomeAdapter(getContext(), this);
         rvRandomArea.setAdapter(homeFeedAdapterArea);
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
         });
     }
 
-    private void recycleriewCategorySettings() {
+    private void recyclerViewCategorySetup() {
         RecyclerView rvRandomCategory = Utils.recyclerViewHandler(binding.rvRandomCategory, getContext());
         HomeAdapter homeFeedAdapterCategory = new HomeAdapter(getContext(), this);
         rvRandomCategory.setAdapter(homeFeedAdapterCategory);
@@ -211,7 +211,7 @@ public class HomeFragment extends Fragment implements HomeInterface {
         dialogBuilder.show();
     }
 
-    private void recycleriewIngredientsSettings() {
+    private void recyclerViewIngredientsSetup() {
         RecyclerView rvRandomIngredien = Utils.recyclerViewHandler(binding.rvRandomIngredien, getContext());
         HomeAdapter homeFeedAdapterIngredien = new HomeAdapter(getContext(), this);
         rvRandomIngredien.setAdapter(homeFeedAdapterIngredien);

@@ -10,6 +10,8 @@ public interface SearchInterface extends RepoInterface<List<MealsItem>> {
     public static final int INGREDIENT = 2;
     public static final int CATEGORY = 3;
     public static final int SEARCH = 4;
+
     public void onSavePlane(MealsItem item);
+
     public void onSaveFavorite(MealsItem item);
 }

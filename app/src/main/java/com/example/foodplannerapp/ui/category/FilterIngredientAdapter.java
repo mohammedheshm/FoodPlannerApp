@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +37,7 @@ public class FilterIngredientAdapter extends RecyclerView.Adapter<FilterIngredie
     @NonNull
     @Override
     public FilterIngredientAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter_ingredient,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter_ingredient, parent, false));
     }
 
     @Override
@@ -45,20 +46,19 @@ public class FilterIngredientAdapter extends RecyclerView.Adapter<FilterIngredie
         holder.title.setText(item.getStrIngredient());
 
 
-        Utils.loadImage(context,item.getThumnail(),holder.thumnailView);
+        Utils.loadImage(context, item.getThumnail(), holder.thumnailView);
         holder.linearLayout.setOnClickListener(view -> {
-            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.INGREDIENT,item.getStrIngredient());
+            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.INGREDIENT, item.getStrIngredient());
 
         });
 
 
-
     }
 
-    public void setItemsList(List<Ingredient> itemsList){
+    public void setItemsList(List<Ingredient> itemsList) {
         this.itemsList = itemsList;
         notifyDataSetChanged();
-        isHaveData.postValue(itemsList.size()>0);
+        isHaveData.postValue(itemsList.size() > 0);
 
     }
 
@@ -67,12 +67,13 @@ public class FilterIngredientAdapter extends RecyclerView.Adapter<FilterIngredie
         return itemsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
         ImageView thumnailView;
 
         LinearLayout linearLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

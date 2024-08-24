@@ -28,11 +28,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     Button btn_signUP;
     TextView signUpEmailTv;
     TextView signUpPasswordTv;
-    private static boolean statesFlagEmail=false;
-    private static boolean statesFlagPassword=false;
+    private static boolean statesFlagEmail = false;
+    private static boolean statesFlagPassword = false;
 
     private FirebaseAuth mAuth;
-    private static final String TAG="RegisterActivity";
+    private static final String TAG = "RegisterActivity";
 
     private Authentication authentication;
     private AuthenticationManger authenticationManger;
@@ -47,20 +47,20 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
             getSupportActionBar().hide();
         }
 
-        authentication= AuthenticationManger.authenticationManager(AuthenticationManger.EMAIL);
+        authentication = AuthenticationManger.authenticationManager(AuthenticationManger.EMAIL);
         initUi();
         handleButtonEvents();
     }
 
-    public void initUi(){
+    public void initUi() {
         loginTv = findViewById(R.id.loginTv);
         btn_signUP = findViewById(R.id.signUpBtn);
-        signUpEmailTv=findViewById(R.id.signupEmailTxtView);
-        signUpPasswordTv=findViewById(R.id.passwordSignupTxtView);
+        signUpEmailTv = findViewById(R.id.signupEmailTxtView);
+        signUpPasswordTv = findViewById(R.id.passwordSignupTxtView);
         btn_signUP.setEnabled(false);
     }
 
-    public void handleButtonEvents(){
+    public void handleButtonEvents() {
 
         loginTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
-
 
 
         signUpEmailTv.addTextChangedListener(new TextWatcher() {
@@ -79,11 +78,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                if (isValidEmail(s))
-                {   statesFlagEmail=true;
-                    buttonStates();}
-                if(isValidEmail(s)==false) {
-                    statesFlagEmail=false;
+                if (isValidEmail(s)) {
+                    statesFlagEmail = true;
+                    buttonStates();
+                }
+                if (isValidEmail(s) == false) {
+                    statesFlagEmail = false;
                     buttonStates();
                 }
             }
@@ -106,12 +106,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                if (isValidPassword(s))
-                {  statesFlagPassword=true;
-                    buttonStates();}
-                if(isValidPassword(s)==false)
-                {
-                    statesFlagPassword=false;
+                if (isValidPassword(s)) {
+                    statesFlagPassword = true;
+                    buttonStates();
+                }
+                if (isValidPassword(s) == false) {
+                    statesFlagPassword = false;
                     buttonStates();
                 }
             }
@@ -125,19 +125,20 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
         btn_signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                authentication.register(RegisterActivity.this,signUpEmailTv.getText().toString(),signUpPasswordTv.getText().toString());
+                authentication.register(RegisterActivity.this, signUpEmailTv.getText().toString(), signUpPasswordTv.getText().toString());
             }
         });
     }
 
 
     public void updateUI(FirebaseUser user) {
-        if(user!=null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));}
+        if (user != null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
     }
 
     public void buttonStates() {
-        if (statesFlagEmail&&statesFlagPassword)
+        if (statesFlagEmail && statesFlagPassword)
             btn_signUP.setEnabled(true);
         else
             btn_signUP.setEnabled(false);

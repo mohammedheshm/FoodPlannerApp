@@ -27,7 +27,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     @Override
     public SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new SliderViewHolder(LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.slider_item,parent, false));
+                inflate(R.layout.slider_item, parent, false));
     }
 
     @Override
@@ -40,20 +40,20 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         return sliderItems.size();
     }
 
-    class SliderViewHolder extends RecyclerView.ViewHolder{
+    class SliderViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView titleTxtView;
         private TextView descTxtView;
 
         public SliderViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.introImage2);
-            titleTxtView=itemView.findViewById(R.id.TitleTextview);
-            descTxtView=itemView.findViewById(R.id.descTextView);
+            imageView = itemView.findViewById(R.id.introImage2);
+            titleTxtView = itemView.findViewById(R.id.TitleTextview);
+            descTxtView = itemView.findViewById(R.id.descTextView);
 
         }
 
-        public void setSliderItem(SliderItem sliderItem){
+        public void setSliderItem(SliderItem sliderItem) {
             imageView.setImageResource(sliderItem.getImage());
             titleTxtView.setText(sliderItem.getTitle());
             descTxtView.setText(sliderItem.getDescreption());

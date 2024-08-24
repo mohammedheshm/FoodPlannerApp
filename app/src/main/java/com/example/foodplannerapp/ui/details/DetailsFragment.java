@@ -2,21 +2,28 @@ package com.example.foodplannerapp.ui.details;
 
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import static com.example.foodplannerapp.R.*;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
+
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplannerapp.R;
@@ -33,8 +40,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.List;
 
 
-
-public class DetailsFragment extends Fragment implements DetailsInterface{
+public class DetailsFragment extends Fragment implements DetailsInterface {
 
     private boolean isFavorite = false;
     private TextView detailsName;
@@ -55,40 +61,38 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
     private YouTubePlayerView youTubePlayerView;
 
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentDetailsBinding.inflate(inflater, container, false);
         initUi();
-        presenter = new DetailsPresenter(getContext(),this);
+        presenter = new DetailsPresenter(getContext(), this);
 
 
-        mealId=DetailsFragmentArgs.fromBundle(getArguments()).getMealId();
+        mealId = DetailsFragmentArgs.fromBundle(getArguments()).getMealId();
         presenter.getMeal(mealId, new RepoInterface<List<MealsItem>>() {
 
 
             @Override
             public void onDataSuccessResponse(List<MealsItem> data) {
-                mealsItem=data.get(0);
-                mealPlan=mealsItem.convertMealsItemToMealsPlan(mealsItem);
-                Log.i("TAG", "meal plan obj: "+mealPlan.getStrCategory());
+                mealsItem = data.get(0);
+                mealPlan = mealsItem.convertMealsItemToMealsPlan(mealsItem);
+                Log.i("TAG", "meal plan obj: " + mealPlan.getStrCategory());
                 detailsName.setText(mealsItem.getStrMeal());
                 areaName.setText(mealsItem.getStrArea());
                 categoryName.setText(mealsItem.getStrCategory());
-                Log.i("TAG", "category: "+mealsItem.getStrCategory());
+                Log.i("TAG", "category: " + mealsItem.getStrCategory());
                 instructionsTv.setText(mealsItem.getStrInstructions());
-                Log.i("TAG", "instructions: "+mealsItem.getStrInstructions());
-                ingridients=mealsItem.getIngredients();
+                Log.i("TAG", "instructions: " + mealsItem.getStrInstructions());
+                ingridients = mealsItem.getIngredients();
 
-                for(int i=0;i<ingridients.size();i++)
-                {
-                    ingridientsTv.append("."+ingridients.get(i)+"\n");
-                    Log.i("TAG", "ingridients: "+ingridients.get(i));
+                for (int i = 0; i < ingridients.size(); i++) {
+                    ingridientsTv.append("." + ingridients.get(i) + "\n");
+                    Log.i("TAG", "ingridients: " + ingridients.get(i));
                 }
                 Glide.with(requireContext()).
                         load(mealsItem.getStrMealThumb())
-                        .apply(new RequestOptions().override(1920,1080).
+                        .apply(new RequestOptions().override(1920, 1080).
 
                                 placeholder(drawable.randomloadingimg).error(drawable.randomloadingimg)).
                         into(imageView);
@@ -168,16 +172,16 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
     }
 
 
-    public void initUi(){
+    public void initUi() {
         root = binding.getRoot();
-        detailsName=root.findViewById(id.nameDetailsTextView);
-        categoryName=root.findViewById(id.categoryTextView);
-        areaName=root.findViewById(id.countryTextView);
-        addTofavBtn=root.findViewById(id.addToFavoriteButton);
-        addToPlan=root.findViewById(id.addTOPlanButton);
-        imageView=root.findViewById(id.mealImageView);
-        ingridientsTv=root.findViewById(id.ingredientsTextView);
-        instructionsTv=root.findViewById(id.instructionsTextView);
+        detailsName = root.findViewById(id.nameDetailsTextView);
+        categoryName = root.findViewById(id.categoryTextView);
+        areaName = root.findViewById(id.countryTextView);
+        addTofavBtn = root.findViewById(id.addToFavoriteButton);
+        addToPlan = root.findViewById(id.addTOPlanButton);
+        imageView = root.findViewById(id.mealImageView);
+        ingridientsTv = root.findViewById(id.ingredientsTextView);
+        instructionsTv = root.findViewById(id.instructionsTextView);
         youTubePlayerView = root.findViewById(id.youtube_player_view);
         getLifecycle().addObserver(youTubePlayerView);
 
@@ -189,9 +193,10 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
     public void onStart() {
         super.onStart();
         DetailsFragment.this.requireActivity().getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -255,8 +260,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
     }
 
 
-
-    public void createDialog(){
+    public void createDialog() {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
         dialogBuilder.setIcon(R.drawable.ic_plane);
@@ -282,36 +286,29 @@ public class DetailsFragment extends Fragment implements DetailsInterface{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("TAG", "meal plan at dialog: " + mealPlan.getStrCategory());
-                if(which==0)
-                {
+                if (which == 0) {
                     mealPlan.setDay(Week.SATURDAY);
                 }
-                if(which==1)
-                {
+                if (which == 1) {
                     mealPlan.setDay(Week.SUNDAY);
                 }
-                if(which==2)
-                {
+                if (which == 2) {
                     mealPlan.setDay(Week.MONDAY);
                 }
-                if(which==3)
-                {
+                if (which == 3) {
                     mealPlan.setDay(Week.THURSDAY);
                 }
-                if(which==4)
-                {
+                if (which == 4) {
                     mealPlan.setDay(Week.WEDNESDAY);
                 }
-                if(which==5)
-                {
+                if (which == 5) {
                     mealPlan.setDay(Week.TUESDAY);
                 }
-                if(which==6)
-                {
+                if (which == 6) {
                     mealPlan.setDay(Week.FRIDAY);
                 }
                 addToPlan(mealPlan);
-                Toast.makeText(requireContext(),"Added to plan successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Added to plan successfully", Toast.LENGTH_SHORT).show();
 
             }
         });

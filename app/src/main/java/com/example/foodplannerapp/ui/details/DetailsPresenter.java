@@ -18,32 +18,32 @@ public class DetailsPresenter {
     private Repository repository;
     Context context;
 
-    public DetailsPresenter(Context context,DetailsInterface detailsInterface) {
+    public DetailsPresenter(Context context, DetailsInterface detailsInterface) {
         this.detailsInterface = detailsInterface;
-        repository=Repository.getInstance(context);
+        repository = Repository.getInstance(context);
     }
 
-    public void deleteFromPlan(MealPlan mealPlan){
+    public void deleteFromPlan(MealPlan mealPlan) {
 
-        LocalDataSource.deletePlanMeal(mealPlan,null);
+        LocalDataSource.deletePlanMeal(mealPlan, null);
 
     }
 
-    public void deleteFromFav(MealsItem mealsItem){
-        LocalDataSource.deleteFavorite(mealsItem,null);
+    public void deleteFromFav(MealsItem mealsItem) {
+        LocalDataSource.deleteFavorite(mealsItem, null);
     }
 
-    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface){
+    public void addToPlan(MealPlan mealPlan, RepoInterface<Void> repoInterface) {
 
         repository.insertPlaneMealDataBase(mealPlan, repoInterface);
 
     }
 
-    public void addToFav(MealsItem mealsItem, RepoInterface<Void> repoInterface){
+    public void addToFav(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
         repository.insertFavoriteMealDataBase(mealsItem, repoInterface);
     }
-    public void getMeal(String mealId, RepoInterface<List<MealsItem>> repoInterface)
-    {
+
+    public void getMeal(String mealId, RepoInterface<List<MealsItem>> repoInterface) {
         RemoteDataSource.retrieveMealByID(mealId, repoInterface);
     }
 

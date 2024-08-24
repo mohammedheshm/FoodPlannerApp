@@ -1,10 +1,8 @@
 package com.example.foodplannerapp.data.room;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
-
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 

@@ -2,20 +2,12 @@ package com.example.foodplannerapp.data.repository;
 
 import android.content.Context;
 
-import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.network.ApiCalls;
 import com.example.foodplannerapp.data.network.Network;
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
-import com.example.foodplannerapp.data.pojo.meals.MealsList;
-import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
-
 import java.util.List;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+
 
 public class Repository {
 
@@ -23,6 +15,7 @@ public class Repository {
     private final RemoteDataSource remoteDataSource;
     public static Repository repository = null;
     private Context context;
+
     public static Repository getInstance(Context context) {
         if (repository == null)
             repository = new Repository(context);
@@ -34,8 +27,6 @@ public class Repository {
         localDataSource = new LocalDataSource(context);
         remoteDataSource = new RemoteDataSource(context, apiCalls);  // Pass both context and apiCalls to RemoteDataSource
     }
-
-
 
 
     // Insert favorite meal by fetching data from the API, then storing it locally
@@ -63,8 +54,6 @@ public class Repository {
     }
 
 
-
-
     // Insert meal plan by fetching data from the API, then storing it locally
     public void insertPlaneMealDataBase(MealPlan mealPlan, RepoInterface<Void> repoInterface) {
         remoteDataSource.retrieveMealByID(mealPlan.getIdMeal(), new RepoInterface<List<MealsItem>>() {
@@ -88,9 +77,6 @@ public class Repository {
             }
         });
     }
-
-
-
 
 
 }

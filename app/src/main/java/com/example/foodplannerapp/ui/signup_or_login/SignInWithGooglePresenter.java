@@ -2,7 +2,9 @@ package com.example.foodplannerapp.ui.signup_or_login;
 
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.fragment.app.FragmentActivity;
+
 import com.example.foodplannerapp.data.firbaseauth.AuthenticationManger;
 import com.example.foodplannerapp.data.firbaseauth.GoogleAuth;
 import com.example.foodplannerapp.data.repository.LocalDataSource;

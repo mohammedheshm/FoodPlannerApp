@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.category.CategoryFragment"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical"
+    tools:context=".ui.category.CategoryFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <TextView
-            android:layout_marginTop="30dp"
             android:id="@+id/search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/input_style"
             android:drawableStart="@drawable/colored_search_24"
@@ -30,44 +29,46 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
+
         <LinearLayout
             android:id="@+id/section_title_category_holder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:padding="5dp"
             android:orientation="horizontal"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/rv_category"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
             app:layout_constraintTop_toBottomOf="@+id/search_view">
 
             <TextView
+                style="@style/TextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                style="@style/TextTitle"
-                android:padding="2dp"
-                android:textColor="@color/teal_color_dark"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/search_by_category" />
+                android:padding="2dp"
+                android:text="@string/search_by_category"
+                android:textColor="@color/teal_color_dark"
+                android:textStyle="bold" />
 
-<!--            <TextView-->
-<!--                android:textColor="@color/teal_color_dark"-->
-<!--                style="@style/TextTitle"-->
-<!--                android:id="@+id/seeMoreCategory"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:background="@drawable/hover_effect"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="right"-->
-<!--                android:padding="2dp"-->
-<!--                android:textAllCaps="true"-->
-<!--                android:textStyle="italic"-->
-<!--                android:text="@string/see_more" />-->
+            <!--            <TextView-->
+            <!--                android:textColor="@color/teal_color_dark"-->
+            <!--                style="@style/TextTitle"-->
+            <!--                android:id="@+id/seeMoreCategory"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:background="@drawable/hover_effect"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:gravity="right"-->
+            <!--                android:padding="2dp"-->
+            <!--                android:textAllCaps="true"-->
+            <!--                android:textStyle="italic"-->
+            <!--                android:text="@string/see_more" />-->
 
 
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_category"
             android:layout_width="0dp"
@@ -76,10 +77,10 @@
             android:orientation="horizontal"
             android:textColor="@color/black"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/section_title_category_holder"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
+            app:layout_constraintTop_toBottomOf="@+id/section_title_category_holder"
             tools:layout_editor_absoluteY="78dp"
             tools:listitem="@layout/item_filter_category" />
 
@@ -89,8 +90,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:padding="5dp"
             android:orientation="horizontal"
+            android:padding="5dp"
 
             app:layout_constraintBottom_toTopOf="@+id/rv_areas"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
@@ -98,29 +99,30 @@
             app:layout_constraintTop_toBottomOf="@+id/rv_category">
 
             <TextView
+                style="@style/TextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                style="@style/TextTitle"
-                android:padding="2dp"
-                android:textColor="@color/teal_color_dark"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/search_by_country" />
+                android:padding="2dp"
+                android:text="@string/search_by_country"
+                android:textColor="@color/teal_color_dark"
+                android:textStyle="bold" />
 
-<!--            <TextView-->
-<!--                android:textColor="@color/teal_color_dark"-->
-<!--                style="@style/TextTitle"-->
-<!--                android:id="@+id/seeMoreArea"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:background="@drawable/hover_effect"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="right"-->
-<!--                android:padding="2dp"-->
-<!--                android:textAllCaps="true"-->
-<!--                android:textStyle="italic"-->
-<!--                android:text="@string/see_more" />-->
+            <!--            <TextView-->
+            <!--                android:textColor="@color/teal_color_dark"-->
+            <!--                style="@style/TextTitle"-->
+            <!--                android:id="@+id/seeMoreArea"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:background="@drawable/hover_effect"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:gravity="right"-->
+            <!--                android:padding="2dp"-->
+            <!--                android:textAllCaps="true"-->
+            <!--                android:textStyle="italic"-->
+            <!--                android:text="@string/see_more" />-->
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_areas"
             android:layout_width="0dp"
@@ -129,10 +131,10 @@
             android:orientation="horizontal"
             android:textColor="@color/black"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/section_title_area_holder"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
+            app:layout_constraintTop_toBottomOf="@+id/section_title_area_holder"
             tools:listitem="@layout/item_filter_category" />
 
         <LinearLayout
@@ -140,37 +142,38 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:padding="5dp"
             android:orientation="horizontal"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/rv_ingredient"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
             app:layout_constraintTop_toBottomOf="@+id/rv_areas">
 
             <TextView
+                style="@style/TextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                style="@style/TextTitle"
-                android:padding="2dp"
-                android:textColor="@color/teal_color_dark"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="@string/search_by_ingredient" />
+                android:padding="2dp"
+                android:text="@string/search_by_ingredient"
+                android:textColor="@color/teal_color_dark"
+                android:textStyle="bold" />
 
-<!--            <TextView-->
-<!--                android:textColor="@color/teal_color_dark"-->
-<!--                android:id="@+id/seeMoreIngredient"-->
-<!--                style="@style/TextTitle"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:background="@drawable/hover_effect"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="right"-->
-<!--                android:padding="2dp"-->
-<!--                android:textAllCaps="true"-->
-<!--                android:textStyle="italic"-->
-<!--                android:text="@string/see_more" />-->
+            <!--            <TextView-->
+            <!--                android:textColor="@color/teal_color_dark"-->
+            <!--                android:id="@+id/seeMoreIngredient"-->
+            <!--                style="@style/TextTitle"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:background="@drawable/hover_effect"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:gravity="right"-->
+            <!--                android:padding="2dp"-->
+            <!--                android:textAllCaps="true"-->
+            <!--                android:textStyle="italic"-->
+            <!--                android:text="@string/see_more" />-->
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_ingredient"
             android:layout_width="0dp"
@@ -179,10 +182,10 @@
             android:orientation="horizontal"
             android:textColor="@color/black"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/section_title_ingredient_holder"
             app:layout_constraintEnd_toEndOf="@+id/guideEnd"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideStart"
+            app:layout_constraintTop_toBottomOf="@+id/section_title_ingredient_holder"
             app:spanCount="1"
             tools:layout_editor_absoluteY="78dp"
             tools:listitem="@layout/item_filter_ingredient" />
@@ -193,6 +196,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="5dp" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideEnd"
             android:layout_width="wrap_content"

@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
@@ -27,7 +29,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     private Context context;
 
 
-    public FavoriteAdapter(Context context,List<MealsItem> itemsList, FavoriteAdapter.FavoriteAdapterActions favoriteAdapterActions) {
+    public FavoriteAdapter(Context context, List<MealsItem> itemsList, FavoriteAdapter.FavoriteAdapterActions favoriteAdapterActions) {
         this.itemsList = itemsList;
         this.context = context;
         this.favoriteAdapterActions = favoriteAdapterActions;
@@ -36,7 +38,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @NonNull
     @Override
     public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorit_list,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorit_list, parent, false));
     }
 
     @Override
@@ -51,7 +53,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             alertDialog.setTitle(context.getResources().getString(R.string.delete_favorite));
             alertDialog.setMessage(context.getResources().getString(R.string.delete_title));
             alertDialog.setCancelable(false);
-            alertDialog.setPositiveButton(context.getResources().getString(R.string.dialog_positive_button), (dialog, which) -> favoriteAdapterActions.onCardClicked(item,position));
+            alertDialog.setPositiveButton(context.getResources().getString(R.string.dialog_positive_button), (dialog, which) -> favoriteAdapterActions.onCardClicked(item, position));
             alertDialog.setNegativeButton(context.getResources().getString(R.string.dialog_negative_button), (dialog, which) -> dialog.cancel());
             AlertDialog dialog = alertDialog.create();
             dialog.show();
@@ -65,10 +67,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         return itemsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvCategory,tvArea;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName, tvCategory, tvArea;
         ImageView removeBtn;
         ImageView imagefav;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.nameDetailsTextView);
@@ -80,8 +83,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
     }
 
-    public interface FavoriteAdapterActions{
-        public void onCardClicked(MealsItem item,int position);
+    public interface FavoriteAdapterActions {
+        public void onCardClicked(MealsItem item, int position);
     }
 
 

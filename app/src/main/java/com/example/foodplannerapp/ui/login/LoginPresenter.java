@@ -9,10 +9,11 @@ public class LoginPresenter {
         this.loginInterface = loginInterface;
     }
 
-    public void onSuccess(FirebaseUser user){
+    public void onSuccess(FirebaseUser user) {
         loginInterface.onSuccess(user);
     }
-    public void onFail(String task){
+
+    public void onFail(String task) {
         loginInterface.onFail(task);
 
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,8 +27,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="20dp"
         android:id="@+id/connect_wit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +34,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="4dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/Optimize_meals_login"
         android:textAppearance="@style/hello_again"
@@ -45,7 +44,6 @@
         app:layout_constraintTop_toBottomOf="@+id/create_an_a" />
 
     <EditText
-        android:textSize="14sp"
         android:id="@+id/emailTxtView"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -57,13 +55,13 @@
         android:minHeight="48dp"
         android:textColor="@color/black"
         android:textColorHint="#999EA1"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:textSize="14sp"
         android:id="@+id/passwordTxtView"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -76,6 +74,7 @@
         android:minHeight="48dp"
         android:textColor="@color/black"
         android:textColorHint="#999EA1"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/emailTxtView"
         app:layout_constraintTop_toBottomOf="@+id/emailTxtView" />
 

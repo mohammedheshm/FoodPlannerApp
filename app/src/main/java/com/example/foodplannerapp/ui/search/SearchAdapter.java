@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,12 +48,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         //holder.btn_AddToPlane.setOnClickListener(view -> searchInterface.onSavePlane(item));
 
         holder.btn_addToFav.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked)
-            {
+            if (isChecked) {
                 holder.btn_addToFav.setButtonDrawable(R.drawable.solid_favorite_24);
                 searchInterface.onSaveFavorite(item);
-            }
-            else {
+            } else {
                 holder.btn_addToFav.setButtonDrawable(R.drawable.ic_favorite_border_black_menu_24dp);
 
             }

@@ -36,24 +36,24 @@ public class FilterAreaAdapter extends RecyclerView.Adapter<FilterAreaAdapter.Vi
     @NonNull
     @Override
     public FilterAreaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter_area,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter_area, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull FilterAreaAdapter.ViewHolder holder, int position) {
         Area item = itemsList.get(position);
         holder.title.setText(item.getStrArea());
-        Utils.loadImage(context,item.getThumbnail(),holder.thumnailView);
+        Utils.loadImage(context, item.getThumbnail(), holder.thumnailView);
 
         holder.linearLayout.setOnClickListener(view -> {
-            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.AREA,item.getStrArea());
+            Utils.navigatorCategoryToSearchFragment(view, SearchInterface.AREA, item.getStrArea());
         });
     }
 
-    public void setItemsList(List<Area> itemsList){
+    public void setItemsList(List<Area> itemsList) {
         this.itemsList = itemsList;
         notifyDataSetChanged();
-        mutableLiveData.postValue(itemsList.size()>0);
+        mutableLiveData.postValue(itemsList.size() > 0);
 
     }
 
@@ -62,7 +62,7 @@ public class FilterAreaAdapter extends RecyclerView.Adapter<FilterAreaAdapter.Vi
         return itemsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView thumnailView;
         LinearLayout linearLayout;

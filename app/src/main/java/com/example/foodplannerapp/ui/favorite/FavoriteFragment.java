@@ -55,7 +55,7 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface {
     private void showGuestUI() {
         Toast.makeText(getContext(), "You are in Guest Mode!", Toast.LENGTH_SHORT).show();
         binding.rvListFavorite.setVisibility(View.GONE);
-       // binding.guestMessageHolder.setVisibility(View.VISIBLE);
+        // binding.guestMessageHolder.setVisibility(View.VISIBLE);
         binding.noDataHolder.setVisibility(View.GONE);
     }
 
@@ -99,13 +99,13 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface {
     private void showNoData() {
         binding.rvListFavorite.setVisibility(View.GONE);
         binding.noDataHolder.setVisibility(View.VISIBLE);
-       // binding.guestMessageHolder.setVisibility(View.GONE);
+        // binding.guestMessageHolder.setVisibility(View.GONE);
     }
 
     private void showData() {
         binding.rvListFavorite.setVisibility(View.VISIBLE);
         binding.noDataHolder.setVisibility(View.GONE);
-       // binding.guestMessageHolder.setVisibility(View.GONE);
+        // binding.guestMessageHolder.setVisibility(View.GONE);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface {
     private void showError() {
         binding.rvListFavorite.setVisibility(View.GONE);
         binding.noDataHolder.setVisibility(View.GONE);
-       // binding.guestMessageHolder.setVisibility(View.GONE);
+        // binding.guestMessageHolder.setVisibility(View.GONE);
     }
 
     @Override

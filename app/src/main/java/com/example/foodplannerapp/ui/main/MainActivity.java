@@ -1,9 +1,11 @@
 package com.example.foodplannerapp.ui.main;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -20,7 +22,6 @@ import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.databinding.ActivityMainBinding;
 import com.example.foodplannerapp.ui.signup_or_login.SignUpOrLoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void navigationUiSettings() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        int[] pages = {R.id.navigation_home,R.id.navigation_favorite,R.id.navigation_category, R.id.navigation_plan,R.id.navigation_details,R.id.navigation_search};
+        int[] pages = {R.id.navigation_home, R.id.navigation_favorite, R.id.navigation_category, R.id.navigation_plan, R.id.navigation_details, R.id.navigation_search};
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(pages).build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main_app);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if(navDestination.getId() == R.id.navigation_details) {
+                if (navDestination.getId() == R.id.navigation_details) {
 
                     navView.setVisibility(View.GONE);
                 } else {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logout_menu,menu);
+        getMenuInflater().inflate(R.menu.logout_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

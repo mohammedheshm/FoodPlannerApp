@@ -2,7 +2,6 @@ package com.example.foodplannerapp.data.pojo.foodcategory;
 
 
 public class CategoriesItem{
-    ;
 
     private String strCategory;
 

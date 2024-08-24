@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.widget.Toast;
-
 import com.example.foodplannerapp.data.pojo.category.Category;
 import com.example.foodplannerapp.data.pojo.countries.Area;
 import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
@@ -43,6 +41,7 @@ public class CategoryFragment extends Fragment implements CategoryInterface {
 
 
     }
+
     private void setUpRecyclerArea() {
         RecyclerView recyclerViewArea = Utils.recyclerViewHandler(binding.rvAreas, getContext());
         FilterAreaAdapter filterAreaAdapter = new FilterAreaAdapter(getContext(), this);

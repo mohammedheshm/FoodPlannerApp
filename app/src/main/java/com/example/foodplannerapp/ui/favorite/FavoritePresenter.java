@@ -24,6 +24,7 @@ public class FavoritePresenter {
     public void removeFavorite(MealsItem mealsItem, RepoInterface<Void> repoInterface) {
         LocalDataSource.deleteFavorite(mealsItem, repoInterface);
     }
+
     public void getFavorites(RepoInterface<List<MealsItem>> repoInterface) {
         LocalDataSource.showFavouriteMealsDataBase(repoInterface);
     }

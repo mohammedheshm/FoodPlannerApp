@@ -10,7 +10,6 @@ import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.data.fireasestore.FirebaseStoreBackup;
 import com.example.foodplannerapp.data.pojo.user.User;
 import com.example.foodplannerapp.data.repository.LocalDataSource;
-import com.example.foodplannerapp.data.repository.Repository;
 import com.example.foodplannerapp.data.sharedpref.SharedPrefrencesManger;
 import com.example.foodplannerapp.ui.signup_or_login.SignInWithGoogleInterface;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -97,30 +96,6 @@ public class GoogleAuth extends SocialAuthentication<GoogleAuth.Google> {
         public FirebaseUser getCurrentUser() {
             return mAuth.getCurrentUser();
         }
-
-//        private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-//            AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-//            mAuth.signInWithCredential(credential)
-//                    .addOnSuccessListener(authResult -> {
-//                        User user = getUserData();
-//                        SharedPrefrencesManger sharedPrefrencesManger = SharedPrefrencesManger.getInstance(context);
-//                        FirebaseStoreBackup.getInstance(sharedPrefrencesManger).saveUser(user, task -> {
-//                            if (task.isSuccessful()) {
-//                                sharedPrefrencesManger.saveUser(user);
-//                                LocalDataSource.getInstance(context).restoreAllData();
-//                                signInWithGoogleInterface.onSuccessFullFireBaseAuth();
-//                            } else {
-//                                Log.e(TAG, "Failed to save user data");
-//                                signInWithGoogleInterface.onFailedFireBaseAuth();
-//                            }
-//                        });
-//                    })
-//                    .addOnFailureListener(e -> {
-//                        Log.w(TAG, "FirebaseAuthWithGoogle: Failed", e);
-//                        signInWithGoogleInterface.onFailedFireBaseAuth();
-//                    });
-//        }
-
 
         private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
             AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);

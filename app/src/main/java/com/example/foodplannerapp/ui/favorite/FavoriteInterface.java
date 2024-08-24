@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface FavoriteInterface extends RepoInterface<List<MealsItem>> {
     public void addToPlan(MealPlan mealPlan);
+
     public void deleteFromPlan(MealPlan mealPlan);
 
 }

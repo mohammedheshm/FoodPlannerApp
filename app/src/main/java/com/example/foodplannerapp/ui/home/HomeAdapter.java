@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,12 +57,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.addToFavBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     holder.addToFavBtn.setButtonDrawable(R.drawable.solid_favorite_24);
                     homeInterface.onSaveFavorite(item);
-                }
-                else {
+                } else {
                     holder.addToFavBtn.setButtonDrawable(R.drawable.ic_favorite_border_black_menu_24dp);
                 }
 

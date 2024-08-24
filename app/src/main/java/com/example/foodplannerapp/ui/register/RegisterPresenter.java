@@ -10,10 +10,11 @@ public class RegisterPresenter {
         this.registerInterface = registerInterface;
     }
 
-    public void onSuccess(FirebaseUser user){
+    public void onSuccess(FirebaseUser user) {
         registerInterface.onSuccess(user);
     }
-    public void onFail(Exception exception){
+
+    public void onFail(Exception exception) {
         registerInterface.onFail(exception);
 
     }

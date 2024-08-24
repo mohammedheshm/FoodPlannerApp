@@ -15,21 +15,22 @@ import java.util.Random;
 
 public class SearchPresenter {
 
-    public static final String AREA= "AREA";
-    public static final String CATEGORY= "CATEGORY";
-    public static final String INGREDIENT= "INGREDIENT";
-    public static final String SEARCH= "SEARCH";
+    public static final String AREA = "AREA";
+    public static final String CATEGORY = "CATEGORY";
+    public static final String INGREDIENT = "INGREDIENT";
+    public static final String SEARCH = "SEARCH";
     private Repository repository;
     private SearchInterface searchInterface;
 
 
-    public SearchPresenter(Context context,SearchInterface searchInterface) {
+    public SearchPresenter(Context context, SearchInterface searchInterface) {
         this.searchInterface = searchInterface;
         repository = Repository.getInstance(context);
     }
-    public String[] getCashList(int type){
+
+    public String[] getCashList(int type) {
         String[] result = {""};
-        switch (type){
+        switch (type) {
             case SearchInterface.SEARCH:
                 break;
             case SearchInterface.AREA:
@@ -44,16 +45,17 @@ public class SearchPresenter {
         }
         return result;
     }
-    public void saveFavorite(MealsItem item, RepoInterface<Void> repoInterface){
+
+    public void saveFavorite(MealsItem item, RepoInterface<Void> repoInterface) {
         repository.insertFavoriteMealDataBase(item, repoInterface);
     }
 
 
-    public String getRandomList(int type){
+    public String getRandomList(int type) {
         int random = 0;
         String[] cashList;
         String reVal = "";
-        switch (type){
+        switch (type) {
             case SearchInterface.AREA:
                 cashList = LocalDataSource.getList(SharedPrefrencesManger.AREAS);
                 random = new Random().nextInt(cashList.length);
@@ -74,22 +76,22 @@ public class SearchPresenter {
 
 
         }
-        return  reVal;
+        return reVal;
     }
 
-    public void getSearchResultMeals(int type,String query){
-        switch (type){
+    public void getSearchResultMeals(int type, String query) {
+        switch (type) {
             case SearchInterface.AREA:
-                RemoteDataSource.retrieveFilterResults(null, null, query,searchInterface);
+                RemoteDataSource.retrieveFilterResults(null, null, query, searchInterface);
                 break;
             case SearchInterface.CATEGORY:
-                RemoteDataSource.retrieveFilterResults(query, null, null,searchInterface);
+                RemoteDataSource.retrieveFilterResults(query, null, null, searchInterface);
                 break;
             case SearchInterface.INGREDIENT:
-                RemoteDataSource.retrieveFilterResults(null, query, null,searchInterface);
+                RemoteDataSource.retrieveFilterResults(null, query, null, searchInterface);
                 break;
             case SearchInterface.SEARCH:
-                RemoteDataSource.searchMealsByName(query,searchInterface);
+                RemoteDataSource.searchMealsByName(query, searchInterface);
                 break;
 
 

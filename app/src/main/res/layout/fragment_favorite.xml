@@ -1,31 +1,31 @@
-<LinearLayout
-    android:id="@+id/holder_list_favorite"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder_list_favorite"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="6dp"
     android:layout_marginTop="16dp"
-    tools:context=".ui.favorite.FavoriteFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="6dp"
+    tools:context=".ui.favorite.FavoriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_favorite"
         android:layout_width="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_favorit_list" />
 
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/no_data_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_weight="1">
-        <include layout="@layout/loading_data"/>
+        android:visibility="gone">
+
+        <include layout="@layout/loading_data" />
     </LinearLayout>
 </LinearLayout>
