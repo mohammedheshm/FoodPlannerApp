@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.foodplannerapp.data.pojo.meals.MealPlan;
 import com.example.foodplannerapp.data.pojo.meals.MealsItem;
 import com.example.foodplannerapp.data.repository.RepoInterface;
@@ -17,7 +15,6 @@ import com.example.foodplannerapp.databinding.FragmentFavoriteBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,11 +130,9 @@ public class FavoriteFragment extends Fragment implements FavoriteInterface {
 
     @Override
     public void addToPlan(MealPlan mealPlan) {
-        // Implement adding to plan logic here
     }
 
     @Override
     public void deleteFromPlan(MealPlan mealPlan) {
-        // Implement deleting from plan logic here
     }
 }

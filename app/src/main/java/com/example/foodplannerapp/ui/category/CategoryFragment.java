@@ -3,15 +3,12 @@ package com.example.foodplannerapp.ui.category;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.foodplannerapp.data.pojo.category.Category;
 import com.example.foodplannerapp.data.pojo.countries.Area;
 import com.example.foodplannerapp.data.pojo.ingredient.Ingredient;
@@ -19,7 +16,6 @@ import com.example.foodplannerapp.data.repository.RepoInterface;
 import com.example.foodplannerapp.databinding.FragmentCategoryBinding;
 import com.example.foodplannerapp.ui.common.Utils;
 import com.example.foodplannerapp.ui.search.SearchInterface;
-
 import java.util.List;
 
 

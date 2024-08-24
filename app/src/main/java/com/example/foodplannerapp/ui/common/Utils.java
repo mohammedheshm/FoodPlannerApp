@@ -6,16 +6,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplannerapp.R;
 import com.example.foodplannerapp.ui.category.CategoryFragmentDirections;
 import com.example.foodplannerapp.ui.home.HomeFragmentDirections;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
